@@ -79,22 +79,29 @@ export default function ProductCatalogHub() {
           ))}
         </div>
 
-        {/* 6 Product Cards Grid */}
+        {/* 6 Institutional Asset Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCategories.map((item) => {
+          {filteredCategories.map((item, idx) => {
             const Icon = iconMap[item.icon] || Boxes;
+            const grades = ["GRADE AAA", "GRADE AA+", "GRADE AAA", "GRADE A+", "GRADE AA", "GRADE AA+"];
+            const grade = grades[idx % grades.length];
             return (
               <FloatingCard3D key={item.id} className="h-full">
-                <div className="h-full p-7 rounded-3xl wavo-card flex flex-col justify-between space-y-6 group">
+                <div className="h-full p-7 rounded-3xl wavo-card flex flex-col justify-between space-y-6 group relative overflow-hidden bg-[#0f131f]">
                   
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="p-3 rounded-2xl bg-white/[0.04] text-[#fa6e69] border border-white/[0.08] group-hover:scale-110 group-hover:text-[#ffbc7d] transition-all">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <span className="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-[#fa6e69]/15 text-[#fa6e69] border border-[#fa6e69]/30">
-                        Rotation {item.rotation}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/[0.05] text-slate-300 border border-white/[0.08]">
+                          {grade}
+                        </span>
+                        <span className="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-[#fa6e69]/15 text-[#fa6e69] border border-[#fa6e69]/30">
+                          &lt; {item.rotation}
+                        </span>
+                      </div>
                     </div>
 
                     <h3 className="text-lg font-bold text-white tracking-tight">
@@ -106,9 +113,12 @@ export default function ProductCatalogHub() {
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-white/[0.08] space-y-1.5">
-                    <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500">
-                      Exemples concrets financés
+                  <div className="pt-4 border-t border-white/[0.08] space-y-2">
+                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                      <span>Exemples financés</span>
+                      <span className="text-emerald-400 flex items-center gap-1">
+                        ● Collatéral Éligible
+                      </span>
                     </div>
                     <div className="text-xs font-medium text-slate-300">
                       {item.examples}

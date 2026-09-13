@@ -125,75 +125,107 @@ Content-Type: application/json
             </div>
           </div>
 
-          {/* Right: Code Terminal */}
+          {/* Right: Institutional Systems Console */}
           <div className="lg:col-span-7">
             <FloatingCard3D className="rounded-3xl">
-              <div className="rounded-3xl bg-[#10101b] border border-white/[0.1] shadow-2xl overflow-hidden font-mono text-xs">
+              <div className="rounded-3xl bg-[#0f131f] border border-white/[0.1] shadow-2xl overflow-hidden text-xs">
                 
-                {/* Header */}
-                <div className="flex items-center justify-between px-5 py-3.5 bg-black/60 border-b border-white/[0.08]">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-rose-500/70" />
-                    <span className="w-3 h-3 rounded-full bg-amber-500/70" />
-                    <span className="w-3 h-3 rounded-full bg-emerald-500/70" />
-                    <span className="text-[11px] text-slate-400 ml-2">wavo-daemon // live</span>
+                {/* Institutional Console Header (No generic mac dots) */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 bg-black/50 border-b border-white/[0.08]">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#fa6e69] animate-pulse" />
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-[#fa6e69] font-bold">
+                      WAVO-SYNC // MODULE ERP &amp; FLUX BANCAIRES
+                    </span>
                   </div>
 
                   {/* Tabs */}
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 font-mono">
                     <button
+                      type="button"
                       onClick={() => setActiveTab("webhook")}
-                      className={`px-3 py-1 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
                         activeTab === "webhook"
                           ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
-                          : "text-slate-400 hover:text-white"
+                          : "text-slate-400 hover:text-white bg-white/[0.03]"
                       }`}
                     >
-                      Webhook
+                      Événement Vente
                     </button>
                     <button
+                      type="button"
                       onClick={() => setActiveTab("payload")}
-                      className={`px-3 py-1 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
                         activeTab === "payload"
                           ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
-                          : "text-slate-400 hover:text-white"
+                          : "text-slate-400 hover:text-white bg-white/[0.03]"
                       }`}
                     >
-                      Ledger
+                      Registre Collatéral
                     </button>
                     <button
+                      type="button"
                       onClick={() => setActiveTab("erp")}
-                      className={`px-3 py-1 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
                         activeTab === "erp"
                           ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
-                          : "text-slate-400 hover:text-white"
+                          : "text-slate-400 hover:text-white bg-white/[0.03]"
                       }`}
                     >
-                      Connecteurs
+                      Connecteurs Certifiés
                     </button>
 
                     <button
+                      type="button"
                       onClick={handleCopy}
-                      className="ml-2 p-1.5 rounded-lg hover:bg-white/[0.08] text-slate-400 hover:text-white transition-colors cursor-pointer"
-                      title="Copier le code"
+                      className="ml-1 p-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-400 hover:text-white transition-colors cursor-pointer"
+                      title="Copier"
                     >
                       {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
                 </div>
 
-                {/* Body */}
-                <div className="p-6 text-slate-300 overflow-x-auto leading-relaxed max-h-[380px]">
-                  <pre>{codeSnippets[activeTab]}</pre>
+                {/* Console Content */}
+                <div className="p-6 text-slate-300 font-mono overflow-x-auto leading-relaxed max-h-[380px] bg-[#090b12]">
+                  {activeTab === "erp" ? (
+                    <div className="space-y-3">
+                      <div className="text-xs text-slate-400 mb-4 font-sans font-medium">
+                        Wavo s&apos;interconnecte nativement avec vos briques de gestion sans perturber votre production :
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {[
+                          { name: "Shopify Plus & PrestaShop", type: "E-Commerce", desc: "Détection unitaire des commandes expédiées" },
+                          { name: "SAP S/4HANA & Business One", type: "ERP Industrie", desc: "Connecteur certifié API REST bi-directionnel" },
+                          { name: "Pennylane & Sage", type: "Comptabilité", desc: "Écritures de rachat exportées sans retraitement" },
+                          { name: "Cegid & Odoo", type: "Gestion Stock", desc: "Suivi multi-entrepôts & traçabilité SKU" },
+                          { name: "DSP2 Open Banking", type: "Agrégation Flux", desc: "Réconciliation automatisée des encaissements" },
+                          { name: "Exports Sécurisés CSV/SFTP", type: "Universel", desc: "Intégration manuelle hebdomadaire si besoin" },
+                        ].map((c, i) => (
+                          <div key={i} className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] space-y-1 font-sans">
+                            <div className="flex items-center justify-between text-xs font-bold text-white">
+                              <span>{c.name}</span>
+                              <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-[#fa6e69]/20 text-[#fa6e69]">
+                                ACTIF
+                              </span>
+                            </div>
+                            <div className="text-[11px] text-slate-400">{c.desc}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <pre className="text-xs leading-relaxed text-slate-300">{codeSnippets[activeTab]}</pre>
+                  )}
                 </div>
 
-                {/* Footer status */}
-                <div className="px-5 py-3 bg-black/40 border-t border-white/[0.08] flex items-center justify-between text-[11px] text-slate-400">
+                {/* Footer Telemetry Status */}
+                <div className="px-6 py-3.5 bg-black/40 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-slate-400">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#fa6e69] animate-ping" />
-                    <span>Flux actif • 0 erreur de synchronisation</span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span>Synchronisation certifiée ISO-27001 &amp; DSP2</span>
                   </div>
-                  <span className="text-[#fa6e69] font-mono">TLS 1.3 Strict</span>
+                  <span className="text-[#fa6e69] font-bold">Chiffrement AES-256</span>
                 </div>
 
               </div>
