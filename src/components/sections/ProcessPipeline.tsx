@@ -43,8 +43,8 @@ export default function ProcessPipeline() {
 
         {/* Connected High-End Stepper Track */}
         <div className="relative">
-          {/* Connecting Track Line */}
-          <div className="hidden md:block absolute top-1/2 left-8 right-8 h-0.5 bg-slate-200 dark:bg-white/[0.08] -translate-y-1/2 z-0" />
+          {/* Connecting Track Line (Positioned behind solid cards at icon level) */}
+          <div className="hidden md:block absolute top-[38px] left-12 right-12 h-0.5 bg-slate-200 dark:bg-white/[0.08] -translate-y-1/2 z-0" />
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
             {steps.map((step, idx) => {
@@ -56,21 +56,30 @@ export default function ProcessPipeline() {
                   key={idx}
                   type="button"
                   onClick={() => setSelectedStep(idx)}
-                  className={`p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 cursor-pointer flex flex-col justify-between gap-4 border select-none ${
+                  className={`relative z-10 p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 cursor-pointer flex flex-col justify-between gap-4 border select-none overflow-hidden ${
                     active
-                      ? "bg-[#fa6e69]/10 dark:bg-[#0f131f] border-[#fa6e69] text-slate-900 dark:text-white shadow-lg shadow-[#fa6e69]/15"
+                      ? "bg-white dark:bg-[#0f131f] border-2 border-[#fa6e69] text-slate-900 dark:text-white shadow-xl shadow-[#fa6e69]/20 ring-1 ring-[#fa6e69]"
                       : isPast
-                      ? "bg-slate-50 dark:bg-[#0a0d15] border-slate-200/80 dark:border-white/[0.1] text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-white/[0.2]"
-                      : "bg-slate-50/50 dark:bg-[#080a10] border-slate-200/50 dark:border-white/[0.05] text-slate-400 dark:text-slate-500 hover:border-slate-300 dark:hover:border-white/[0.1] hover:text-slate-700 dark:hover:text-slate-300"
+                      ? "bg-white dark:bg-[#0d111c] border border-slate-200/90 dark:border-white/[0.08] text-slate-800 dark:text-slate-300 hover:border-slate-300 dark:hover:border-white/[0.2] shadow-sm dark:shadow-none"
+                      : "bg-white dark:bg-[#0a0d16] border border-slate-200/70 dark:border-white/[0.05] text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-white/[0.1] hover:text-slate-800 dark:hover:text-slate-200 shadow-xs dark:shadow-none"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
+                  {/* Active Top Accent Line */}
+                  {active && (
+                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#fa6e69] to-[#ffbc7d]" />
+                  )}
+                  {/* Subtle inner ambient glow on active */}
+                  {active && (
+                    <div className="absolute inset-0 bg-[#fa6e69]/[0.03] pointer-events-none" />
+                  )}
+
+                  <div className="flex items-center justify-between relative z-10">
                     <div
                       className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
                         active
                           ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/40"
                           : isPast
-                          ? "bg-slate-200 dark:bg-white/[0.08] text-slate-800 dark:text-white"
+                          ? "bg-slate-100 dark:bg-white/[0.08] text-slate-800 dark:text-white"
                           : "bg-slate-100 dark:bg-white/[0.03] text-slate-400 dark:text-slate-500"
                       }`}
                     >
@@ -79,7 +88,7 @@ export default function ProcessPipeline() {
                     <span
                       className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded ${
                         active
-                          ? "bg-[#fa6e69]/20 text-[#fa6e69]"
+                          ? "bg-[#fa6e69]/15 text-[#fa6e69]"
                           : "bg-slate-100 dark:bg-white/[0.04] text-slate-500"
                       }`}
                     >
@@ -87,7 +96,7 @@ export default function ProcessPipeline() {
                     </span>
                   </div>
 
-                  <div>
+                  <div className="relative z-10">
                     <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                       {step.timeframe}
                     </div>
