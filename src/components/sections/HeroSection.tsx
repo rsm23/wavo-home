@@ -88,7 +88,7 @@ export default function HeroSection() {
 
         {/* Decorative Coordinate Marks */}
         <div className="hidden lg:block absolute top-36 left-10 font-mono text-[10px] text-slate-400 dark:text-slate-600 tracking-widest">
-          FACILITY//PARIS:48.8566°N
+          FACILITY//LYON:45.6950°N, 4.8923°E
         </div>
         <div className="hidden lg:block absolute top-36 right-10 font-mono text-[10px] text-slate-400 dark:text-slate-600 tracking-widest">
           STATUS:LIVE_MARKET
@@ -272,7 +272,7 @@ export default function HeroSection() {
               <span className="text-[#fa6e69] font-bold">100% SÉCURISÉ</span>
             </div>
             
-            <div className="h-[340px] sm:h-[380px] w-full relative">
+            <div className="relative flex-1 min-h-[460px] lg:min-h-[500px] w-full flex items-center justify-center">
               <InventoryVault3D />
             </div>
 
