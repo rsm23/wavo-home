@@ -52,15 +52,19 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${plusJakartaSans.variable} ${inter.variable} dark scroll-smooth`}>
-      <body className="font-sans antialiased bg-[#07080d] text-[#f1f5f9] selection:bg-indigo-500 selection:text-white min-h-screen flex flex-col">
-        {children}
+    <html lang="fr" className={`${plusJakartaSans.variable} ${inter.variable} scroll-smooth`} suppressHydrationWarning>
+      <body className="font-sans antialiased bg-[#fafafc] dark:bg-[#080b13] text-[#0f172a] dark:text-[#f8fafc] selection:bg-[#fa6e69] selection:text-white min-h-screen flex flex-col transition-colors duration-200">
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

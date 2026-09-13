@@ -21,22 +21,22 @@ export default function ProcessPipeline() {
   const stepIcons = [PhoneCall, FileCheck2, LayoutDashboard, ShoppingBag];
 
   return (
-    <section id="etapes" className="relative z-20 py-28 bg-[#080b13] border-t border-white/[0.08] overflow-hidden">
+    <section id="etapes" className="relative z-20 py-28 bg-white dark:bg-[#080b13] border-t border-slate-200/80 dark:border-white/[0.08] transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30 shadow-xs">
             <Layers className="w-3.5 h-3.5" />
             <span>LE CYCLE DU PORTAGE WAVO</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight transition-colors">
             Un cycle de trésorerie fluide en{" "}
             <span className="wavo-gradient-text">4 temps sans friction</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-400">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 transition-colors">
             De la valorisation initiale de votre bon de commande jusqu&apos;au rachat unitaire pièce par pièce : aucun passage devant notaire, aucun ralentissement opérationnel.
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function ProcessPipeline() {
         {/* Connected High-End Stepper Track */}
         <div className="relative">
           {/* Connecting Track Line */}
-          <div className="hidden md:block absolute top-1/2 left-8 right-8 h-0.5 bg-white/[0.08] -translate-y-1/2 z-0" />
+          <div className="hidden md:block absolute top-1/2 left-8 right-8 h-0.5 bg-slate-200 dark:bg-white/[0.08] -translate-y-1/2 z-0" />
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
             {steps.map((step, idx) => {
@@ -58,10 +58,10 @@ export default function ProcessPipeline() {
                   onClick={() => setSelectedStep(idx)}
                   className={`p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 cursor-pointer flex flex-col justify-between gap-4 border select-none ${
                     active
-                      ? "bg-[#0f131f] border-[#fa6e69] text-white shadow-xl shadow-[#fa6e69]/20"
+                      ? "bg-[#fa6e69]/10 dark:bg-[#0f131f] border-[#fa6e69] text-slate-900 dark:text-white shadow-lg shadow-[#fa6e69]/15"
                       : isPast
-                      ? "bg-[#0a0d15] border-white/[0.1] text-slate-300 hover:border-white/[0.2]"
-                      : "bg-[#080a10] border-white/[0.05] text-slate-500 hover:border-white/[0.1] hover:text-slate-300"
+                      ? "bg-slate-50 dark:bg-[#0a0d15] border-slate-200/80 dark:border-white/[0.1] text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-white/[0.2]"
+                      : "bg-slate-50/50 dark:bg-[#080a10] border-slate-200/50 dark:border-white/[0.05] text-slate-400 dark:text-slate-500 hover:border-slate-300 dark:hover:border-white/[0.1] hover:text-slate-700 dark:hover:text-slate-300"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -70,8 +70,8 @@ export default function ProcessPipeline() {
                         active
                           ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/40"
                           : isPast
-                          ? "bg-white/[0.08] text-white"
-                          : "bg-white/[0.03] text-slate-500"
+                          ? "bg-slate-200 dark:bg-white/[0.08] text-slate-800 dark:text-white"
+                          : "bg-slate-100 dark:bg-white/[0.03] text-slate-400 dark:text-slate-500"
                       }`}
                     >
                       <Icon className="w-4 h-4" />
@@ -80,7 +80,7 @@ export default function ProcessPipeline() {
                       className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded ${
                         active
                           ? "bg-[#fa6e69]/20 text-[#fa6e69]"
-                          : "bg-white/[0.04] text-slate-500"
+                          : "bg-slate-100 dark:bg-white/[0.04] text-slate-500"
                       }`}
                     >
                       0{step.stepNumber}
@@ -88,10 +88,10 @@ export default function ProcessPipeline() {
                   </div>
 
                   <div>
-                    <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                    <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                       {step.timeframe}
                     </div>
-                    <div className="text-xs sm:text-sm font-bold text-white mt-0.5 line-clamp-1">
+                    <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white mt-0.5 line-clamp-1">
                       {step.title}
                     </div>
                   </div>
@@ -106,16 +106,16 @@ export default function ProcessPipeline() {
           
           {/* Left: Step Description */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fa6e69]/15 border border-[#fa6e69]/30 text-[#fa6e69] text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fa6e69]/10 dark:bg-[#fa6e69]/15 border border-[#fa6e69]/30 text-[#fa6e69] text-xs font-mono font-semibold">
               <Clock className="w-3.5 h-3.5" />
               <span>Délai d&apos;exécution moyen : {steps[selectedStep].timeframe}</span>
             </div>
 
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h3 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               {steps[selectedStep].stepNumber}. {steps[selectedStep].title}
             </h3>
 
-            <p className="text-base text-slate-300 leading-relaxed font-normal">
+            <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
               {steps[selectedStep].description}
             </p>
 
@@ -124,7 +124,7 @@ export default function ProcessPipeline() {
                 <CheckCircle className="w-4 h-4 text-[#fa6e69]" />
                 Protocole Opérationnel Wavo
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 {steps[selectedStep].details}
               </p>
             </div>
@@ -142,7 +142,7 @@ export default function ProcessPipeline() {
                 href="https://www.wavo.fr/rendez-vous/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-semibold text-slate-400 hover:text-[#fa6e69] transition-colors"
+                className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#fa6e69] transition-colors"
               >
                 Démarrer mon dossier →
               </a>

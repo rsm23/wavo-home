@@ -53,21 +53,21 @@ Content-Type: application/json
   };
 
   return (
-    <section className="relative z-20 py-28 bg-[#080b13] border-t border-white/[0.08] overflow-hidden">
+    <section className="relative z-20 py-28 bg-white dark:bg-[#080b13] border-t border-slate-200/80 dark:border-white/[0.08] transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30 shadow-xs">
             <Cpu className="w-3.5 h-3.5" />
             <span>SYNCHRONISATION ERP &amp; AUTOMATISATION</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight transition-colors">
             Connecté à vos outils en <span className="wavo-gradient-text">quelques minutes</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-400">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 transition-colors">
             Wavo se synchronise de manière invisible avec vos flux informatiques et bancaires. Aucune modification de vos process logistiques : vous vendez, nous régularisons unitairement.
           </p>
         </div>
@@ -83,19 +83,19 @@ Content-Type: application/json
                   <span>01</span>
                   <span>CONNEXION SANS INTRUSION</span>
                 </div>
-                <h4 className="text-sm font-bold text-white">Vos tiers ne voient jamais Wavo</h4>
-                <p className="text-xs text-slate-400">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Vos tiers ne voient jamais Wavo</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   Vos clients et vos fournisseurs continuent de traiter directement avec vous. La confidentialité commerciale est 100% absolue.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl wavo-card space-y-1.5">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#ffbc7d]">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-600 dark:text-[#ffbc7d]">
                   <span>02</span>
                   <span>DÉCOMPTE UNITAIRE AUTOMATISÉ</span>
                 </div>
-                <h4 className="text-sm font-bold text-white">Régularisation au fil des sorties de caisse</h4>
-                <p className="text-xs text-slate-400">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Régularisation au fil des sorties de caisse</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   Dès qu&apos;une référence est vendue et payée, notre daemon décompte l&apos;unité sans aucun échéancier mensuel rigide.
                 </p>
               </div>
@@ -105,8 +105,8 @@ Content-Type: application/json
                   <span>03</span>
                   <span>COMPATIBILITÉ MULTI-SI</span>
                 </div>
-                <h4 className="text-sm font-bold text-white">Connecteurs natifs et simples imports CSV</h4>
-                <p className="text-xs text-slate-400">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Connecteurs natifs et simples imports CSV</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   Prise en charge de Shopify, SAP, Cegid, Sage, Pennylane ou simples exports sécurisés hebdomadaires.
                 </p>
               </div>
@@ -117,7 +117,7 @@ Content-Type: application/json
                 href="https://www.wavo.fr/contact/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[#fa6e69] hover:text-[#ffbc7d] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[#fa6e69] hover:text-[#ff8a85] transition-colors"
               >
                 <span>Documentation d&apos;intégration technique</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -128,10 +128,10 @@ Content-Type: application/json
           {/* Right: Institutional Systems Console */}
           <div className="lg:col-span-7">
             <FloatingCard3D className="rounded-3xl">
-              <div className="rounded-3xl bg-[#0f131f] border border-white/[0.1] shadow-2xl overflow-hidden text-xs">
+              <div className="rounded-3xl bg-[#0f172a] dark:bg-[#0f131f] border border-slate-700/50 dark:border-white/[0.1] shadow-2xl overflow-hidden text-xs">
                 
                 {/* Institutional Console Header (No generic mac dots) */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 bg-black/50 border-b border-white/[0.08]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 bg-slate-950/60 dark:bg-black/50 border-b border-white/[0.08]">
                   <div className="flex items-center gap-2.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#fa6e69] animate-pulse" />
                     <span className="font-mono text-[11px] uppercase tracking-widest text-[#fa6e69] font-bold">

@@ -36,21 +36,21 @@ export default function FaqSection() {
   });
 
   return (
-    <section id="faq" className="relative z-20 py-28 bg-[#080b13] border-t border-white/[0.08]">
+    <section id="faq" className="relative z-20 py-28 bg-slate-50/70 dark:bg-[#080b13] border-t border-slate-200/80 dark:border-white/[0.08] transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30 shadow-xs">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>CENTRE DE CONNAISSANCES</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight transition-colors">
             Questions <span className="wavo-gradient-text">fréquentes</span>
           </h2>
 
-          <p className="text-base text-slate-400">
+          <p className="text-base text-slate-600 dark:text-slate-400 transition-colors">
             Tout ce que vous devez savoir sur le fonctionnement juridique, les tarifs, l&apos;éligibilité et la confidentialité de Wavo.
           </p>
         </div>
@@ -60,7 +60,7 @@ export default function FaqSection() {
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-[#fa6e69]/20 via-[#ffbc7d]/10 to-transparent rounded-2xl blur-lg opacity-0 group-focus-within:opacity-100 transition-opacity duration-500 pointer-events-none" />
             
-            <div className="relative flex items-center bg-[#10101b] border border-white/[0.1] rounded-2xl px-4 py-3.5 group-focus-within:border-[#fa6e69]/60 transition-all shadow-xl">
+            <div className="relative flex items-center bg-white dark:bg-[#10101b] border border-slate-200/90 dark:border-white/[0.1] rounded-2xl px-4 py-3.5 group-focus-within:border-[#fa6e69]/60 transition-all shadow-sm dark:shadow-xl">
               <Search className="w-5 h-5 text-slate-400 group-focus-within:text-[#fa6e69] transition-colors flex-shrink-0" />
               
               <input
@@ -68,20 +68,20 @@ export default function FaqSection() {
                 placeholder="Rechercher par mot-clé (rachat, caution, taux journalier, TVA, bilan)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent px-3 text-sm text-white placeholder-slate-500 focus:outline-none font-sans"
+                className="w-full bg-transparent px-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none font-sans"
               />
 
               {searchQuery ? (
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="p-1 rounded-lg bg-white/[0.08] hover:bg-white/[0.15] text-slate-400 hover:text-white transition-colors cursor-pointer mr-2"
+                  className="p-1 rounded-lg bg-slate-100 dark:bg-white/[0.08] hover:bg-slate-200 dark:hover:bg-white/[0.15] text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer mr-2"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               ) : null}
 
-              <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/[0.05] border border-white/[0.08] text-[10px] font-mono text-slate-400 whitespace-nowrap">
+              <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/[0.08] text-[10px] font-mono text-slate-500 dark:text-slate-400 whitespace-nowrap">
                 <span>⌘K</span>
               </div>
             </div>
@@ -98,13 +98,13 @@ export default function FaqSection() {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                     activeCategory === cat.id
                       ? "bg-[#fa6e69] text-white shadow-lg shadow-[#fa6e69]/30 border border-[#fa6e69]"
-                      : "bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06]"
+                      : "bg-white dark:bg-white/[0.03] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] border border-slate-200/80 dark:border-white/[0.06] shadow-xs dark:shadow-none"
                   }`}
                 >
                   <span>{cat.label}</span>
                   <span
                     className={`px-1.5 py-0.2 rounded-md text-[10px] font-mono ${
-                      activeCategory === cat.id ? "bg-white/20 text-white" : "bg-white/[0.06] text-slate-500"
+                      activeCategory === cat.id ? "bg-white/20 text-white" : "bg-slate-100 dark:bg-white/[0.06] text-slate-500"
                     }`}
                   >
                     {count}
@@ -116,7 +116,7 @@ export default function FaqSection() {
 
           {/* Results Counter if searching */}
           {searchQuery && (
-            <div className="text-center text-xs font-mono text-slate-400">
+            <div className="text-center text-xs font-mono text-slate-500 dark:text-slate-400">
               {filteredFaq.length} question{filteredFaq.length > 1 ? "s" : ""} trouvée{filteredFaq.length > 1 ? "s" : ""} pour « {searchQuery} »
             </div>
           )}
@@ -125,9 +125,9 @@ export default function FaqSection() {
         {/* Accordion List */}
         <div className="space-y-3">
           {filteredFaq.length === 0 ? (
-            <div className="text-center py-14 rounded-3xl border border-white/[0.06] bg-[#10101b] space-y-3">
-              <Sparkles className="w-6 h-6 text-slate-500 mx-auto" />
-              <div className="text-sm font-medium text-slate-300">
+            <div className="text-center py-14 rounded-3xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-[#10101b] space-y-3 shadow-sm dark:shadow-none">
+              <Sparkles className="w-6 h-6 text-slate-400 dark:text-slate-500 mx-auto" />
+              <div className="text-sm font-medium text-slate-700 dark:text-slate-300">
                 Aucune question ne correspond à votre recherche « {searchQuery} »
               </div>
               <button
@@ -146,8 +146,8 @@ export default function FaqSection() {
                   key={item.id}
                   className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                     isOpen
-                      ? "border-[#fa6e69]/40 bg-[#121422] shadow-xl shadow-[#fa6e69]/5"
-                      : "border-white/[0.07] bg-[#10101b] hover:border-white/[0.14]"
+                      ? "border-[#fa6e69]/50 bg-white dark:bg-[#121422] shadow-md dark:shadow-xl shadow-[#fa6e69]/5"
+                      : "border-slate-200/80 dark:border-white/[0.07] bg-white dark:bg-[#10101b] hover:border-slate-300 dark:hover:border-white/[0.14] shadow-xs dark:shadow-none"
                   }`}
                 >
                   <button
@@ -157,10 +157,10 @@ export default function FaqSection() {
                     <div className="flex items-center gap-3">
                       <span
                         className={`w-2 h-2 rounded-full transition-colors flex-shrink-0 ${
-                          isOpen ? "bg-[#fa6e69]" : "bg-white/20"
+                          isOpen ? "bg-[#fa6e69]" : "bg-slate-300 dark:bg-white/20"
                         }`}
                       />
-                      <span className="text-sm sm:text-base font-bold text-white tracking-tight">
+                      <span className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight">
                         {item.question}
                       </span>
                     </div>
@@ -168,8 +168,8 @@ export default function FaqSection() {
                     <div
                       className={`w-7 h-7 rounded-xl flex items-center justify-center border transition-all flex-shrink-0 ${
                         isOpen
-                          ? "bg-[#fa6e69]/20 border-[#fa6e69]/40 text-[#fa6e69] rotate-180"
-                          : "bg-white/[0.04] border-white/[0.08] text-slate-400"
+                          ? "bg-[#fa6e69]/15 dark:bg-[#fa6e69]/20 border-[#fa6e69]/40 text-[#fa6e69] rotate-180"
+                          : "bg-slate-100 dark:bg-white/[0.04] border-slate-200/80 dark:border-white/[0.08] text-slate-500 dark:text-slate-400"
                       }`}
                     >
                       <ChevronDown className="w-4 h-4" />
@@ -177,7 +177,7 @@ export default function FaqSection() {
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/[0.05] pt-4 font-normal">
+                    <div className="px-6 pb-5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-white/[0.05] pt-4 font-normal">
                       {item.answer}
                     </div>
                   )}
@@ -190,8 +190,8 @@ export default function FaqSection() {
         {/* Support Callout */}
         <div className="p-7 rounded-3xl wavo-card flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <h4 className="text-sm font-bold text-white">Vous avez une question spécifique sur vos contrats ?</h4>
-            <p className="text-xs text-slate-400">
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Vous avez une question spécifique sur vos contrats ?</h4>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
               Nos analystes en financement de stock vous répondent sous 2 heures ouvrées.
             </p>
           </div>

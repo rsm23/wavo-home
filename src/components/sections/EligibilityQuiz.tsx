@@ -74,21 +74,21 @@ export default function EligibilityQuiz() {
   const percentage = Math.round((passedCount / totalCriteria) * 100);
 
   return (
-    <section id="eligibilite" className="relative z-20 py-28 bg-[#080b13] border-t border-white/[0.08]">
+    <section id="eligibilite" className="relative z-20 py-28 bg-white dark:bg-[#080b13] border-t border-slate-200/80 dark:border-white/[0.08] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30 shadow-xs">
             <PackageCheck className="w-3.5 h-3.5" />
             <span>DIAGNOSTIC DE QUALIFICATION EN DIRECT</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight transition-colors">
             Qui peut utiliser <span className="wavo-gradient-text">Wavo ?</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-400">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 transition-colors">
             Wavo s’adresse aux entreprises établies qui achètent et stockent des produits physiques avant de les revendre en B2B ou B2C. Activez vos critères ci-dessous pour tester votre éligibilité en temps réel.
           </p>
         </div>
@@ -101,15 +101,15 @@ export default function EligibilityQuiz() {
             
             {/* Group 1: Enterprise Criteria */}
             <div className="p-7 sm:p-9 rounded-3xl wavo-card space-y-6">
-              <div className="flex items-center gap-3.5 border-b border-white/[0.08] pb-5">
+              <div className="flex items-center gap-3.5 border-b border-slate-200/80 dark:border-white/[0.08] pb-5">
                 <div className="p-3 rounded-2xl bg-[#fa6e69]/15 text-[#fa6e69] border border-[#fa6e69]/30 shadow-lg shadow-[#fa6e69]/10">
                   <Building2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white tracking-tight">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
                     Critères Entreprise (TPE &amp; PME Françaises)
                   </h3>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     Conditions requises sur la structure juridique et financière
                   </p>
                 </div>
@@ -126,8 +126,8 @@ export default function EligibilityQuiz() {
                       onClick={() => toggleCriterion(c.id)}
                       className={`group p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex items-center justify-between gap-4 select-none ${
                         isChecked
-                          ? "bg-[#fa6e69]/[0.08] border-[#fa6e69]/40 hover:border-[#fa6e69]/70 shadow-lg shadow-[#fa6e69]/5"
-                          : "bg-white/[0.02] border-white/[0.06] hover:border-white/[0.15] opacity-60 hover:opacity-100"
+                          ? "bg-[#fa6e69]/[0.06] border-[#fa6e69]/40 hover:border-[#fa6e69]/70 shadow-sm dark:shadow-none"
+                          : "bg-slate-50 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/[0.06] hover:border-slate-300 dark:hover:border-white/[0.15] opacity-75 hover:opacity-100"
                       }`}
                     >
                       {/* Left: Custom Icon + Text */}
@@ -136,12 +136,12 @@ export default function EligibilityQuiz() {
                           className={`p-2.5 rounded-xl border transition-colors ${
                             isChecked
                               ? "bg-[#fa6e69]/20 border-[#fa6e69]/40 text-[#fa6e69]"
-                              : "bg-white/[0.04] border-white/[0.08] text-slate-500"
+                              : "bg-white dark:bg-white/[0.04] border-slate-200 dark:border-white/[0.08] text-slate-400 dark:text-slate-500"
                           }`}
                         >
                           <Icon className="w-4 h-4" />
                         </div>
-                        <span className="text-xs sm:text-sm font-medium text-slate-200 group-hover:text-white transition-colors">
+                        <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                           {c.label}
                         </span>
                       </div>
@@ -152,12 +152,12 @@ export default function EligibilityQuiz() {
                           className={`px-3 py-1.5 rounded-xl text-[11px] font-mono font-bold flex items-center gap-2 transition-all duration-300 ${
                             isChecked
                               ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/40"
-                              : "bg-white/[0.05] text-slate-500 border border-white/[0.08]"
+                              : "bg-white dark:bg-white/[0.05] text-slate-500 border border-slate-200 dark:border-white/[0.08]"
                           }`}
                         >
                           <div
                             className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
-                              isChecked ? "bg-white text-[#fa6e69]" : "bg-white/10 text-slate-500"
+                              isChecked ? "bg-white text-[#fa6e69]" : "bg-slate-200 dark:bg-white/10 text-slate-500"
                             }`}
                           >
                             {isChecked ? <Check className="w-2.5 h-2.5 stroke-[3]" /> : null}
@@ -173,15 +173,15 @@ export default function EligibilityQuiz() {
 
             {/* Group 2: Product Criteria */}
             <div className="p-7 sm:p-9 rounded-3xl wavo-card space-y-6">
-              <div className="flex items-center gap-3.5 border-b border-white/[0.08] pb-5">
+              <div className="flex items-center gap-3.5 border-b border-slate-200/80 dark:border-white/[0.08] pb-5">
                 <div className="p-3 rounded-2xl bg-[#ffbc7d]/15 text-[#ffbc7d] border border-[#ffbc7d]/30 shadow-lg shadow-[#ffbc7d]/10">
                   <PackageCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white tracking-tight">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
                     Critères Produits &amp; Stocks
                   </h3>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     Conditions d&apos;éligibilité pour les références en inventaire
                   </p>
                 </div>
@@ -198,8 +198,8 @@ export default function EligibilityQuiz() {
                       onClick={() => toggleCriterion(c.id)}
                       className={`group p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 select-none ${
                         isChecked
-                          ? "bg-[#ffbc7d]/[0.08] border-[#ffbc7d]/40 hover:border-[#ffbc7d]/70 shadow-lg shadow-[#ffbc7d]/5"
-                          : "bg-white/[0.02] border-white/[0.06] hover:border-white/[0.15] opacity-60 hover:opacity-100"
+                          ? "bg-[#ffbc7d]/[0.08] border-[#ffbc7d]/40 hover:border-[#ffbc7d]/70 shadow-sm dark:shadow-none"
+                          : "bg-slate-50 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/[0.06] hover:border-slate-300 dark:hover:border-white/[0.15] opacity-75 hover:opacity-100"
                       }`}
                     >
                       {/* Left: Icon + Label + Explanatory note */}
@@ -208,16 +208,16 @@ export default function EligibilityQuiz() {
                           className={`p-2.5 rounded-xl border mt-0.5 transition-colors ${
                             isChecked
                               ? "bg-[#ffbc7d]/20 border-[#ffbc7d]/40 text-[#ffbc7d]"
-                              : "bg-white/[0.04] border-white/[0.08] text-slate-500"
+                              : "bg-white dark:bg-white/[0.04] border-slate-200 dark:border-white/[0.08] text-slate-400 dark:text-slate-500"
                           }`}
                         >
                           <Icon className="w-4 h-4" />
                         </div>
                         <div className="space-y-1">
-                          <div className="text-xs sm:text-sm font-semibold text-white">
+                          <div className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">
                             {c.label}
                           </div>
-                          <div className="text-[11px] text-slate-400 font-normal">
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-normal">
                             {c.note}
                           </div>
                         </div>
@@ -229,12 +229,12 @@ export default function EligibilityQuiz() {
                           className={`px-3 py-1.5 rounded-xl text-[11px] font-mono font-bold flex items-center gap-2 transition-all duration-300 ${
                             isChecked
                               ? "bg-[#ffbc7d] text-[#10101b] shadow-md shadow-[#ffbc7d]/40"
-                              : "bg-white/[0.05] text-slate-500 border border-white/[0.08]"
+                              : "bg-white dark:bg-white/[0.05] text-slate-500 border border-slate-200 dark:border-white/[0.08]"
                           }`}
                         >
                           <div
                             className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
-                              isChecked ? "bg-[#10101b] text-[#ffbc7d]" : "bg-white/10 text-slate-500"
+                              isChecked ? "bg-[#10101b] text-[#ffbc7d]" : "bg-slate-200 dark:bg-white/10 text-slate-500"
                             }`}
                           >
                             {isChecked ? <Check className="w-2.5 h-2.5 stroke-[3]" /> : null}
@@ -253,10 +253,10 @@ export default function EligibilityQuiz() {
           {/* Right Column: High-End Live Diagnostic Gauge & Action Card */}
           <div className="lg:col-span-5 sticky top-28">
             <FloatingCard3D className="rounded-3xl">
-              <div className="p-8 sm:p-9 rounded-3xl bg-gradient-to-br from-[#10101b] via-[#1c2639] to-[#0a0c14] border border-[#fa6e69]/30 shadow-2xl space-y-7">
+              <div className="p-8 sm:p-9 rounded-3xl bg-white dark:bg-gradient-to-br dark:from-[#10101b] dark:via-[#1c2639] dark:to-[#0a0c14] border border-[#fa6e69]/30 shadow-xl dark:shadow-2xl space-y-7 transition-colors">
                 
                 <div className="flex items-center justify-between font-mono text-xs">
-                  <span className="text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                  <span className="text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#fa6e69] animate-ping" />
                     Indicateur de Conformité
                   </span>
@@ -275,7 +275,8 @@ export default function EligibilityQuiz() {
                         cy="60"
                         r="50"
                         fill="none"
-                        stroke="rgba(255, 255, 255, 0.08)"
+                        stroke="currentColor"
+                        className="text-slate-200 dark:text-white/[0.08]"
                         strokeWidth="10"
                       />
                       {/* Progress animated circle */}
@@ -300,10 +301,10 @@ export default function EligibilityQuiz() {
                     </svg>
 
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                      <div className="text-3xl font-black text-white font-mono tracking-tight">
+                      <div className="text-3xl font-black text-slate-900 dark:text-white font-mono tracking-tight">
                         {percentage}%
                       </div>
-                      <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                      <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                         Qualifié
                       </div>
                     </div>
@@ -312,22 +313,22 @@ export default function EligibilityQuiz() {
 
                 {/* Status Callout */}
                 {isFullyEligible ? (
-                  <div className="p-5 rounded-2xl bg-[#fa6e69]/15 border border-[#fa6e69]/40 space-y-2">
+                  <div className="p-5 rounded-2xl bg-[#fa6e69]/10 dark:bg-[#fa6e69]/15 border border-[#fa6e69]/40 space-y-2">
                     <div className="flex items-center gap-2 text-[#fa6e69] font-bold text-sm">
-                      <Sparkles className="w-4 h-4 text-[#ffbc7d]" />
+                      <Sparkles className="w-4 h-4 text-[#fa6e69] dark:text-[#ffbc7d]" />
                       <span>Félicitations ! Dossier 100% éligible</span>
                     </div>
-                    <p className="text-xs text-slate-200 leading-relaxed">
+                    <p className="text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
                       Votre entreprise et vos stocks répondent aux exigences d&apos;intervention Wavo. Vous pouvez débloquer jusqu&apos;à 250 000 € en moins de 24h.
                     </p>
                   </div>
                 ) : (
-                  <div className="p-5 rounded-2xl bg-amber-950/30 border border-amber-500/30 space-y-2">
-                    <div className="flex items-center gap-2 text-amber-300 font-bold text-sm">
-                      <ShieldAlert className="w-4 h-4 text-amber-400" />
+                  <div className="p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-500/30 space-y-2">
+                    <div className="flex items-center gap-2 text-amber-700 dark:text-amber-300 font-bold text-sm">
+                      <ShieldAlert className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                       <span>Éligibilité partielle ({totalCriteria - passedCount} critère(s) manquant(s))</span>
                     </div>
-                    <p className="text-xs text-amber-200/80 leading-relaxed">
+                    <p className="text-xs text-amber-900/80 dark:text-amber-200/80 leading-relaxed">
                       Certaines conditions nécessitent une analyse spécifique. Contactez notre équipe pour étudier une dérogation.
                     </p>
                   </div>

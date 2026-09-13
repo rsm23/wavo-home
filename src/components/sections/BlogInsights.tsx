@@ -10,22 +10,22 @@ export default function BlogInsights() {
   const { blogArticles } = WAVO_CONTENT;
 
   return (
-    <section id="blog" className="relative z-20 py-28 bg-[#080b13] border-t border-white/[0.08]">
+    <section id="blog" className="relative z-20 py-28 bg-white dark:bg-[#080b13] border-t border-slate-200/80 dark:border-white/[0.08] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <div className="max-w-2xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30 shadow-xs">
               <BookOpen className="w-3.5 h-3.5" />
               <span>PERSPECTIVES &amp; ANALYSES DE MARCHÉ</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight transition-colors">
               Nos derniers <span className="wavo-gradient-text">articles de blog</span>
             </h2>
 
-            <p className="text-base text-slate-400">
+            <p className="text-base text-slate-600 dark:text-slate-400 transition-colors">
               Analyses stratégiques sur le BFR, le financement non dilutif et les alternatives au crédit bancaire.
             </p>
           </div>
@@ -34,7 +34,7 @@ export default function BlogInsights() {
             href="https://www.wavo.fr/blog/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fa6e69] hover:text-[#ffbc7d] transition-colors self-start sm:self-auto font-mono"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fa6e69] hover:text-[#ff8a85] transition-colors self-start sm:self-auto font-mono"
           >
             <span>VOIR TOUS LES ARTICLES</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -52,7 +52,7 @@ export default function BlogInsights() {
                 className="h-full rounded-3xl wavo-card overflow-hidden flex flex-col justify-between group block"
               >
                 <div>
-                  <div className="relative h-52 w-full overflow-hidden bg-black/40">
+                  <div className="relative h-52 w-full overflow-hidden bg-slate-100 dark:bg-black/40">
                     <Image
                       src={article.image}
                       alt={article.title}
@@ -70,17 +70,17 @@ export default function BlogInsights() {
                       <span>{article.readTime}</span>
                     </div>
 
-                    <h3 className="text-base font-bold text-white leading-snug group-hover:text-[#fa6e69] transition-colors">
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white leading-snug group-hover:text-[#fa6e69] transition-colors">
                       {article.title}
                     </h3>
 
-                    <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed font-normal">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed font-normal">
                       {article.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-7 pt-0 flex items-center justify-between text-xs font-bold text-[#fa6e69] group-hover:text-[#ffbc7d] transition-colors">
+                <div className="p-7 pt-0 flex items-center justify-between text-xs font-bold text-[#fa6e69] group-hover:text-[#ff8a85] transition-colors">
                   <span>Lire l&apos;analyse complète</span>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
