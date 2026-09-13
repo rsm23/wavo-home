@@ -8,6 +8,149 @@ interface HeroBackground3DProps {
   className?: string;
 }
 
+// GLSL Vertex Shader: Fullscreen quad with UV pass-through
+const vertexShader = `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = vec4(position, 1.0);
+  }
+`;
+
+// GLSL Fragment Shader: Ultra-Subtle Ethereal Fluid Light Field
+// Soft, calm, continuous organic flow with gentle cursor refraction & magnetic drift
+const fragmentShader = `
+  precision highp float;
+
+  uniform vec2 uResolution;
+  uniform vec2 uMouse;
+  uniform float uTime;
+  uniform float uDark;
+  uniform float uHover;
+
+  varying vec2 vUv;
+
+  // Analytical 2D Simplex Noise (Ashima / McEwan)
+  vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+  vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+  vec3 permute(vec3 x) { return mod289(((x * 34.0) + 1.0) * x); }
+
+  float snoise(vec2 v) {
+    const vec4 C = vec4(
+      0.211324865405187,
+      0.366025403784439,
+      -0.577350269189626,
+      0.024390243902439
+    );
+    vec2 i  = floor(v + dot(v, C.yy));
+    vec2 x0 = v - i + dot(i, C.xx);
+    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+    vec4 x12 = x0.xyxy + C.xxzz;
+    x12.xy -= i1;
+    i = mod289(i);
+    vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+    vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);
+    m = m * m;
+    m = m * m;
+    vec3 x = 2.0 * fract(p * C.www) - 1.0;
+    vec3 h = abs(x) - 0.5;
+    vec3 ox = floor(x + 0.5);
+    vec3 a0 = x - ox;
+    m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);
+    vec3 g;
+    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+    return 130.0 * dot(m, g);
+  }
+
+  void main() {
+    vec2 uv = vUv;
+    float aspect = uResolution.x / max(uResolution.y, 1.0);
+    vec2 p = (uv - 0.5) * vec2(aspect, 1.0) * 1.8;
+
+    // Slow, serene time progression (peaceful breathing cadence)
+    float t = uTime * 0.08;
+
+    // Aspect-corrected cursor coordinates
+    vec2 mouseP = (uMouse - 0.5) * vec2(aspect, 1.0) * 1.8;
+    float mouseDist = length(p - mouseP);
+
+    // Subtle magnetic cursor deformation: gentle fluid parting and refraction
+    float mouseInfluence = exp(-mouseDist * 1.4) * uHover;
+    vec2 mouseDrift = (p - mouseP) * mouseInfluence * 0.35;
+
+    // Primary domain warping layer (smooth fluid displacement)
+    vec2 q = vec2(
+      snoise(p * 0.55 + vec2(t * 0.45, t * 0.35) + mouseDrift * 0.6),
+      snoise(p * 0.55 + vec2(-t * 0.35, t * 0.40) - mouseDrift * 0.6)
+    );
+
+    // Secondary harmonic layer (silky ribbon folding)
+    vec2 r = vec2(
+      snoise(p * 0.75 + 1.1 * q + vec2(2.4, 6.7) + t * 0.2),
+      snoise(p * 0.75 + 1.1 * q + vec2(7.8, 1.9) - t * 0.15)
+    );
+
+    // Final scalar fluid density
+    float f = 0.5 + 0.5 * snoise(p * 0.65 + 1.4 * r + t * 0.1);
+
+    // Subtle 3D normal & specular sheen calculation
+    float eps = 0.02;
+    float fRight = snoise((p + vec2(eps, 0.0)) * 0.65 + 1.4 * r);
+    float fUp    = snoise((p + vec2(0.0, eps)) * 0.65 + 1.4 * r);
+    vec3 normal = normalize(vec3((f - fRight) / eps, (f - fUp) / eps, 1.6));
+
+    // Dynamic light direction following cursor softly in 3D
+    vec3 lightPos = vec3(mouseP.x, mouseP.y, 1.8);
+    vec3 lightDir = normalize(lightPos - vec3(p, 0.0));
+    float specular = pow(max(dot(normal, lightDir), 0.0), 12.0) * (0.05 + 0.08 * uHover);
+
+    // Wavo Brand Palette
+    // Coral: #fa6e69 -> rgb(0.98, 0.43, 0.41)
+    // Peach: #ffbc7d -> rgb(1.00, 0.74, 0.49)
+    // Rose:  #ff8a85 -> rgb(1.00, 0.54, 0.52)
+    vec3 coralColor = vec3(0.98, 0.431, 0.412);
+    vec3 peachColor = vec3(1.00, 0.737, 0.490);
+    vec3 roseColor  = vec3(1.00, 0.541, 0.522);
+
+    // Color gradient mixing based on fluid density 'f'
+    vec3 fluidColor = mix(peachColor, coralColor, smoothstep(0.3, 0.7, f));
+    fluidColor = mix(fluidColor, roseColor, smoothstep(0.65, 0.95, f));
+
+    // Add subtle 3D specular highlight
+    fluidColor += vec3(specular * 1.1, specular * 0.9, specular * 0.8);
+
+    // --- Theme Adaptations ---
+    // Light mode: Ultra-clean, luminous porcelain base with very subtle warm gradient tint
+    // Dark mode: Deep obsidian velvet base with glowing warm embers
+    vec3 baseLight = vec3(0.98, 0.98, 0.99); // #fafafc
+    vec3 baseDark  = vec3(0.031, 0.043, 0.075); // #080b13
+
+    // Vignette / Radial falloff so the center remains calm and edges fade softly
+    float radialFalloff = smoothstep(1.6, 0.1, length(p * vec2(0.7, 1.0)));
+
+    // Interactive cursor local glow
+    float cursorGlow = exp(-mouseDist * 1.8) * 0.12 * uHover;
+
+    // Density factor: keep it soft and restrained (subtle, non-distracting)
+    float lightOpacity = (0.08 + 0.14 * f + cursorGlow) * radialFalloff;
+    float darkOpacity  = (0.12 + 0.22 * f + cursorGlow * 1.5) * radialFalloff;
+
+    vec3 finalColor;
+    float finalAlpha;
+
+    if (uDark > 0.5) {
+      finalColor = mix(baseDark, fluidColor, darkOpacity);
+      finalAlpha = clamp(darkOpacity * 1.4, 0.0, 0.9);
+    } else {
+      finalColor = mix(baseLight, fluidColor, lightOpacity);
+      finalAlpha = clamp(lightOpacity * 1.3, 0.0, 0.65);
+    }
+
+    gl_FragColor = vec4(finalColor, finalAlpha);
+  }
+`;
+
 export default function HeroBackground3D({ className = "" }: HeroBackground3DProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { theme } = useTheme();
@@ -24,9 +167,7 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
     const width = container.clientWidth;
     const height = container.clientHeight;
 
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, -3.5, 12);
-    camera.lookAt(0, 0, 0);
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
     // --- WebGL Renderer ---
     const renderer = new THREE.WebGLRenderer({
@@ -36,159 +177,58 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = isDark ? 1.2 : 1.0;
     container.appendChild(renderer.domElement);
 
-    // --- Dynamic 3D Morphing Surface Geometry ---
-    // 84x64 grid offers ultra-smooth wave contours with negligible frame-time cost (~0.2ms)
-    const gridCols = 84;
-    const gridRows = 64;
-    const planeWidth = 26;
-    const planeHeight = 18;
-    const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, gridCols, gridRows);
+    // --- Shader Material on Fullscreen Quad ---
+    const uniforms = {
+      uResolution: { value: new THREE.Vector2(width, height) },
+      uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+      uTime: { value: 0 },
+      uDark: { value: isDark ? 1.0 : 0.0 },
+      uHover: { value: 0.0 },
+    };
 
-    // Cache initial 2D layout for wave displacement
-    const posAttr = geometry.attributes.position as THREE.BufferAttribute;
-    const vertexCount = posAttr.count;
-    const initialPositions = new Float32Array(posAttr.array);
-
-    // --- High-End Materials ---
-    // Layer 1: Sculptural Physical Membrane with Frosted Subsurface Look
-    const surfaceMaterial = new THREE.MeshPhysicalMaterial({
-      color: isDark ? 0x0a0e1a : 0xfcf9f7,
-      metalness: isDark ? 0.4 : 0.08,
-      roughness: isDark ? 0.35 : 0.25,
-      clearcoat: isDark ? 0.5 : 0.8,
-      clearcoatRoughness: 0.15,
-      transmission: isDark ? 0.2 : 0.4,
-      opacity: isDark ? 0.88 : 0.72,
+    const material = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms,
       transparent: true,
-      side: THREE.DoubleSide,
-      wireframe: false,
-    });
-
-    const surfaceMesh = new THREE.Mesh(geometry, surfaceMaterial);
-    surfaceMesh.rotation.x = -Math.PI * 0.28; // Tilted for dramatic fintech horizon perspective
-    surfaceMesh.position.set(0, 0.5, -1);
-    scene.add(surfaceMesh);
-
-    // Layer 2: Architectural CAD Lattice Wireframe Overlay (riding the exact same geometry)
-    const wireframeMaterial = new THREE.MeshBasicMaterial({
-      color: 0xfa6e69,
-      wireframe: true,
-      transparent: true,
-      opacity: isDark ? 0.22 : 0.16,
-    });
-    const wireframeMesh = new THREE.Mesh(geometry, wireframeMaterial);
-    wireframeMesh.rotation.copy(surfaceMesh.rotation);
-    wireframeMesh.position.copy(surfaceMesh.position);
-    wireframeMesh.position.z += 0.02; // Sits microscopically above surface to prevent z-fighting
-    scene.add(wireframeMesh);
-
-    // --- Layer 3: Floating Micro-Node Constellation Particles ---
-    const particleCount = 75;
-    const particleGeometry = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-    const particleSpeeds = new Float32Array(particleCount);
-    const particleOffsets = new Float32Array(particleCount);
-
-    for (let i = 0; i < particleCount; i++) {
-      particlePositions[i * 3] = (Math.random() - 0.5) * 22;
-      particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 14;
-      particlePositions[i * 3 + 2] = Math.random() * 3 + 0.5;
-      particleSpeeds[i] = 0.2 + Math.random() * 0.4;
-      particleOffsets[i] = Math.random() * Math.PI * 2;
-    }
-    particleGeometry.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
-
-    // Canvas-generated soft glow particle circle
-    const particleCanvas = document.createElement("canvas");
-    particleCanvas.width = 64;
-    particleCanvas.height = 64;
-    const ctx = particleCanvas.getContext("2d");
-    if (ctx) {
-      const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 30);
-      grad.addColorStop(0, "rgba(255, 255, 255, 1)");
-      grad.addColorStop(0.3, "rgba(250, 110, 105, 0.8)");
-      grad.addColorStop(0.7, "rgba(255, 188, 125, 0.3)");
-      grad.addColorStop(1, "rgba(250, 110, 105, 0)");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 64, 64);
-    }
-    const particleTexture = new THREE.CanvasTexture(particleCanvas);
-
-    const particleMaterial = new THREE.PointsMaterial({
-      size: 0.28,
-      map: particleTexture,
-      transparent: true,
-      opacity: isDark ? 0.75 : 0.55,
-      blending: THREE.AdditiveBlending,
       depthWrite: false,
+      depthTest: false,
     });
-    const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
-    scene.add(particleSystem);
 
-    // --- Dynamic Specular Lighting System ---
-    const ambientLight = new THREE.AmbientLight(
-      isDark ? 0x101524 : 0xffffff,
-      isDark ? 1.2 : 2.2
-    );
-    scene.add(ambientLight);
+    const quadGeometry = new THREE.PlaneGeometry(2, 2);
+    const quad = new THREE.Mesh(quadGeometry, material);
+    scene.add(quad);
 
-    const keyLight = new THREE.DirectionalLight(0xffecd8, isDark ? 1.6 : 1.8);
-    keyLight.position.set(12, 16, 14);
-    scene.add(keyLight);
-
-    // Dynamic Cursor Spotlight (Wavo signature coral glow that tracks cursor)
-    const cursorLight = new THREE.PointLight(0xfa6e69, isDark ? 6.5 : 4.8, 22, 1.2);
-    cursorLight.position.set(0, 0, 3.5);
-    scene.add(cursorLight);
-
-    // Secondary Warm Peach Ambient Reflector
-    const fillLight = new THREE.PointLight(0xffbc7d, isDark ? 4.2 : 3.0, 26, 1.4);
-    fillLight.position.set(-6, -4, 4);
-    scene.add(fillLight);
-
-    // --- Cursor Tracking & Physics State ---
-    const mouseTarget = { x: 0, y: 0 };
-    const mouseSmoothed = { x: 0, y: 0 };
-    const mouse3D = { x: 0, y: 0 };
-    let mouseVelocity = 0;
-    let lastMouse = { x: 0, y: 0 };
-    let isHovered = false;
+    // --- Cursor Tracking & Smooth Easing ---
+    const targetMouse = { x: 0.5, y: 0.5 };
+    const currentMouse = { x: 0.5, y: 0.5 };
+    let targetHover = 0.0;
+    let currentHover = 0.0;
 
     const handlePointerMove = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-      mouseTarget.x = Math.max(-1.2, Math.min(1.2, x));
-      mouseTarget.y = Math.max(-1.2, Math.min(1.2, y));
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = 1.0 - (e.clientY - rect.top) / rect.height; // Invert Y for GL coordinates
 
-      const dx = mouseTarget.x - lastMouse.x;
-      const dy = mouseTarget.y - lastMouse.y;
-      const speed = Math.sqrt(dx * dx + dy * dy);
-      mouseVelocity = Math.min(3.5, mouseVelocity * 0.7 + speed * 12);
-      lastMouse = { x: mouseTarget.x, y: mouseTarget.y };
-      isHovered = true;
+      targetMouse.x = Math.max(0.0, Math.min(1.0, x));
+      targetMouse.y = Math.max(0.0, Math.min(1.0, y));
+      targetHover = 1.0;
     };
 
     const handlePointerLeave = () => {
-      mouseTarget.x = 0;
-      mouseTarget.y = 0;
-      isHovered = false;
+      targetHover = 0.0;
     };
 
-    // Attach to window for fluid cursor reception anywhere on top of hero
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("pointerleave", handlePointerLeave);
 
-    // --- Animation Clock & Render Loop ---
+    // --- Animation & Visibility ---
     const clock = new THREE.Clock();
     let animationFrameId: number;
     let isVisible = true;
 
-    // IntersectionObserver to pause when hero is scrolled out of viewport
     const observer = new IntersectionObserver(
       (entries) => {
         isVisible = entries[0].isIntersecting;
@@ -203,112 +243,37 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
 
       const elapsed = clock.getElapsedTime();
 
-      // Smooth cursor interpolation (damping/lerp)
-      const lerpFactor = 0.045;
-      mouseSmoothed.x += (mouseTarget.x - mouseSmoothed.x) * lerpFactor;
-      mouseSmoothed.y += (mouseTarget.y - mouseSmoothed.y) * lerpFactor;
-      mouseVelocity *= 0.94; // Decay velocity
+      // Silky, gentle interpolation (damping) for serene, non-jarring motion
+      const lerpFactor = 0.025;
+      currentMouse.x += (targetMouse.x - currentMouse.x) * lerpFactor;
+      currentMouse.y += (targetMouse.y - currentMouse.y) * lerpFactor;
+      currentHover += (targetHover - currentHover) * 0.04;
 
-      // Map smoothed mouse into 3D plane coordinate space
-      mouse3D.x = mouseSmoothed.x * 11.0;
-      mouse3D.y = mouseSmoothed.y * 7.5;
+      // Update uniforms
+      uniforms.uTime.value = elapsed;
+      uniforms.uMouse.value.set(currentMouse.x, currentMouse.y);
+      uniforms.uHover.value = currentHover;
+      uniforms.uDark.value = themeRef.current ? 1.0 : 0.0;
 
-      // Update Cursor Dynamic Spotlight
-      cursorLight.position.x = mouse3D.x * 0.9;
-      cursorLight.position.y = mouse3D.y * 0.85 + 0.5;
-      cursorLight.position.z = 2.8 + Math.sin(elapsed * 2) * 0.4 + mouseVelocity * 0.6;
-      cursorLight.intensity = (themeRef.current ? 6.5 : 4.8) + mouseVelocity * 1.5;
-
-      // Move fill light on gentle harmonic orbit
-      fillLight.position.x = -mouse3D.x * 0.6 + Math.cos(elapsed * 0.8) * 4;
-      fillLight.position.y = -mouse3D.y * 0.6 + Math.sin(elapsed * 0.6) * 3;
-
-      // Gentle parallax camera response
-      camera.position.x += (mouseSmoothed.x * 1.6 - camera.position.x) * 0.035;
-      camera.position.y += (-3.5 + mouseSmoothed.y * 1.2 - camera.position.y) * 0.035;
-      camera.lookAt(mouseSmoothed.x * 0.5, 0.4 + mouseSmoothed.y * 0.4, 0);
-
-      // --- Morph 3D Surface Geometry Vertices ---
-      const positions = posAttr.array as Float32Array;
-      const waveTime = elapsed * 0.75;
-      const radiusSq = 20.0; // Dynamic zone of cursor influence
-      const velocityAmp = 1 + mouseVelocity * 0.8;
-
-      for (let i = 0; i < vertexCount; i++) {
-        const i3 = i * 3;
-        const x = initialPositions[i3];
-        const y = initialPositions[i3 + 1];
-
-        // Harmonic multi-octave base wave
-        const harmonic1 = Math.sin(x * 0.28 + waveTime * 0.9) * Math.cos(y * 0.32 + waveTime * 0.7) * 1.05;
-        const harmonic2 = Math.sin((x + y) * 0.22 - waveTime * 0.8) * 0.55;
-        const harmonic3 = Math.cos(Math.sqrt(x * x + y * y) * 0.35 - waveTime * 1.1) * 0.35;
-        const baseZ = harmonic1 + harmonic2 + harmonic3;
-
-        // Interactive Cursor Disturbance & Morphing Wave
-        const dx = x - mouse3D.x;
-        const dy = y - mouse3D.y;
-        const distSq = dx * dx + dy * dy;
-
-        let interactiveZ = 0;
-        if (distSq < radiusSq * 2) {
-          const dist = Math.sqrt(distSq);
-          const influence = Math.exp(-distSq / radiusSq);
-          // Ripple wake + crest elevation under cursor
-          const ripple = Math.sin(dist * 2.8 - waveTime * 5.0) * influence * 1.35 * velocityAmp;
-          const lift = influence * 1.6 * (isHovered ? 1.0 : 0.3);
-          interactiveZ = ripple + lift;
-        }
-
-        positions[i3 + 2] = baseZ + interactiveZ;
-      }
-
-      posAttr.needsUpdate = true;
-      geometry.computeVertexNormals();
-
-      // --- Animate Floating Particles ---
-      const pPositions = particleGeometry.attributes.position.array as Float32Array;
-      for (let i = 0; i < particleCount; i++) {
-        const i3 = i * 3;
-        const spd = particleSpeeds[i];
-        const off = particleOffsets[i];
-        // Bobbing & drifting motion
-        pPositions[i3 + 1] += Math.sin(elapsed * spd + off) * 0.006;
-        pPositions[i3 + 2] = 0.8 + Math.sin(elapsed * spd * 1.4 + off) * 1.2;
-
-        // Subtle particle deflection away from active cursor
-        const pdx = pPositions[i3] - mouse3D.x;
-        const pdy = pPositions[i3 + 1] - mouse3D.y;
-        const pDistSq = pdx * pdx + pdy * pdy;
-        if (pDistSq < 16 && pDistSq > 0.1) {
-          const push = (1 - pDistSq / 16) * 0.04;
-          pPositions[i3] += (pdx / Math.sqrt(pDistSq)) * push;
-          pPositions[i3 + 1] += (pdy / Math.sqrt(pDistSq)) * push;
-        }
-      }
-      particleGeometry.attributes.position.needsUpdate = true;
-
-      // Render Scene
       renderer.render(scene, camera);
     };
 
     animationFrameId = requestAnimationFrame(animate);
 
-    // --- Resize Handling with ResizeObserver ---
+    // --- Resize Handling ---
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const newW = entry.contentRect.width;
         const newH = entry.contentRect.height;
         if (newW > 0 && newH > 0) {
-          camera.aspect = newW / newH;
-          camera.updateProjectionMatrix();
           renderer.setSize(newW, newH);
+          uniforms.uResolution.value.set(newW, newH);
         }
       }
     });
     resizeObserver.observe(container);
 
-    // Return Cleanup Function
+    // --- Cleanup ---
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("pointermove", handlePointerMove);
@@ -316,12 +281,8 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
       observer.disconnect();
       resizeObserver.disconnect();
 
-      geometry.dispose();
-      surfaceMaterial.dispose();
-      wireframeMaterial.dispose();
-      particleGeometry.dispose();
-      particleMaterial.dispose();
-      particleTexture.dispose();
+      quadGeometry.dispose();
+      material.dispose();
       renderer.dispose();
 
       if (container.contains(renderer.domElement)) {
@@ -335,11 +296,11 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
       ref={containerRef}
       className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
       style={{
-        // Soft vignette feathering so the 3D surface seamlessly fades at edges and bottom
+        // Smooth bottom fade so it blends seamlessly into the next sections
         maskImage:
-          "radial-gradient(ellipse 95% 85% at 50% 32%, black 45%, rgba(0,0,0,0.4) 80%, transparent 100%)",
+          "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 85%, transparent 100%)",
         WebkitMaskImage:
-          "radial-gradient(ellipse 95% 85% at 50% 32%, black 45%, rgba(0,0,0,0.4) 80%, transparent 100%)",
+          "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 85%, transparent 100%)",
       }}
       aria-hidden="true"
     />
