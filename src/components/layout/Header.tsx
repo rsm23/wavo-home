@@ -6,14 +6,10 @@ import Link from "next/link";
 import { WAVO_CONTENT } from "@/lib/content";
 import { 
   ArrowRight, 
-  ChevronDown, 
   Menu, 
   X, 
-  Sparkles, 
-  Layers, 
   Calculator, 
-  ArrowUpRight,
-  ShieldCheck
+  ArrowUpRight
 } from "lucide-react";
 
 export default function Header() {
@@ -31,9 +27,9 @@ export default function Header() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 transition-all duration-300">
       {/* Top Announcement Banner */}
-      <div className="relative z-50 bg-[#07080d]/90 border-b border-white/[0.06] text-xs py-2 px-4 backdrop-blur-md">
+      <div className="relative z-50 bg-[#080b13]/90 border-b border-white/[0.06] text-xs py-2 px-4 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-2.5 text-center flex-wrap">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 font-semibold text-[10px] border border-indigo-500/30 uppercase tracking-widest">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#fa6e69]/15 text-[#fa6e69] font-semibold text-[10px] border border-[#fa6e69]/30 uppercase tracking-widest">
             {WAVO_CONTENT.announcement.badge}
           </span>
           <span className="text-slate-300 font-medium text-xs">
@@ -43,7 +39,7 @@ export default function Header() {
             href={WAVO_CONTENT.announcement.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 font-semibold transition-colors ml-1"
+            className="inline-flex items-center gap-1 text-[#ffbc7d] hover:text-white font-semibold transition-colors ml-1"
           >
             <span>{WAVO_CONTENT.announcement.linkText}</span>
             <ArrowRight className="w-3 h-3" />
@@ -56,8 +52,8 @@ export default function Header() {
         <div
           className={`flex items-center justify-between h-16 px-6 rounded-2xl transition-all duration-300 ${
             scrolled
-              ? "bg-[#0c0e17]/85 backdrop-blur-2xl border border-white/[0.1] shadow-2xl shadow-black/50"
-              : "bg-[#0c0e17]/50 backdrop-blur-xl border border-white/[0.06]"
+              ? "bg-[#10101b]/85 backdrop-blur-2xl border border-white/[0.1] shadow-2xl shadow-black/50"
+              : "bg-[#10101b]/55 backdrop-blur-xl border border-white/[0.06]"
           }`}
         >
           {/* Brand Logo */}
@@ -71,9 +67,6 @@ export default function Header() {
                 priority
               />
             </div>
-            <span className="hidden sm:inline-block text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded bg-white/[0.05] text-slate-400 border border-white/[0.08]">
-              CREDIT
-            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -82,7 +75,7 @@ export default function Header() {
               href="#simulateur"
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/[0.06] transition-colors"
             >
-              <Calculator className="w-3.5 h-3.5 text-indigo-400" />
+              <Calculator className="w-3.5 h-3.5 text-[#fa6e69]" />
               <span>Simulateur</span>
             </a>
 
@@ -135,11 +128,11 @@ export default function Header() {
               href="https://www.wavo.fr/rendez-vous/"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative group overflow-hidden px-4.5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-700 hover:from-indigo-500 hover:to-violet-600 shadow-lg shadow-indigo-600/30 transition-all duration-200 active:scale-95 flex items-center gap-2 border border-white/[0.15]"
+              className="relative group overflow-hidden px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#fa6e69] via-[#e0534e] to-[#c43834] hover:from-[#ff8a85] hover:to-[#e0534e] shadow-lg shadow-[#fa6e69]/30 transition-all duration-200 active:scale-95 flex items-center gap-2 border border-white/[0.15]"
             >
               <span>Vérifier mon éligibilité</span>
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
           </div>
 
@@ -159,14 +152,14 @@ export default function Header() {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden max-w-7xl mx-auto px-4 mt-2">
-          <div className="p-5 rounded-2xl bg-[#0e111a]/95 backdrop-blur-2xl border border-white/[0.1] shadow-2xl space-y-4">
+          <div className="p-5 rounded-2xl bg-[#10101b]/95 backdrop-blur-2xl border border-white/[0.1] shadow-2xl space-y-4">
             <div className="flex flex-col space-y-2 text-sm font-medium">
               <a
                 href="#simulateur"
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/[0.05] text-slate-200"
               >
-                <Calculator className="w-4 h-4 text-indigo-400" />
+                <Calculator className="w-4 h-4 text-[#fa6e69]" />
                 Simulateur de trésorerie
               </a>
               <a
@@ -211,7 +204,7 @@ export default function Header() {
                 href="https://www.wavo.fr/rendez-vous/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 text-center text-xs font-bold text-white bg-indigo-600 rounded-xl shadow-lg"
+                className="w-full py-3 text-center text-xs font-bold text-white bg-[#fa6e69] rounded-xl shadow-lg"
               >
                 Vérifier mon éligibilité
               </a>

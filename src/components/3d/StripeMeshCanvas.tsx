@@ -62,30 +62,34 @@ export default function StripeMeshCanvas() {
         vec2 uv = gl_FragCoord.xy / uResolution.xy;
         vec2 mouse = uMouse / uResolution.xy;
         
-        vec2 slantedUv = vec2(uv.x * 0.9 + uv.y * 0.4, uv.y * 0.85 - uv.x * 0.2);
+        vec2 slantedUv = vec2(uv.x * 0.88 + uv.y * 0.38, uv.y * 0.85 - uv.x * 0.18);
         float t = uTime * 0.12;
         
         float n1 = snoise(slantedUv * 1.8 + vec2(t * 0.3, -t * 0.2));
-        float n2 = snoise(slantedUv * 3.2 - vec2(t * 0.2, t * 0.4) + vec2(n1 * 0.4));
-        float n3 = snoise(slantedUv * 1.2 + vec2(-t * 0.2, t * 0.1) + (mouse * 0.3));
+        float n2 = snoise(slantedUv * 3.0 - vec2(t * 0.2, t * 0.35) + vec2(n1 * 0.35));
+        float n3 = snoise(slantedUv * 1.3 + vec2(-t * 0.2, t * 0.1) + (mouse * 0.25));
         
-        float wave = sin((slantedUv.x + slantedUv.y + n1 * 0.35 + n2 * 0.2) * 3.2 + t) * 0.5 + 0.5;
+        float wave = sin((slantedUv.x + slantedUv.y + n1 * 0.3 + n2 * 0.2) * 3.2 + t) * 0.5 + 0.5;
         wave += n3 * 0.15;
 
-        // Luxury Dark Fintech Palette
-        // Deep Obsidian / Blue Noir
-        vec3 cDark    = vec3(0.027, 0.031, 0.051); // #07080d
-        vec3 cIndigo  = vec3(0.18, 0.14, 0.65);   // #2e24a6
-        vec3 cCyan    = vec3(0.02, 0.55, 0.75);   // #058cbf
-        vec3 cViolet  = vec3(0.38, 0.12, 0.68);   // #611fae
-        vec3 cGlow    = vec3(0.25, 0.38, 0.95);   // Electric accent
+        // Official Wavo Brand Palette:
+        // cDark: Midnight Navy #080b13
+        // cNavy: Deep Navy #1c2639
+        // cCoral: Wavo Official Coral #fa6e69
+        // cPeach: Wavo Warm Peach #ffbc7d
+        // cRose: Warm Ruby #e0534e
+        vec3 cDark  = vec3(0.031, 0.043, 0.075);
+        vec3 cNavy  = vec3(0.11, 0.15, 0.22);
+        vec3 cCoral = vec3(0.98, 0.43, 0.41);
+        vec3 cPeach = vec3(1.0, 0.74, 0.49);
+        vec3 cRose  = vec3(0.88, 0.32, 0.30);
 
-        vec3 col = mix(cDark, cIndigo, smoothstep(0.1, 0.5, wave + n1 * 0.25));
-        col = mix(col, cCyan, smoothstep(0.45, 0.75, wave + n2 * 0.2));
-        col = mix(col, cViolet, smoothstep(0.65, 0.92, wave + n3 * 0.25));
-        col = mix(col, cGlow, smoothstep(0.85, 1.05, wave + n1 * 0.3));
+        vec3 col = mix(cDark, cNavy, smoothstep(0.1, 0.45, wave + n1 * 0.2));
+        col = mix(col, cRose, smoothstep(0.4, 0.7, wave + n2 * 0.22));
+        col = mix(col, cCoral, smoothstep(0.65, 0.9, wave + n3 * 0.25));
+        col = mix(col, cPeach, smoothstep(0.85, 1.05, wave + n1 * 0.28));
 
-        float edgeAlpha = smoothstep(0.0, 0.3, uv.y) * smoothstep(1.0, 0.6, uv.y * 0.6);
+        float edgeAlpha = smoothstep(0.0, 0.25, uv.y) * smoothstep(1.0, 0.6, uv.y * 0.6);
         
         gl_FragColor = vec4(col, 0.55 * edgeAlpha);
       }
@@ -207,9 +211,9 @@ export default function StripeMeshCanvas() {
           WebkitMaskImage: "radial-gradient(ellipse 85% 65% at 50% 25%, black 40%, transparent 90%)",
         }}
       />
-      {/* Cinematic subtle glow spheres */}
-      <div className="absolute -top-32 left-1/3 w-[650px] h-[650px] bg-indigo-600/15 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-48 right-10 w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[180px] pointer-events-none" />
+      {/* Wavo Coral Ambient Glows */}
+      <div className="absolute -top-32 left-1/3 w-[650px] h-[650px] bg-[#fa6e69]/15 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-48 right-10 w-[550px] h-[550px] bg-[#ffbc7d]/10 rounded-full blur-[180px] pointer-events-none" />
     </div>
   );
 }

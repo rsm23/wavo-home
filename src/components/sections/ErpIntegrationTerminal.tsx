@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Terminal, Copy, Check, Cpu, ArrowUpRight } from "lucide-react";
+import { Copy, Check, Cpu, ArrowUpRight } from "lucide-react";
 import FloatingCard3D from "@/components/3d/FloatingCards3D";
 
 export default function ErpIntegrationTerminal() {
@@ -53,18 +53,18 @@ Content-Type: application/json
   };
 
   return (
-    <section className="relative z-20 py-28 bg-[#07080d] border-t border-white/[0.08] overflow-hidden">
+    <section className="relative z-20 py-28 bg-[#080b13] border-t border-white/[0.08] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full fintech-glass text-xs font-mono font-semibold text-cyan-300 border border-cyan-500/30">
-            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
+            <Cpu className="w-3.5 h-3.5" />
             <span>SYNCHRONISATION ERP &amp; AUTOMATISATION</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Connecté à vos outils en <span className="fintech-gradient-text">quelques minutes</span>
+            Connecté à vos outils en <span className="wavo-gradient-text">quelques minutes</span>
           </h2>
 
           <p className="text-base sm:text-lg text-slate-400">
@@ -78,8 +78,8 @@ Content-Type: application/json
           {/* Left: Key Features */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl fintech-card space-y-1.5">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-indigo-400">
+              <div className="p-4 rounded-2xl wavo-card space-y-1.5">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#fa6e69]">
                   <span>01</span>
                   <span>CONNEXION SANS INTRUSION</span>
                 </div>
@@ -89,8 +89,8 @@ Content-Type: application/json
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl fintech-card space-y-1.5">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-cyan-400">
+              <div className="p-4 rounded-2xl wavo-card space-y-1.5">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#ffbc7d]">
                   <span>02</span>
                   <span>DÉCOMPTE UNITAIRE AUTOMATISÉ</span>
                 </div>
@@ -100,8 +100,8 @@ Content-Type: application/json
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl fintech-card space-y-1.5">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400">
+              <div className="p-4 rounded-2xl wavo-card space-y-1.5">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#fa6e69]">
                   <span>03</span>
                   <span>COMPATIBILITÉ MULTI-SI</span>
                 </div>
@@ -117,7 +117,7 @@ Content-Type: application/json
                 href="https://www.wavo.fr/contact/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-cyan-300 hover:text-cyan-200 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[#fa6e69] hover:text-[#ffbc7d] transition-colors"
               >
                 <span>Documentation d&apos;intégration technique</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -128,7 +128,7 @@ Content-Type: application/json
           {/* Right: Code Terminal */}
           <div className="lg:col-span-7">
             <FloatingCard3D className="rounded-3xl">
-              <div className="rounded-3xl bg-[#0a0c14] border border-white/[0.1] shadow-2xl overflow-hidden font-mono text-xs">
+              <div className="rounded-3xl bg-[#10101b] border border-white/[0.1] shadow-2xl overflow-hidden font-mono text-xs">
                 
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-3.5 bg-black/60 border-b border-white/[0.08]">
@@ -145,7 +145,7 @@ Content-Type: application/json
                       onClick={() => setActiveTab("webhook")}
                       className={`px-3 py-1 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
                         activeTab === "webhook"
-                          ? "bg-indigo-600 text-white shadow-md"
+                          ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
                           : "text-slate-400 hover:text-white"
                       }`}
                     >
@@ -155,7 +155,7 @@ Content-Type: application/json
                       onClick={() => setActiveTab("payload")}
                       className={`px-3 py-1 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
                         activeTab === "payload"
-                          ? "bg-indigo-600 text-white shadow-md"
+                          ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
                           : "text-slate-400 hover:text-white"
                       }`}
                     >
@@ -165,7 +165,7 @@ Content-Type: application/json
                       onClick={() => setActiveTab("erp")}
                       className={`px-3 py-1 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
                         activeTab === "erp"
-                          ? "bg-indigo-600 text-white shadow-md"
+                          ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
                           : "text-slate-400 hover:text-white"
                       }`}
                     >
@@ -190,10 +190,10 @@ Content-Type: application/json
                 {/* Footer status */}
                 <div className="px-5 py-3 bg-black/40 border-t border-white/[0.08] flex items-center justify-between text-[11px] text-slate-400">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                    <span className="w-2 h-2 rounded-full bg-[#fa6e69] animate-ping" />
                     <span>Flux actif • 0 erreur de synchronisation</span>
                   </div>
-                  <span className="text-cyan-300 font-mono">TLS 1.3 Strict</span>
+                  <span className="text-[#fa6e69] font-mono">TLS 1.3 Strict</span>
                 </div>
 
               </div>

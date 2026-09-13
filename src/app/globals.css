@@ -6,20 +6,25 @@
 }
 
 :root {
-  --background: #07080d;
-  --foreground: #f1f5f9;
-  --card: #0e111a;
-  --card-foreground: #f1f5f9;
-  --primary: #4f46e5;
+  --background: #0a0e17;
+  --foreground: #f8fafc;
+  --card: #10101b;
+  --card-foreground: #f8fafc;
+  --primary: #fa6e69;
   --primary-foreground: #ffffff;
-  --accent: #6366f1;
+  --accent: #ff8a85;
   --muted: #94a3b8;
   --border: rgba(255, 255, 255, 0.08);
+  --wavo-coral: #fa6e69;
+  --wavo-coral-dark: #e0534e;
+  --wavo-peach: #ffbc7d;
+  --wavo-navy: #10101b;
+  --wavo-navy-card: #1c2639;
 }
 
 body {
-  background-color: #07080d;
-  color: #f1f5f9;
+  background-color: #080b13;
+  color: #f8fafc;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
@@ -31,69 +36,48 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
 }
 
-/* Luxury Fintech Gradients */
-.fintech-gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 40%, #818cf8 80%, #38bdf8 100%);
+/* Wavo Official Color Gradients (Coral #FA6E69 + Peach #FFBC7D) */
+.wavo-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #fa6e69 55%, #ffbc7d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.fintech-gradient-accent {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.wavo-coral-gradient {
+  background: linear-gradient(135deg, #fa6e69 0%, #e0534e 50%, #c43834 100%);
 }
 
-.fintech-gradient-gold {
-  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Glassmorphic Panels */
-.fintech-glass {
-  background: rgba(14, 17, 26, 0.7);
+.wavo-glass {
+  background: rgba(16, 16, 27, 0.72);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.fintech-glass-light {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.fintech-card {
+.wavo-card {
   position: relative;
-  background: #0e111a;
+  background: #10101b;
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 1.5rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.fintech-card:hover {
-  border-color: rgba(99, 102, 241, 0.35);
+.wavo-card:hover {
+  border-color: rgba(250, 110, 105, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(250, 110, 105, 0.15);
 }
 
 /* Subtle Grid Background */
-.fintech-grid {
+.wavo-grid {
   background-size: 48px 48px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
 }
 
-.fintech-dots {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* Custom Range Slider for Financial Simulators */
-input[type="range"].fintech-slider {
+/* Custom Range Slider using Wavo Coral */
+input[type="range"].wavo-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -104,32 +88,22 @@ input[type="range"].fintech-slider {
   transition: background 0.2s;
 }
 
-input[type="range"].fintech-slider::-webkit-slider-thumb {
+input[type="range"].wavo-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #6366f1;
+  background: #fa6e69;
   border: 3px solid #ffffff;
-  box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 15px rgba(250, 110, 105, 0.7);
   cursor: pointer;
   transition: transform 0.1s, box-shadow 0.2s;
 }
 
-input[type="range"].fintech-slider::-webkit-slider-thumb:hover {
+input[type="range"].wavo-slider::-webkit-slider-thumb:hover {
   transform: scale(1.15);
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.9);
-}
-
-/* Animations */
-@keyframes pulse-soft {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.02); }
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 6s ease-in-out infinite;
+  box-shadow: 0 0 22px rgba(250, 110, 105, 0.95);
 }
 
 /* Custom Scrollbar */
@@ -137,12 +111,12 @@ input[type="range"].fintech-slider::-webkit-slider-thumb:hover {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #07080d;
+  background: #080b13;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(250, 110, 105, 0.25);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(250, 110, 105, 0.5);
 }

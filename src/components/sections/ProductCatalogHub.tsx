@@ -9,8 +9,7 @@ import {
   ShoppingBag, 
   Laptop, 
   Factory, 
-  Sparkles,
-  ArrowRight
+  Sparkles
 } from "lucide-react";
 import FloatingCard3D from "@/components/3d/FloatingCards3D";
 
@@ -33,19 +32,19 @@ export default function ProductCatalogHub() {
       : productCategories.filter((c) => c.id === activeCategory);
 
   return (
-    <section id="produits" className="relative z-20 py-28 bg-[#07080d] border-t border-white/[0.08]">
+    <section id="produits" className="relative z-20 py-28 bg-[#080b13] border-t border-white/[0.08]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full fintech-glass text-xs font-mono font-semibold text-indigo-400 border border-indigo-500/30">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
             <Sparkles className="w-3.5 h-3.5" />
             <span>CATALOGUE D&apos;ACTIFS VALORISABLES</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             Nous accompagnons les entreprises dans la{" "}
-            <span className="fintech-gradient-text">valorisation de leurs stocks</span>
+            <span className="wavo-gradient-text">valorisation de leurs stocks</span>
           </h2>
 
           <p className="text-base sm:text-lg text-slate-400">
@@ -59,7 +58,7 @@ export default function ProductCatalogHub() {
             onClick={() => setActiveCategory("all")}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
               activeCategory === "all"
-                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 border border-indigo-400/40"
+                ? "bg-[#fa6e69] text-white shadow-lg shadow-[#fa6e69]/30 border border-[#fa6e69]"
                 : "bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06]"
             }`}
           >
@@ -71,7 +70,7 @@ export default function ProductCatalogHub() {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeCategory === cat.id
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 border border-indigo-400/40"
+                  ? "bg-[#fa6e69] text-white shadow-lg shadow-[#fa6e69]/30 border border-[#fa6e69]"
                   : "bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06]"
               }`}
             >
@@ -86,14 +85,14 @@ export default function ProductCatalogHub() {
             const Icon = iconMap[item.icon] || Boxes;
             return (
               <FloatingCard3D key={item.id} className="h-full">
-                <div className="h-full p-7 rounded-3xl fintech-card flex flex-col justify-between space-y-6 group">
+                <div className="h-full p-7 rounded-3xl wavo-card flex flex-col justify-between space-y-6 group">
                   
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="p-3 rounded-2xl bg-white/[0.04] text-indigo-400 border border-white/[0.08] group-hover:scale-110 group-hover:text-cyan-300 transition-all">
+                      <div className="p-3 rounded-2xl bg-white/[0.04] text-[#fa6e69] border border-white/[0.08] group-hover:scale-110 group-hover:text-[#ffbc7d] transition-all">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <span className="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                      <span className="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-[#fa6e69]/15 text-[#fa6e69] border border-[#fa6e69]/30">
                         Rotation {item.rotation}
                       </span>
                     </div>
@@ -123,7 +122,7 @@ export default function ProductCatalogHub() {
         </div>
 
         {/* Custom Inventory Review Callout */}
-        <div className="p-8 rounded-3xl bg-gradient-to-r from-indigo-950/60 via-[#0e111a] to-[#07080d] border border-indigo-500/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+        <div className="p-8 rounded-3xl bg-gradient-to-r from-[#1c2639] via-[#10101b] to-[#080b13] border border-[#fa6e69]/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
           <div className="space-y-1.5 text-center sm:text-left">
             <h4 className="text-base font-bold text-white">Vous avez un stock physique spécifique ou atypique ?</h4>
             <p className="text-xs text-slate-400">
@@ -134,7 +133,7 @@ export default function ProductCatalogHub() {
             href="https://www.wavo.fr/rendez-vous/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 shadow-lg shadow-indigo-600/30 transition-all whitespace-nowrap cursor-pointer"
+            className="px-6 py-3 rounded-xl text-xs font-bold text-white bg-[#fa6e69] hover:bg-[#e0534e] shadow-lg shadow-[#fa6e69]/30 transition-all whitespace-nowrap cursor-pointer"
           >
             Faire évaluer mon stock →
           </a>

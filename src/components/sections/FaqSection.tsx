@@ -28,18 +28,18 @@ export default function FaqSection() {
   });
 
   return (
-    <section id="faq" className="relative z-20 py-28 bg-[#07080d] border-t border-white/[0.08]">
+    <section id="faq" className="relative z-20 py-28 bg-[#080b13] border-t border-white/[0.08]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full fintech-glass text-xs font-mono font-semibold text-indigo-400 border border-indigo-500/30">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>CENTRE DE CONNAISSANCES</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Questions <span className="fintech-gradient-text">fréquentes</span>
+            Questions <span className="wavo-gradient-text">fréquentes</span>
           </h2>
 
           <p className="text-base text-slate-400">
@@ -56,7 +56,7 @@ export default function FaqSection() {
               placeholder="Rechercher une réponse (rachat, caution, taux journalier, bilan, TVA)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-sans"
+              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#fa6e69] transition-all font-sans"
             />
           </div>
 
@@ -73,7 +73,7 @@ export default function FaqSection() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   activeCategory === cat.id
-                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 border border-indigo-400/40"
+                    ? "bg-[#fa6e69] text-white shadow-lg shadow-[#fa6e69]/30 border border-[#fa6e69]"
                     : "bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06]"
                 }`}
               >
@@ -95,7 +95,7 @@ export default function FaqSection() {
               return (
                 <div
                   key={item.id}
-                  className="rounded-2xl border border-white/[0.07] bg-[#0c0e17] overflow-hidden transition-all duration-200 hover:border-white/[0.14]"
+                  className="rounded-2xl border border-white/[0.07] bg-[#10101b] overflow-hidden transition-all duration-200 hover:border-white/[0.14]"
                 >
                   <button
                     onClick={() => toggleItem(item.id)}
@@ -106,7 +106,7 @@ export default function FaqSection() {
                     </span>
                     <ChevronDown
                       className={`w-4 h-4 text-slate-400 transition-transform duration-200 flex-shrink-0 ${
-                        isOpen ? "rotate-180 text-cyan-400" : ""
+                        isOpen ? "rotate-180 text-[#fa6e69]" : ""
                       }`}
                     />
                   </button>
@@ -123,7 +123,7 @@ export default function FaqSection() {
         </div>
 
         {/* Support Callout */}
-        <div className="p-7 rounded-3xl fintech-card flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-7 rounded-3xl wavo-card flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
             <h4 className="text-sm font-bold text-white">Vous avez une question spécifique sur vos contrats ?</h4>
             <p className="text-xs text-slate-400">
@@ -134,7 +134,7 @@ export default function FaqSection() {
             href="https://www.wavo.fr/contact/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md transition-all whitespace-nowrap cursor-pointer"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#fa6e69] hover:bg-[#e0534e] text-white shadow-md transition-all whitespace-nowrap cursor-pointer"
           >
             Contacter un analyste
           </a>

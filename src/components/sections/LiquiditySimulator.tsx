@@ -6,13 +6,8 @@ import {
   Calculator, 
   Sparkles, 
   ArrowRight, 
-  TrendingUp, 
-  ShieldCheck, 
   CheckCircle2, 
-  XCircle,
-  HelpCircle,
-  Activity,
-  Layers
+  Activity
 } from "lucide-react";
 
 export default function LiquiditySimulator() {
@@ -49,21 +44,21 @@ export default function LiquiditySimulator() {
   return (
     <section id="simulateur" className="relative z-20 py-28 sm:py-36 overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 -left-60 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/4 -right-60 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 -left-60 w-[600px] h-[600px] bg-[#fa6e69]/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 -right-60 w-[600px] h-[600px] bg-[#ffbc7d]/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full fintech-glass text-xs font-mono font-semibold text-cyan-300 border border-cyan-500/30">
-            <Calculator className="w-3.5 h-3.5 text-cyan-400" />
-            <span>MOTEUR DE SIMULATION FINANCIÈRE EN TEMPS RÉEL</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
+            <Calculator className="w-3.5 h-3.5" />
+            <span>CALCULATEUR DE FINANCEMENT EN TEMPS RÉEL</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             Estimez votre déblocage de{" "}
-            <span className="fintech-gradient-text">trésorerie immédiate</span>
+            <span className="wavo-gradient-text">trésorerie immédiate</span>
           </h2>
 
           <p className="text-base sm:text-lg text-slate-400 font-normal leading-relaxed">
@@ -71,11 +66,11 @@ export default function LiquiditySimulator() {
           </p>
         </div>
 
-        {/* The Private Credit Marketplace Simulator Layout */}
+        {/* The Simulator Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Controls Console (Left Column) */}
-          <div className="lg:col-span-7 fintech-card p-6 sm:p-10 space-y-9">
+          <div className="lg:col-span-7 wavo-card p-6 sm:p-10 space-y-9">
             
             {/* Slider 1: Stock Amount */}
             <div className="space-y-4">
@@ -88,7 +83,7 @@ export default function LiquiditySimulator() {
                     Commande fournisseur ou inventaire déjà stocké
                   </p>
                 </div>
-                <div className="px-5 py-2.5 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 font-mono font-black text-2xl tracking-tight self-start sm:self-auto">
+                <div className="px-5 py-2.5 rounded-2xl bg-[#fa6e69]/15 border border-[#fa6e69]/30 text-[#fa6e69] font-mono font-black text-2xl tracking-tight self-start sm:self-auto">
                   {stockAmount.toLocaleString("fr-FR")} €
                 </div>
               </div>
@@ -100,7 +95,7 @@ export default function LiquiditySimulator() {
                 step="10000"
                 value={stockAmount}
                 onChange={(e) => setStockAmount(Number(e.target.value))}
-                className="fintech-slider"
+                className="wavo-slider"
               />
 
               <div className="flex justify-between items-center text-[11px] font-mono text-slate-500">
@@ -117,7 +112,7 @@ export default function LiquiditySimulator() {
                     onClick={() => setStockAmount(val)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all cursor-pointer ${
                       stockAmount === val
-                        ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/40 border border-indigo-400/40"
+                        ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/40 border border-[#fa6e69]"
                         : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08] border border-white/[0.06]"
                     }`}
                   >
@@ -138,7 +133,7 @@ export default function LiquiditySimulator() {
                     Délai pour écouler 100% des unités concernées
                   </p>
                 </div>
-                <div className="px-5 py-2.5 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 font-mono font-black text-2xl tracking-tight self-start sm:self-auto">
+                <div className="px-5 py-2.5 rounded-2xl bg-[#ffbc7d]/15 border border-[#ffbc7d]/30 text-[#ffbc7d] font-mono font-black text-2xl tracking-tight self-start sm:self-auto">
                   {rotationMonths} {rotationMonths > 1 ? "mois" : "mois"}
                 </div>
               </div>
@@ -150,7 +145,7 @@ export default function LiquiditySimulator() {
                 step="1"
                 value={rotationMonths}
                 onChange={(e) => setRotationMonths(Number(e.target.value))}
-                className="fintech-slider"
+                className="wavo-slider"
               />
 
               <div className="flex justify-between items-center text-[11px] font-mono text-slate-500">
@@ -177,7 +172,7 @@ export default function LiquiditySimulator() {
                     onClick={() => setCategory(item.id)}
                     className={`p-3 text-xs font-semibold rounded-xl border text-center transition-all cursor-pointer ${
                       category === item.id
-                        ? "border-indigo-500 bg-indigo-600/20 text-indigo-300 shadow-md shadow-indigo-600/20 font-bold"
+                        ? "border-[#fa6e69] bg-[#fa6e69]/20 text-[#fa6e69] shadow-md shadow-[#fa6e69]/20 font-bold"
                         : "border-white/[0.08] bg-white/[0.02] text-slate-400 hover:text-white hover:bg-white/[0.05]"
                     }`}
                   >
@@ -191,29 +186,29 @@ export default function LiquiditySimulator() {
             <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08] space-y-3">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-mono font-bold text-slate-300 flex items-center gap-1.5">
-                  <Activity className="w-3.5 h-3.5 text-cyan-400" />
-                  Courbe de Trésorerie Simulée (vs Financement Traditionnel)
+                  <Activity className="w-3.5 h-3.5 text-[#fa6e69]" />
+                  Courbe de Trésorerie Simulée (vs Financement Bancaire)
                 </span>
-                <span className="text-[10px] text-emerald-400 font-mono font-bold">
+                <span className="text-[10px] text-[#fa6e69] font-mono font-bold">
                   +100% de liquidité immédiate
                 </span>
               </div>
 
-              {/* Dynamic SVG Area Chart */}
+              {/* Dynamic SVG Area Chart with Wavo Coral Palette */}
               <div className="h-28 w-full relative">
                 <svg className="w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
                   <defs>
                     <linearGradient id="wavoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="#6366f1" stopOpacity="0.0" />
+                      <stop offset="0%" stopColor="#fa6e69" stopOpacity="0.4" />
+                      <stop offset="100%" stopColor="#fa6e69" stopOpacity="0.0" />
                     </linearGradient>
                   </defs>
 
-                  {/* Wavo Cash Path (Steady high plateau) */}
+                  {/* Wavo Cash Path */}
                   <path
                     d="M 0,35 Q 100,28 200,30 T 400,25"
                     fill="none"
-                    stroke="#00d4ff"
+                    stroke="#fa6e69"
                     strokeWidth="3"
                   />
                   <path
@@ -221,21 +216,21 @@ export default function LiquiditySimulator() {
                     fill="url(#wavoGrad)"
                   />
 
-                  {/* Bank Debt / Traditional Dip Path (Severe cash drain) */}
+                  {/* Bank Debt Path */}
                   <path
                     d="M 0,40 Q 80,85 200,80 T 400,60"
                     fill="none"
-                    stroke="#f43f5e"
+                    stroke="#64748b"
                     strokeWidth="2"
                     strokeDasharray="4 4"
                     opacity="0.8"
                   />
                 </svg>
 
-                <div className="absolute top-2 left-3 text-[10px] font-mono text-cyan-300 bg-black/60 px-2 py-0.5 rounded border border-cyan-500/30">
+                <div className="absolute top-2 left-3 text-[10px] font-mono text-[#fa6e69] bg-black/60 px-2 py-0.5 rounded border border-[#fa6e69]/30">
                   Avec Wavo : Trésorerie préservée
                 </div>
-                <div className="absolute bottom-2 right-3 text-[10px] font-mono text-rose-400 bg-black/60 px-2 py-0.5 rounded border border-rose-500/30">
+                <div className="absolute bottom-2 right-3 text-[10px] font-mono text-slate-400 bg-black/60 px-2 py-0.5 rounded border border-white/10">
                   Crédit classique : BFR gelé
                 </div>
               </div>
@@ -246,15 +241,15 @@ export default function LiquiditySimulator() {
           {/* Results Financial HUD Card (Right Column) with 3D Tilt */}
           <div className="lg:col-span-5 sticky top-28">
             <FloatingCard3D className="rounded-3xl">
-              <div className="p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#0e111a] via-[#131726] to-[#0a0c14] border border-indigo-500/30 shadow-2xl space-y-7 relative overflow-hidden">
+              <div className="p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#10101b] via-[#1c2639] to-[#0a0c14] border border-[#fa6e69]/30 shadow-2xl space-y-7 relative overflow-hidden">
                 
                 {/* Visual Top Status */}
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-400 font-semibold flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-                    Offre Indicative • Wavo Credit
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#fa6e69] font-semibold flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#fa6e69] animate-ping" />
+                    Offre Indicative • Wavo
                   </span>
-                  <span className="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono font-bold">
+                  <span className="px-2.5 py-1 rounded-full bg-[#fa6e69]/15 text-[#fa6e69] border border-[#fa6e69]/30 text-[10px] font-mono font-bold">
                     Accord sous 24h
                   </span>
                 </div>
@@ -266,9 +261,9 @@ export default function LiquiditySimulator() {
                   </div>
                   <div className="text-4xl sm:text-5xl font-black text-white font-mono tracking-tight flex items-baseline gap-1.5">
                     {Math.round(results.totalCashReleased).toLocaleString("fr-FR")}
-                    <span className="text-2xl text-cyan-400 font-bold">€</span>
+                    <span className="text-2xl text-[#fa6e69] font-bold">€</span>
                   </div>
-                  <div className="text-xs text-emerald-400 font-medium flex items-center gap-1.5 pt-1">
+                  <div className="text-xs text-[#fa6e69] font-medium flex items-center gap-1.5 pt-1">
                     <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
                     <span>Dont {Math.round(results.tvaAdvance).toLocaleString("fr-FR")} € de TVA avancée à 100% par Wavo</span>
                   </div>
@@ -292,14 +287,14 @@ export default function LiquiditySimulator() {
 
                   <div className="flex justify-between items-center text-slate-400">
                     <span>Coût de revient mensuel :</span>
-                    <span className="font-bold text-cyan-300">
+                    <span className="font-bold text-[#ffbc7d]">
                       {results.effectiveMonthlyPercent}% / mois
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center pt-3 border-t border-white/[0.08] text-sm">
                     <span className="font-sans font-bold text-slate-200">Impact sur votre endettement :</span>
-                    <span className="font-bold text-emerald-400 uppercase">0 € (Zéro Dette)</span>
+                    <span className="font-bold text-[#fa6e69] uppercase">0 € (Zéro Dette)</span>
                   </div>
                 </div>
 
@@ -309,10 +304,10 @@ export default function LiquiditySimulator() {
                     Comparatif Structurel
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-[10px] text-center font-mono">
-                    <div className="p-2.5 rounded-xl bg-indigo-600/20 border border-indigo-500/30 text-white">
-                      <div className="font-bold text-indigo-300">Wavo</div>
-                      <div className="text-emerald-400 mt-1">✓ 0 caution</div>
-                      <div className="text-emerald-400">✓ 0 dette</div>
+                    <div className="p-2.5 rounded-xl bg-[#fa6e69]/20 border border-[#fa6e69]/40 text-white">
+                      <div className="font-bold text-[#fa6e69]">Wavo</div>
+                      <div className="text-[#fa6e69] mt-1">✓ 0 caution</div>
+                      <div className="text-[#fa6e69]">✓ 0 dette</div>
                     </div>
                     <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-slate-400">
                       <div>Prêt Bancaire</div>
@@ -332,7 +327,7 @@ export default function LiquiditySimulator() {
                   href="https://www.wavo.fr/rendez-vous/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-700 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white text-sm font-bold shadow-xl shadow-indigo-600/35 border border-white/[0.15] flex items-center justify-center gap-2 group cursor-pointer transition-all active:scale-[0.98]"
+                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#fa6e69] via-[#e0534e] to-[#c43834] hover:from-[#ff8a85] hover:to-[#e0534e] text-white text-sm font-bold shadow-xl shadow-[#fa6e69]/35 border border-white/[0.15] flex items-center justify-center gap-2 group cursor-pointer transition-all active:scale-[0.98]"
                 >
                   <span>Bloquer ces conditions &amp; Postuler</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

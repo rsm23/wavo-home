@@ -2,16 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { 
-  TrendingUp, 
-  ShieldCheck, 
-  Zap, 
-  CheckCircle2, 
-  ArrowUpRight,
-  Activity,
-  Layers,
-  Lock
-} from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 
 export default function InventoryVault3D() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -36,7 +27,7 @@ export default function InventoryVault3D() {
     camera.position.set(6.5, 5.0, 7.5);
     camera.lookAt(0, 0.4, 0);
 
-    // Renderer (Alpha true for seamless blending into dark background)
+    // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -44,46 +35,46 @@ export default function InventoryVault3D() {
     renderer.toneMappingExposure = 1.3;
     container.appendChild(renderer.domElement);
 
-    // Lighting
+    // Lighting (Warm Wavo Coral & Peach Palette)
     const ambient = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambient);
 
-    const mainLight = new THREE.DirectionalLight(0x6366f1, 4.0);
-    mainLight.position.set(8, 12, 6);
-    scene.add(mainLight);
+    const coralLight = new THREE.DirectionalLight(0xfa6e69, 4.2);
+    coralLight.position.set(8, 12, 6);
+    scene.add(coralLight);
 
-    const cyanLight = new THREE.DirectionalLight(0x06b6d4, 3.2);
-    cyanLight.position.set(-8, 4, -4);
-    scene.add(cyanLight);
+    const peachLight = new THREE.DirectionalLight(0xffbc7d, 3.0);
+    peachLight.position.set(-8, 4, -4);
+    scene.add(peachLight);
 
-    const violetPoint = new THREE.PointLight(0xa855f7, 3.5, 15);
-    violetPoint.position.set(0, 2, 2);
-    scene.add(violetPoint);
+    const warmPoint = new THREE.PointLight(0xfa6e69, 3.5, 15);
+    warmPoint.position.set(0, 2, 2);
+    scene.add(warmPoint);
 
     // Subtle Holographic Grid Floor
-    const gridHelper = new THREE.GridHelper(12, 24, 0x6366f1, 0x1e293b);
+    const gridHelper = new THREE.GridHelper(12, 24, 0xfa6e69, 0x1c2639);
     gridHelper.position.y = -0.6;
     gridHelper.material.opacity = 0.25;
     gridHelper.material.transparent = true;
     scene.add(gridHelper);
 
-    // Glowing Central Hologram Ring
+    // Glowing Central Hologram Ring (Wavo Coral)
     const ringGeo = new THREE.RingGeometry(2.4, 2.5, 64);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x00d4ff,
+      color: 0xfa6e69,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.65,
     });
     const ring = new THREE.Mesh(ringGeo, ringMat);
     ring.rotation.x = -Math.PI / 2;
     ring.position.y = -0.58;
     scene.add(ring);
 
-    // Second Inner Ring
+    // Second Inner Ring (Wavo Peach)
     const innerRingGeo = new THREE.RingGeometry(1.6, 1.66, 64);
     const innerRingMat = new THREE.MeshBasicMaterial({
-      color: 0x635bff,
+      color: 0xffbc7d,
       side: THREE.DoubleSide,
       transparent: true,
       opacity: 0.5,
@@ -100,12 +91,12 @@ export default function InventoryVault3D() {
     // Glass & Titanium Modular Blocks
     const cubeGeo = new THREE.BoxGeometry(0.85, 0.85, 0.85);
     const edgesGeo = new THREE.EdgesGeometry(cubeGeo);
-    const edgeMatCyan = new THREE.LineBasicMaterial({ color: 0x00d4ff, linewidth: 2 });
-    const edgeMatViolet = new THREE.LineBasicMaterial({ color: 0xa855f7, linewidth: 2 });
+    const edgeMatCoral = new THREE.LineBasicMaterial({ color: 0xfa6e69, linewidth: 2 });
+    const edgeMatPeach = new THREE.LineBasicMaterial({ color: 0xffbc7d, linewidth: 2 });
 
     const glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0f172a,
-      metalness: 0.3,
+      color: 0x10101b,
+      metalness: 0.35,
       roughness: 0.05,
       transmission: 0.85,
       transparent: true,
@@ -118,7 +109,7 @@ export default function InventoryVault3D() {
       [ 0.52, 0.45, -0.52],
       [-0.52, 0.45,  0.52],
       [ 0.52, 0.45,  0.52],
-      [ 0.0,  1.42,  0.0 ], // Keystone tier
+      [ 0.0,  1.42,  0.0 ],
     ];
 
     const cubes: THREE.Mesh[] = [];
@@ -129,14 +120,14 @@ export default function InventoryVault3D() {
 
       const wireframe = new THREE.LineSegments(
         edgesGeo,
-        idx === 4 ? edgeMatViolet : edgeMatCyan
+        idx === 4 ? edgeMatPeach : edgeMatCoral
       );
       cube.add(wireframe);
 
       // Core energetic nucleus inside each cube
       const coreGeo = new THREE.OctahedronGeometry(0.18, 0);
       const coreMat = new THREE.MeshBasicMaterial({
-        color: idx === 4 ? 0xf59e0b : 0x6366f1,
+        color: idx === 4 ? 0xffbc7d : 0xfa6e69,
       });
       const core = new THREE.Mesh(coreGeo, coreMat);
       cube.add(core);
@@ -145,7 +136,7 @@ export default function InventoryVault3D() {
       cubes.push(cube);
     });
 
-    // Particle Swarm (Liquidity flow in orbit)
+    // Particle Swarm (Warm coral and gold liquidity flow)
     const particleCount = 180;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
@@ -160,10 +151,11 @@ export default function InventoryVault3D() {
       particlePositions[i * 3 + 1] = height;
       particlePositions[i * 3 + 2] = Math.sin(angle) * radius;
 
-      // Cyan to Indigo gradient
-      particleColors[i * 3] = 0.1 + Math.random() * 0.3;
-      particleColors[i * 3 + 1] = 0.6 + Math.random() * 0.4;
-      particleColors[i * 3 + 2] = 1.0;
+      // Coral #FA6E69 (0.98, 0.43, 0.41) to Peach #FFBC7D (1.0, 0.74, 0.49)
+      const ratio = Math.random();
+      particleColors[i * 3] = 0.98;
+      particleColors[i * 3 + 1] = 0.43 + ratio * 0.31;
+      particleColors[i * 3 + 2] = 0.41 + ratio * 0.08;
     }
 
     particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
@@ -214,7 +206,6 @@ export default function InventoryVault3D() {
       const time = clock.getElapsedTime();
       const currentMode = modeRef.current;
 
-      // Smooth idle rotation
       assetGroup.rotation.y = time * 0.3;
 
       cubes.forEach((cube, idx) => {
@@ -226,7 +217,6 @@ export default function InventoryVault3D() {
           cube.position.y = THREE.MathUtils.lerp(cube.position.y, positions[idx][1] + hover, 0.08);
           cube.rotation.y = Math.sin(time + idx) * 0.06;
         } else {
-          // Settlement expansion
           const expand = 1.3;
           cube.position.x = THREE.MathUtils.lerp(cube.position.x, positions[idx][0] * expand, 0.06);
           cube.position.z = THREE.MathUtils.lerp(cube.position.z, positions[idx][2] * expand, 0.06);
@@ -234,12 +224,10 @@ export default function InventoryVault3D() {
         }
       });
 
-      // Rings and particles animation
       ring.rotation.z = time * 0.2;
       innerRing.rotation.z = -time * 0.35;
       particles.rotation.y = -time * 0.5;
 
-      // Mouse Parallax Lerp
       targetX = 6.5 + mouseX;
       targetY = 5.0 - mouseY;
       camera.position.x += (targetX - camera.position.x) * 0.05;
@@ -265,9 +253,9 @@ export default function InventoryVault3D() {
   return (
     <div className="relative w-full h-[520px] lg:h-[580px] flex items-center justify-center select-none">
       
-      {/* Ambient Central Glow behind 3D object */}
+      {/* Wavo Coral Ambient Glow behind 3D object */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[380px] h-[380px] bg-gradient-to-tr from-indigo-600/20 via-cyan-500/15 to-purple-600/10 rounded-full blur-[90px]" />
+        <div className="w-[400px] h-[400px] bg-gradient-to-tr from-[#fa6e69]/20 via-[#ffbc7d]/15 to-transparent rounded-full blur-[100px]" />
       </div>
 
       {/* 3D WebGL Canvas Layer */}
@@ -276,14 +264,14 @@ export default function InventoryVault3D() {
         className="w-full h-full cursor-grab active:cursor-grabbing relative z-10"
       />
 
-      {/* Floating Glassmorphic HUD Telemetry Cards (Dribbble Fintech Aesthetic) */}
+      {/* Floating Glassmorphic HUD Telemetry Cards with Wavo Brand Accents */}
       
       {/* Floating Card 1: Live Credit Facility Status (Top Right) */}
       <div className="absolute top-6 right-2 sm:right-6 z-20 pointer-events-none max-w-[240px] animate-float">
-        <div className="p-4 rounded-2xl fintech-glass shadow-2xl space-y-2 border border-white/[0.1]">
+        <div className="p-4 rounded-2xl wavo-glass shadow-2xl space-y-2 border border-white/[0.1]">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-[#fa6e69] flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#fa6e69] animate-ping" />
               Ligne Active
             </span>
             <span className="text-[10px] text-slate-400 font-mono">SEPA 24h</span>
@@ -298,16 +286,16 @@ export default function InventoryVault3D() {
 
           <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between text-[10px] text-slate-300">
             <span>Avance TVA : +50 000 €</span>
-            <span className="text-emerald-400 font-bold font-mono">100% Décaissé</span>
+            <span className="text-[#fa6e69] font-bold font-mono">100% Décaissé</span>
           </div>
         </div>
       </div>
 
       {/* Floating Card 2: Balance Sheet Protection (Bottom Left) */}
       <div className="absolute bottom-16 left-2 sm:left-4 z-20 pointer-events-none max-w-[250px] hidden sm:block animate-float" style={{ animationDelay: "1.5s" }}>
-        <div className="p-4 rounded-2xl fintech-glass shadow-2xl space-y-2.5 border border-white/[0.1]">
+        <div className="p-4 rounded-2xl wavo-glass shadow-2xl space-y-2.5 border border-white/[0.1]">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400">
+            <div className="p-1.5 rounded-lg bg-[#fa6e69]/20 text-[#fa6e69]">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
@@ -319,11 +307,11 @@ export default function InventoryVault3D() {
           <div className="grid grid-cols-2 gap-2 pt-1 border-t border-white/[0.08] text-center font-mono">
             <div className="p-1.5 rounded-lg bg-white/[0.03]">
               <div className="text-[10px] text-slate-400">Dette ajoutée</div>
-              <div className="text-xs font-bold text-emerald-400">0 €</div>
+              <div className="text-xs font-bold text-[#fa6e69]">0 €</div>
             </div>
             <div className="p-1.5 rounded-lg bg-white/[0.03]">
               <div className="text-[10px] text-slate-400">Caution perso</div>
-              <div className="text-xs font-bold text-emerald-400">AUCUNE</div>
+              <div className="text-xs font-bold text-[#fa6e69]">AUCUNE</div>
             </div>
           </div>
         </div>
@@ -331,14 +319,14 @@ export default function InventoryVault3D() {
 
       {/* Floating Card 3: Real-Time Unit Settlement (Bottom Right) */}
       <div className="absolute bottom-4 right-4 z-20 pointer-events-none max-w-[220px] hidden md:block animate-float" style={{ animationDelay: "2.5s" }}>
-        <div className="p-3.5 rounded-2xl fintech-glass shadow-2xl space-y-1.5 border border-white/[0.1] text-xs">
+        <div className="p-3.5 rounded-2xl wavo-glass shadow-2xl space-y-1.5 border border-white/[0.1] text-xs">
           <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
             <span>SYNC ERP TEMPS RÉEL</span>
-            <span className="text-cyan-400 font-bold">LIVE</span>
+            <span className="text-[#ffbc7d] font-bold">LIVE</span>
           </div>
           <div className="text-white font-semibold flex items-center justify-between">
             <span>Rachat unitaire :</span>
-            <span className="text-cyan-300 font-mono">Au fil des ventes</span>
+            <span className="text-[#fa6e69] font-mono">Au fil de l&apos;eau</span>
           </div>
           <div className="text-[10px] text-slate-400">
             Aucun échéancier fixe contraignant
@@ -348,7 +336,7 @@ export default function InventoryVault3D() {
 
       {/* Mode Selector Pill Tabs (Bottom Center) */}
       <div className="absolute bottom-2 inset-x-0 z-30 flex items-center justify-center pointer-events-auto">
-        <div className="p-1.5 rounded-full fintech-glass border border-white/[0.12] flex items-center gap-1 shadow-2xl">
+        <div className="p-1.5 rounded-full wavo-glass border border-white/[0.12] flex items-center gap-1 shadow-2xl">
           {[
             { id: "asset", label: "1. Actif physique" },
             { id: "liquidity", label: "2. Portage & Avance 100%" },
@@ -359,7 +347,7 @@ export default function InventoryVault3D() {
               onClick={() => setActiveMode(mode.id as "asset" | "liquidity" | "settlement")}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
                 activeMode === mode.id
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/40"
+                  ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/40"
                   : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
