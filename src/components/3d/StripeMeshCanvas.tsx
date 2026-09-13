@@ -10,10 +10,7 @@ export default function StripeMeshCanvas() {
     if (!canvas) return;
 
     const gl = canvas.getContext("webgl") || (canvas.getContext("experimental-webgl") as WebGLRenderingContext | null);
-    if (!gl) {
-      // Fallback for browsers with disabled WebGL
-      return;
-    }
+    if (!gl) return;
 
     const vsSource = `
       attribute vec2 position;
@@ -31,7 +28,6 @@ export default function StripeMeshCanvas() {
       uniform vec2 uMouse;
       varying vec2 vUv;
 
-      // Simplex noise implementation
       vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
       vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
       vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
@@ -66,42 +62,32 @@ export default function StripeMeshCanvas() {
         vec2 uv = gl_FragCoord.xy / uResolution.xy;
         vec2 mouse = uMouse / uResolution.xy;
         
-        // Fluid angle coordinate displacement (Stripe slant aesthetic)
-        vec2 slantedUv = vec2(uv.x * 0.85 + uv.y * 0.35, uv.y * 0.9 - uv.x * 0.15);
+        vec2 slantedUv = vec2(uv.x * 0.9 + uv.y * 0.4, uv.y * 0.85 - uv.x * 0.2);
+        float t = uTime * 0.12;
         
-        float t = uTime * 0.15;
+        float n1 = snoise(slantedUv * 1.8 + vec2(t * 0.3, -t * 0.2));
+        float n2 = snoise(slantedUv * 3.2 - vec2(t * 0.2, t * 0.4) + vec2(n1 * 0.4));
+        float n3 = snoise(slantedUv * 1.2 + vec2(-t * 0.2, t * 0.1) + (mouse * 0.3));
         
-        // Complex fluid multi-octave noise
-        float n1 = snoise(slantedUv * 2.2 + vec2(t * 0.4, -t * 0.3));
-        float n2 = snoise(slantedUv * 4.0 - vec2(t * 0.2, t * 0.5) + vec2(n1 * 0.5));
-        float n3 = snoise(slantedUv * 1.5 + vec2(-t * 0.3, t * 0.1) + (mouse * 0.4));
-        
-        // Combine wave harmonics
-        float wave = sin((slantedUv.x + slantedUv.y + n1 * 0.4 + n2 * 0.25) * 4.0 + t) * 0.5 + 0.5;
-        wave += n3 * 0.2;
+        float wave = sin((slantedUv.x + slantedUv.y + n1 * 0.35 + n2 * 0.2) * 3.2 + t) * 0.5 + 0.5;
+        wave += n3 * 0.15;
 
-        // Stripe color palette:
-        // C1: Deep Electric Indigo #4338ca
-        // C2: Vibrant Cyan #06b6d4
-        // C3: Rich Violet #8b5cf6
-        // C4: Warm Peach / Coral #f97316
-        // C5: Clean Canvas Soft White #f8fafc
-        vec3 cIndigo = vec3(0.24, 0.22, 0.86);
-        vec3 cCyan   = vec3(0.02, 0.71, 0.83);
-        vec3 cViolet = vec3(0.55, 0.36, 0.96);
-        vec3 cPeach  = vec3(0.98, 0.45, 0.12);
-        vec3 cLight  = vec3(0.98, 0.99, 1.0);
+        // Luxury Dark Fintech Palette
+        // Deep Obsidian / Blue Noir
+        vec3 cDark    = vec3(0.027, 0.031, 0.051); // #07080d
+        vec3 cIndigo  = vec3(0.18, 0.14, 0.65);   // #2e24a6
+        vec3 cCyan    = vec3(0.02, 0.55, 0.75);   // #058cbf
+        vec3 cViolet  = vec3(0.38, 0.12, 0.68);   // #611fae
+        vec3 cGlow    = vec3(0.25, 0.38, 0.95);   // Electric accent
 
-        // Multi-stop smooth gradient blend
-        vec3 col = mix(cLight, cIndigo, smoothstep(0.1, 0.45, wave + n1 * 0.2));
-        col = mix(col, cCyan, smoothstep(0.4, 0.7, wave + n2 * 0.25));
-        col = mix(col, cViolet, smoothstep(0.65, 0.9, wave + n3 * 0.3));
-        col = mix(col, cPeach, smoothstep(0.85, 1.1, wave + n1 * 0.35));
+        vec3 col = mix(cDark, cIndigo, smoothstep(0.1, 0.5, wave + n1 * 0.25));
+        col = mix(col, cCyan, smoothstep(0.45, 0.75, wave + n2 * 0.2));
+        col = mix(col, cViolet, smoothstep(0.65, 0.92, wave + n3 * 0.25));
+        col = mix(col, cGlow, smoothstep(0.85, 1.05, wave + n1 * 0.3));
 
-        // Soft fade out at bottom edges for natural blend with page background
-        float edgeAlpha = smoothstep(0.0, 0.25, uv.y) * smoothstep(1.0, 0.7, uv.y * 0.5);
+        float edgeAlpha = smoothstep(0.0, 0.3, uv.y) * smoothstep(1.0, 0.6, uv.y * 0.6);
         
-        gl_FragColor = vec4(col, 0.82 * edgeAlpha);
+        gl_FragColor = vec4(col, 0.55 * edgeAlpha);
       }
     `;
 
@@ -112,7 +98,6 @@ export default function StripeMeshCanvas() {
       gl.shaderSource(shader, source);
       gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.warn("Shader compilation error:", gl.getShaderInfoLog(shader));
         gl.deleteShader(shader);
         return null;
       }
@@ -129,20 +114,13 @@ export default function StripeMeshCanvas() {
     gl.attachShader(program, fs);
     gl.linkProgram(program);
 
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.warn("Program linking error:", gl.getProgramInfoLog(program));
-      return;
-    }
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
 
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     const positions = new Float32Array([
-      -1.0, -1.0,
-       1.0, -1.0,
-      -1.0,  1.0,
-      -1.0,  1.0,
-       1.0, -1.0,
-       1.0,  1.0,
+      -1.0, -1.0,  1.0, -1.0, -1.0,  1.0,
+      -1.0,  1.0,  1.0, -1.0,  1.0,  1.0,
     ]);
     gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
 
@@ -184,17 +162,14 @@ export default function StripeMeshCanvas() {
 
     const render = () => {
       if (!gl || !canvas) return;
-
       resize();
 
-      // Smooth mouse interpolation
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 
       const elapsed = (performance.now() - startTime) * 0.001;
 
       gl.useProgram(program);
-
       gl.enableVertexAttribArray(positionAttr);
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
       gl.vertexAttribPointer(positionAttr, 2, gl.FLOAT, false, 0, 0);
@@ -204,7 +179,6 @@ export default function StripeMeshCanvas() {
       gl.uniform2f(mouseUniform, mouseX, mouseY);
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
-
       animationId = requestAnimationFrame(render);
     };
 
@@ -227,19 +201,15 @@ export default function StripeMeshCanvas() {
     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
       <canvas
         ref={canvasRef}
-        className="w-full h-full opacity-65 dark:opacity-40 transition-opacity duration-1000"
+        className="w-full h-full opacity-70 transition-opacity duration-1000"
         style={{
-          maskImage: "radial-gradient(ellipse 90% 70% at 50% 30%, black 40%, transparent 85%)",
-          WebkitMaskImage: "radial-gradient(ellipse 90% 70% at 50% 30%, black 40%, transparent 85%)",
+          maskImage: "radial-gradient(ellipse 85% 65% at 50% 25%, black 40%, transparent 90%)",
+          WebkitMaskImage: "radial-gradient(ellipse 85% 65% at 50% 25%, black 40%, transparent 90%)",
         }}
       />
-      {/* Subtle secondary ambient glow mesh */}
-      <div 
-        className="absolute -top-40 left-1/4 w-[600px] h-[600px] bg-indigo-500/20 rounded-full blur-[120px] pointer-events-none"
-      />
-      <div 
-        className="absolute top-20 right-10 w-[500px] h-[500px] bg-cyan-400/15 rounded-full blur-[140px] pointer-events-none"
-      />
+      {/* Cinematic subtle glow spheres */}
+      <div className="absolute -top-32 left-1/3 w-[650px] h-[650px] bg-indigo-600/15 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-48 right-10 w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[180px] pointer-events-none" />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { WAVO_CONTENT, FaqItem } from "@/lib/content";
-import { HelpCircle, ChevronDown, Search, Sparkles } from "lucide-react";
+import { WAVO_CONTENT } from "@/lib/content";
+import { HelpCircle, ChevronDown, Search } from "lucide-react";
 
 export default function FaqSection() {
   const { faq } = WAVO_CONTENT;
@@ -28,35 +28,35 @@ export default function FaqSection() {
   });
 
   return (
-    <section id="faq" className="relative z-20 py-24 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-white/10">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+    <section id="faq" className="relative z-20 py-28 bg-[#07080d] border-t border-white/[0.08]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/60 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full fintech-glass text-xs font-mono font-semibold text-indigo-400 border border-indigo-500/30">
             <HelpCircle className="w-3.5 h-3.5" />
-            <span>Centre de Réponses</span>
+            <span>CENTRE DE CONNAISSANCES</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Questions <span className="stripe-gradient-text">fréquentes</span>
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            Questions <span className="fintech-gradient-text">fréquentes</span>
           </h2>
 
-          <p className="text-base text-slate-600 dark:text-slate-400">
-            Tout ce que vous devez savoir sur le fonctionnement, les tarifs, l&apos;éligibilité et la confidentialité de Wavo.
+          <p className="text-base text-slate-400">
+            Tout ce que vous devez savoir sur le fonctionnement légal, les tarifs, l&apos;éligibilité et la confidentialité de Wavo.
           </p>
         </div>
 
         {/* Search & Category Filter */}
         <div className="space-y-4">
           <div className="relative">
-            <Search className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+            <Search className="w-5 h-5 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Rechercher une question (ex: rachat, crédit, taux, bilan, confidentialité)..."
+              placeholder="Rechercher une réponse (rachat, caution, taux journalier, bilan, TVA)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-sans"
             />
           </div>
 
@@ -73,8 +73,8 @@ export default function FaqSection() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   activeCategory === cat.id
-                    ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/20"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200"
+                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 border border-indigo-400/40"
+                    : "bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06]"
                 }`}
               >
                 {cat.label}
@@ -86,8 +86,8 @@ export default function FaqSection() {
         {/* Accordion List */}
         <div className="space-y-3">
           {filteredFaq.length === 0 ? (
-            <div className="text-center py-12 text-slate-400 text-sm">
-              Aucune question trouvée pour votre recherche.
+            <div className="text-center py-12 text-slate-500 text-sm font-mono">
+              Aucune question ne correspond à votre recherche.
             </div>
           ) : (
             filteredFaq.map((item) => {
@@ -95,24 +95,24 @@ export default function FaqSection() {
               return (
                 <div
                   key={item.id}
-                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 overflow-hidden transition-all duration-200 hover:border-slate-300 dark:hover:border-slate-700"
+                  className="rounded-2xl border border-white/[0.07] bg-[#0c0e17] overflow-hidden transition-all duration-200 hover:border-white/[0.14]"
                 >
                   <button
                     onClick={() => toggleItem(item.id)}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 cursor-pointer"
+                    className="w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 cursor-pointer"
                   >
-                    <span className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100">
+                    <span className="text-sm sm:text-base font-bold text-white">
                       {item.question}
                     </span>
                     <ChevronDown
                       className={`w-4 h-4 text-slate-400 transition-transform duration-200 flex-shrink-0 ${
-                        isOpen ? "rotate-180 text-indigo-500" : ""
+                        isOpen ? "rotate-180 text-cyan-400" : ""
                       }`}
                     />
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800/80 pt-3">
+                    <div className="px-6 pb-5 text-xs sm:text-sm text-slate-400 leading-relaxed border-t border-white/[0.05] pt-3 font-normal">
                       {item.answer}
                     </div>
                   )}
@@ -122,21 +122,21 @@ export default function FaqSection() {
           )}
         </div>
 
-        {/* Contact fallback */}
-        <div className="p-6 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Support Callout */}
+        <div className="p-7 rounded-3xl fintech-card flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Vous avez une question spécifique ?</h4>
-            <p className="text-xs text-slate-500">
-              Nos experts en financement de stock vous répondent sous 2 heures.
+            <h4 className="text-sm font-bold text-white">Vous avez une question spécifique sur vos contrats ?</h4>
+            <p className="text-xs text-slate-400">
+              Nos analystes en financement de stock vous répondent sous 2 heures ouvrées.
             </p>
           </div>
           <a
             href="https://www.wavo.fr/contact/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md transition-all whitespace-nowrap"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md transition-all whitespace-nowrap cursor-pointer"
           >
-            Contacter un conseiller
+            Contacter un analyste
           </a>
         </div>
 

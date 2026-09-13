@@ -6,36 +6,20 @@
 }
 
 :root {
-  --background: #fafbfe;
-  --foreground: #0c111d;
-  --card: #ffffff;
-  --card-foreground: #0c111d;
+  --background: #07080d;
+  --foreground: #f1f5f9;
+  --card: #0e111a;
+  --card-foreground: #f1f5f9;
   --primary: #4f46e5;
   --primary-foreground: #ffffff;
   --accent: #6366f1;
-  --muted: #667085;
-  --border: #e4e7ec;
-  --stripe-indigo: #635bff;
-  --stripe-cyan: #00d4ff;
-  --stripe-violet: #7928ca;
-  --stripe-orange: #ff5800;
-}
-
-.dark {
-  --background: #08090d;
-  --foreground: #f8fafc;
-  --card: #10121a;
-  --card-foreground: #f8fafc;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --accent: #818cf8;
   --muted: #94a3b8;
-  --border: #1e2330;
+  --border: rgba(255, 255, 255, 0.08);
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: #07080d;
+  color: #f1f5f9;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
@@ -44,115 +28,121 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
+  letter-spacing: -0.03em;
 }
 
-/* Stripe-style gradient text utility */
-.stripe-gradient-text {
-  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 35%, #8b5cf6 70%, #ec4899 100%);
+/* Luxury Fintech Gradients */
+.fintech-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 40%, #818cf8 80%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.stripe-gradient-text-alt {
-  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #4f46e5 100%);
+.fintech-gradient-accent {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Glassmorphism */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+.fintech-gradient-gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.dark .glass-panel {
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* Glassmorphic Panels */
+.fintech-glass {
+  background: rgba(14, 17, 26, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Stripe-style Card Glow Hover */
-.glow-card {
+.fintech-glass-light {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fintech-card {
   position: relative;
+  background: #0e111a;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1.5rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glow-card::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.1), rgba(255, 255, 255, 0.05));
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+.fintech-card:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(99, 102, 241, 0.15);
 }
 
-.glow-card:hover::before {
-  opacity: 1;
-}
-
-/* Mesh grid background */
-.stripe-bg-grid {
-  background-size: 40px 40px;
+/* Subtle Grid Background */
+.fintech-grid {
+  background-size: 48px 48px;
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-.dark .stripe-bg-grid {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+.fintech-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom Range Slider for Financial Simulators */
+input[type="range"].fintech-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  transition: background 0.2s;
+}
+
+input[type="range"].fintech-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6366f1;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+input[type="range"].fintech-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.9);
 }
 
 /* Animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.02); }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.04); }
+.animate-pulse-soft {
+  animation: pulse-soft 6s ease-in-out infinite;
 }
 
-@keyframes laser-flow {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
-}
-
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-.animate-laser {
-  animation: laser-flow 3s linear infinite;
-}
-
-/* Custom scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #07080d;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.4);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.7);
+  background: rgba(255, 255, 255, 0.3);
 }
