@@ -38,12 +38,12 @@ Content-Type: application/json
     "bank_balance_impact": "0.00 EUR (AUCUNE DETTE AU BILAN)"
   }
 }`,
-    erp: `// Connecteurs ERP & Banques supportés nativement
-[✓] Shopify Plus & PrestaShop (Webhooks automatiques temps réel)
-[✓] SAP S/4HANA & Business One (Connecteur REST API certifié)
-[✓] Pennylane & Sage (Exports comptables sans retraitement)
-[✓] Cegid & Odoo (Synchronisation multi-entrepôts)
-[✓] DSP2 Open Banking (Lecture automatisée des encaissements)`,
+    erp: `// Connecteurs ERP & Banques synchronisés en direct
+CONNECTED: Shopify Plus & PrestaShop (Webhooks automatiques temps réel)
+CONNECTED: SAP S/4HANA & Business One (Connecteur REST API certifié)
+CONNECTED: Pennylane & Sage (Exports comptables sans retraitement)
+CONNECTED: Cegid & Odoo (Synchronisation multi-entrepôts)
+CONNECTED: DSP2 Open Banking (Lecture automatisée des encaissements)`,
   };
 
   const handleCopy = () => {

@@ -43,9 +43,6 @@ export default function ProcessPipeline() {
 
         {/* Connected High-End Stepper Track */}
         <div className="relative">
-          {/* Connecting Track Line (Positioned behind solid cards at icon level) */}
-          <div className="hidden md:block absolute top-[38px] left-12 right-12 h-0.5 bg-slate-200 dark:bg-white/[0.08] -translate-y-1/2 z-0" />
-          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
             {steps.map((step, idx) => {
               const Icon = stepIcons[idx];
@@ -151,9 +148,10 @@ export default function ProcessPipeline() {
                 href="https://www.wavo.fr/rendez-vous/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#fa6e69] transition-colors"
+                className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#fa6e69] transition-colors inline-flex items-center gap-1.5 group"
               >
-                Démarrer mon dossier →
+                <span>Démarrer mon dossier</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
           </div>

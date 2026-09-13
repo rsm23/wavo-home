@@ -14,7 +14,8 @@ import {
   Scale,
   TrendingUp,
   Percent,
-  Clock
+  Clock,
+  AlertTriangle
 } from "lucide-react";
 
 export default function CorePillarsBento() {
@@ -169,8 +170,11 @@ export default function CorePillarsBento() {
                 Endettement direct au bilan, caution personnelle solidaire du dirigeant et échéancier de remboursement fixe rigide.
               </p>
               <div className="pt-1 flex items-center gap-2 text-[11px] font-mono text-rose-600 dark:text-rose-400 font-semibold">
-                <span>⚠️ Risque patrimonial privé</span>
-                <span>•</span>
+                <span className="flex items-center gap-1.5">
+                  <AlertTriangle className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+                  Risque patrimonial privé
+                </span>
+                <span className="w-1 h-1 rounded-full bg-rose-400" />
                 <span>Dette au passif</span>
               </div>
             </div>
@@ -197,10 +201,16 @@ export default function CorePillarsBento() {
                 Vente temporaire d&apos;actif circulant 100% hors bilan, zéro caution, avance de TVA et rachat au fil des encaissements.
               </p>
               <div className="pt-1 flex items-center gap-2 text-[11px] font-mono text-[#fa6e69] font-bold">
-                <span>✓ Zéro caution</span>
-                <span>•</span>
-                <span>0€ dette au passif</span>
-                <span>•</span>
+                <span className="flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#fa6e69] shrink-0" />
+                  Zéro caution
+                </span>
+                <span className="w-1 h-1 rounded-full bg-[#fa6e69]" />
+                <span className="flex items-center gap-1">
+                  <Check className="w-3.5 h-3.5 text-[#fa6e69] stroke-[3] shrink-0" />
+                  0€ dette au passif
+                </span>
+                <span className="w-1 h-1 rounded-full bg-[#fa6e69]" />
                 <span>SEPA 24h</span>
               </div>
             </div>

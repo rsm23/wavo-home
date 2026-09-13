@@ -11,7 +11,12 @@ import {
   Laptop,
   Bike,
   Sun,
-  ShoppingBag
+  ShoppingBag,
+  Check,
+  X,
+  Zap,
+  Minus,
+  Plus
 } from "lucide-react";
 
 export default function LiquiditySimulator() {
@@ -105,7 +110,7 @@ export default function LiquiditySimulator() {
                     className="w-9 h-9 rounded-xl bg-white dark:bg-white/[0.05] hover:bg-slate-100 dark:hover:bg-white/[0.1] active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/[0.08] shadow-xs flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
                     title="- 10 000 €"
                   >
-                    <span className="text-base font-bold">−</span>
+                    <Minus className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
 
                   <div className="relative flex-1 flex items-center h-6">
@@ -137,7 +142,7 @@ export default function LiquiditySimulator() {
                     className="w-9 h-9 rounded-xl bg-white dark:bg-white/[0.05] hover:bg-slate-100 dark:hover:bg-white/[0.1] active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/[0.08] shadow-xs flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
                     title="+ 10 000 €"
                   >
-                    <span className="text-base font-bold">+</span>
+                    <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
                 </div>
 
@@ -206,7 +211,7 @@ export default function LiquiditySimulator() {
                     className="w-9 h-9 rounded-xl bg-white dark:bg-white/[0.05] hover:bg-slate-100 dark:hover:bg-white/[0.1] active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/[0.08] shadow-xs flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
                     title="- 1 mois"
                   >
-                    <span className="text-base font-bold">−</span>
+                    <Minus className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
 
                   <div className="relative flex-1 flex items-center h-6">
@@ -238,7 +243,7 @@ export default function LiquiditySimulator() {
                     className="w-9 h-9 rounded-xl bg-white dark:bg-white/[0.05] hover:bg-slate-100 dark:hover:bg-white/[0.1] active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/[0.08] shadow-xs flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
                     title="+ 1 mois"
                   >
-                    <span className="text-base font-bold">+</span>
+                    <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
                 </div>
 
@@ -428,18 +433,30 @@ export default function LiquiditySimulator() {
                   <div className="grid grid-cols-3 gap-2 text-[10px] text-center font-mono">
                     <div className="p-2.5 rounded-xl bg-[#fa6e69]/10 dark:bg-[#fa6e69]/20 border border-[#fa6e69]/40 text-slate-900 dark:text-white">
                       <div className="font-bold text-[#fa6e69]">Wavo</div>
-                      <div className="text-[#fa6e69] font-medium mt-1">✓ 0 caution</div>
-                      <div className="text-[#fa6e69] font-medium">✓ 0 dette</div>
+                      <div className="text-[#fa6e69] font-medium mt-1 flex items-center justify-center gap-1">
+                        <Check className="w-3 h-3 stroke-[3]" /> 0 caution
+                      </div>
+                      <div className="text-[#fa6e69] font-medium flex items-center justify-center gap-1">
+                        <Check className="w-3 h-3 stroke-[3]" /> 0 dette
+                      </div>
                     </div>
                     <div className="p-2.5 rounded-xl bg-white dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.05] text-slate-500 dark:text-slate-400">
                       <div>Prêt Bancaire</div>
-                      <div className="text-rose-600 dark:text-rose-400 mt-1">✗ Caution perso</div>
-                      <div className="text-rose-600 dark:text-rose-400">✗ Bilan alourdi</div>
+                      <div className="text-rose-600 dark:text-rose-400 mt-1 flex items-center justify-center gap-1">
+                        <X className="w-3 h-3 stroke-[2.5]" /> Caution perso
+                      </div>
+                      <div className="text-rose-600 dark:text-rose-400 flex items-center justify-center gap-1">
+                        <X className="w-3 h-3 stroke-[2.5]" /> Bilan alourdi
+                      </div>
                     </div>
                     <div className="p-2.5 rounded-xl bg-white dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.05] text-slate-500 dark:text-slate-400">
                       <div>Gage Stock</div>
-                      <div className="text-rose-600 dark:text-rose-400 mt-1">✗ Greffe lourd</div>
-                      <div className="text-rose-600 dark:text-rose-400">✗ -50% décote</div>
+                      <div className="text-rose-600 dark:text-rose-400 mt-1 flex items-center justify-center gap-1">
+                        <X className="w-3 h-3 stroke-[2.5]" /> Greffe lourd
+                      </div>
+                      <div className="text-rose-600 dark:text-rose-400 flex items-center justify-center gap-1">
+                        <X className="w-3 h-3 stroke-[2.5]" /> -50% décote
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -455,8 +472,9 @@ export default function LiquiditySimulator() {
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                <div className="text-center text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                  ⚡ Décision d&apos;éligibilité garantie en moins de 2 heures
+                <div className="text-center text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center justify-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5 text-[#fa6e69] shrink-0" />
+                  <span>Décision d&apos;éligibilité garantie en moins de 2 heures</span>
                 </div>
 
               </div>

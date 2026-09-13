@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { WAVO_CONTENT } from "@/lib/content";
-import { ArrowRight, MapPin, ShieldCheck, CheckCircle2, Mail } from "lucide-react";
+import { ArrowRight, MapPin, ShieldCheck, CheckCircle2, Mail, Rocket } from "lucide-react";
 
 export default function Footer() {
   const { company } = WAVO_CONTENT;
@@ -150,8 +150,8 @@ export default function Footer() {
                   className="hover:text-slate-900 dark:hover:text-white transition-colors flex items-center gap-1.5"
                 >
                   <span>Nous recrutons</span>
-                  <span className="px-1.5 py-0.2 rounded bg-[#fa6e69]/20 text-[#fa6e69] text-[10px] font-mono">
-                    Jobs 🚀
+                  <span className="px-1.5 py-0.5 rounded bg-[#fa6e69]/20 text-[#fa6e69] text-[10px] font-mono flex items-center gap-1">
+                    Jobs <Rocket className="w-2.5 h-2.5 text-[#fa6e69]" />
                   </span>
                 </a>
               </li>

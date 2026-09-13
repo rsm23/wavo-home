@@ -9,7 +9,8 @@ import {
   ShoppingBag, 
   Laptop, 
   Factory, 
-  Sparkles
+  Sparkles,
+  ArrowRight
 } from "lucide-react";
 import FloatingCard3D from "@/components/3d/FloatingCards3D";
 
@@ -116,8 +117,8 @@ export default function ProductCatalogHub() {
                   <div className="pt-4 border-t border-slate-200/80 dark:border-white/[0.08] space-y-2">
                     <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
                       <span>Exemples financés</span>
-                      <span className="text-emerald-500 dark:text-emerald-400 flex items-center gap-1 font-bold">
-                        ● Collatéral Éligible
+                      <span className="text-emerald-500 dark:text-emerald-400 flex items-center gap-1.5 font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Collatéral Éligible
                       </span>
                     </div>
                     <div className="text-xs font-medium text-slate-800 dark:text-slate-300">
@@ -143,9 +144,10 @@ export default function ProductCatalogHub() {
             href="https://www.wavo.fr/rendez-vous/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl text-xs font-bold text-white bg-[#fa6e69] hover:bg-[#e0534e] shadow-lg shadow-[#fa6e69]/30 transition-all whitespace-nowrap cursor-pointer"
+            className="px-6 py-3 rounded-xl text-xs font-bold text-white bg-[#fa6e69] hover:bg-[#e0534e] shadow-lg shadow-[#fa6e69]/30 transition-all whitespace-nowrap cursor-pointer inline-flex items-center gap-2 group"
           >
-            Faire évaluer mon stock →
+            <span>Faire évaluer mon stock</span>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
 

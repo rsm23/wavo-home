@@ -18,7 +18,8 @@ import {
   Box,
   Warehouse,
   RotateCcw,
-  Check
+  Check,
+  Lock
 } from "lucide-react";
 import FloatingCard3D from "@/components/3d/FloatingCards3D";
 
@@ -345,8 +346,9 @@ export default function EligibilityQuiz() {
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                <div className="text-center text-[11px] font-mono text-slate-500">
-                  🔒 Données d&apos;entreprise protégées sous secret professionnel
+                <div className="text-center text-[11px] font-mono text-slate-500 flex items-center justify-center gap-1.5">
+                  <Lock className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                  <span>Données d&apos;entreprise protégées sous secret professionnel</span>
                 </div>
 
               </div>
