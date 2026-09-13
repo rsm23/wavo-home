@@ -261,7 +261,7 @@ export default function InventoryVault3D() {
   }, [isDark]);
 
   return (
-    <div className="relative w-full h-full min-h-[440px] lg:min-h-[480px] flex items-center justify-center select-none">
+    <div className="relative w-full h-full min-h-[380px] lg:min-h-[400px] flex items-center justify-center select-none">
       
       {/* Wavo Coral Ambient Glow behind 3D object */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
