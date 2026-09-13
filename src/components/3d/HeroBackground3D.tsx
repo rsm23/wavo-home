@@ -255,21 +255,145 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
     const pulseSystem = new THREE.Points(pulseGeo, pulseMat);
     scene.add(pulseSystem);
 
-    // --- 4. Floating 3D Credit Facility Tokens (€ Discs) ---
-    const tokenCount = 7;
-    const tokenGroup = new THREE.Group();
-    scene.add(tokenGroup);
+    // --- 4. Minted 3D Wavo Credit Facility Coins (with official Wavo "W" Emblem) ---
+    const createWavoCoinTexture = (isDarkTheme: boolean) => {
+      const cv = document.createElement("canvas");
+      cv.width = 512;
+      cv.height = 512;
+      const c = cv.getContext("2d");
+      const texture = new THREE.CanvasTexture(cv);
+      if (!c) return texture;
 
-    const tokenGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.06, 32);
-    const tokenMat = new THREE.MeshStandardMaterial({
+      const cx = 256;
+      const cy = 256;
+      const r = 236;
+
+      const drawCoinFace = (logoImg?: HTMLImageElement) => {
+        c.clearRect(0, 0, 512, 512);
+
+        // Radial brushed gold/coral metallic background
+        const grad = c.createRadialGradient(cx - 30, cy - 30, 20, cx, cy, r);
+        if (isDarkTheme) {
+          grad.addColorStop(0, "#3a242c");
+          grad.addColorStop(0.5, "#24161f");
+          grad.addColorStop(0.85, "#180e15");
+          grad.addColorStop(1, "#0f090d");
+        } else {
+          grad.addColorStop(0, "#fff5ee");
+          grad.addColorStop(0.4, "#ffeedf");
+          grad.addColorStop(0.75, "#ffd9c2");
+          grad.addColorStop(1, "#f3b999");
+        }
+        c.fillStyle = grad;
+        c.beginPath();
+        c.arc(cx, cy, r, 0, Math.PI * 2);
+        c.fill();
+
+        // Outer minted coin rim
+        c.strokeStyle = isDarkTheme ? "rgba(250, 110, 105, 0.75)" : "rgba(224, 83, 78, 0.65)";
+        c.lineWidth = 10;
+        c.beginPath();
+        c.arc(cx, cy, r - 6, 0, Math.PI * 2);
+        c.stroke();
+
+        // Inner fine engraved concentric ring
+        c.strokeStyle = isDarkTheme ? "rgba(255, 188, 125, 0.5)" : "rgba(250, 110, 105, 0.45)";
+        c.lineWidth = 3;
+        c.beginPath();
+        c.arc(cx, cy, r - 26, 0, Math.PI * 2);
+        c.stroke();
+
+        // Minted dentil border notches around the circumference
+        const dentils = 40;
+        c.fillStyle = isDarkTheme ? "rgba(255, 188, 125, 0.7)" : "rgba(224, 83, 78, 0.6)";
+        for (let i = 0; i < dentils; i++) {
+          const a = (i / dentils) * Math.PI * 2;
+          const px = cx + Math.cos(a) * (r - 16);
+          const py = cy + Math.sin(a) * (r - 16);
+          c.beginPath();
+          c.arc(px, py, 3.5, 0, Math.PI * 2);
+          c.fill();
+        }
+
+        // Embossed Center Wavo "W" Emblem
+        const wWidth = 230;
+        const wHeight = (wWidth * 60) / 78;
+        const wx = cx - wWidth / 2;
+        const wy = cy - wHeight / 2;
+
+        if (logoImg && logoImg.complete && logoImg.naturalWidth > 0) {
+          c.save();
+          // Drop shadow for embossed 3D relief effect
+          c.shadowColor = isDarkTheme ? "rgba(250, 110, 105, 0.6)" : "rgba(180, 50, 40, 0.35)";
+          c.shadowBlur = 14;
+          c.shadowOffsetX = 0;
+          c.shadowOffsetY = 5;
+
+          // Tint image into signature Wavo Coral / Gold
+          const tintCv = document.createElement("canvas");
+          tintCv.width = logoImg.naturalWidth;
+          tintCv.height = logoImg.naturalHeight;
+          const tCtx = tintCv.getContext("2d");
+          if (tCtx) {
+            tCtx.drawImage(logoImg, 0, 0);
+            tCtx.globalCompositeOperation = "source-in";
+            tCtx.fillStyle = isDarkTheme ? "#fa6e69" : "#e0534e";
+            tCtx.fillRect(0, 0, tintCv.width, tintCv.height);
+            c.drawImage(tintCv, wx, wy, wWidth, wHeight);
+          } else {
+            c.drawImage(logoImg, wx, wy, wWidth, wHeight);
+          }
+          c.restore();
+        } else {
+          // Sharp geometric W fallback before image loads
+          c.save();
+          c.fillStyle = isDarkTheme ? "#fa6e69" : "#e0534e";
+          c.font = "900 160px sans-serif";
+          c.textAlign = "center";
+          c.textBaseline = "middle";
+          c.fillText("W", cx, cy + 6);
+          c.restore();
+        }
+
+        texture.needsUpdate = true;
+      };
+
+      // Draw initial state
+      drawCoinFace();
+
+      // Load official Wavo W logo symbol
+      const wImg = new window.Image();
+      wImg.src = "/assets/wavo-w-symbol.png";
+      wImg.onload = () => {
+        drawCoinFace(wImg);
+      };
+
+      return texture;
+    };
+
+    const coinTexture = createWavoCoinTexture(isDark);
+
+    const coinSideMat = new THREE.MeshStandardMaterial({
       color: 0xffbc7d,
-      metalness: 0.85,
+      metalness: 0.9,
       roughness: 0.2,
       transparent: true,
-      opacity: isDark ? 0.8 : 0.65,
+      opacity: isDark ? 0.85 : 0.75,
     });
 
-    const tokens: { mesh: THREE.Mesh; homeY: number; speed: number }[] = [];
+    const coinFaceMat = new THREE.MeshStandardMaterial({
+      map: coinTexture,
+      bumpMap: coinTexture,
+      bumpScale: 0.03,
+      metalness: 0.85,
+      roughness: 0.22,
+      transparent: true,
+      opacity: isDark ? 0.9 : 0.85,
+    });
+
+    const coinMaterials = [coinSideMat, coinFaceMat, coinFaceMat];
+    const tokenGeo = new THREE.CylinderGeometry(0.48, 0.48, 0.08, 36);
+
     const tokenPositions = [
       [-4.5, 3.2, -2.5],
       [-3.0, -2.5, -2.0],
@@ -278,15 +402,22 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
       [1.8, -3.6, -2.8],
       [-7.5, -1.5, -3.2],
       [5.5, 4.2, -3.0],
+      [-1.2, 3.8, -2.2],
     ];
 
+    const tokenGroup = new THREE.Group();
+    scene.add(tokenGroup);
+
+    const tokens: { mesh: THREE.Mesh; homeY: number; speed: number }[] = [];
+
     tokenPositions.forEach((pos, idx) => {
-      const disc = new THREE.Mesh(tokenGeo, tokenMat.clone());
+      const disc = new THREE.Mesh(tokenGeo, coinMaterials);
       disc.position.set(pos[0], pos[1], pos[2]);
-      disc.rotation.x = Math.PI * 0.35;
-      disc.rotation.z = idx * 0.8;
+      disc.rotation.x = Math.PI * 0.35 + idx * 0.4;
+      disc.rotation.y = idx * 0.5;
+      disc.rotation.z = idx * 0.7;
       tokenGroup.add(disc);
-      tokens.push({ mesh: disc, homeY: pos[1], speed: 0.6 + idx * 0.2 });
+      tokens.push({ mesh: disc, homeY: pos[1], speed: 0.5 + idx * 0.15 });
     });
 
     // --- 5. Interactive Cursor Tracking & 3D Raycast Unprojection ---
@@ -410,10 +541,11 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
       }
       pulseGeo.attributes.position.needsUpdate = true;
 
-      // --- Animate Floating Credit Tokens (€ Discs) ---
+      // --- Animate Floating Wavo Credit Coins with W Emblem (3D Tumble) ---
       tokens.forEach((t, idx) => {
         t.mesh.position.y = t.homeY + Math.sin(elapsed * t.speed + idx) * 0.22;
-        t.mesh.rotation.y += 0.015;
+        t.mesh.rotation.y += 0.018;
+        t.mesh.rotation.x += 0.012;
         t.mesh.rotation.z += 0.008;
       });
 
@@ -464,8 +596,9 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
       edgeCoralMat.dispose();
       edgePeachMat.dispose();
       coreEnergyMat.dispose();
-      corePeachMat.dispose();
-      tokenMat.dispose();
+      coinSideMat.dispose();
+      coinFaceMat.dispose();
+      coinTexture.dispose();
       tokenGeo.dispose();
       pulseMat.dispose();
       pulseGeo.dispose();
