@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import InventoryVault3D from "@/components/3d/InventoryVault3D";
+import HeroBackground3D from "@/components/3d/HeroBackground3D";
 import { WAVO_CONTENT } from "@/lib/content";
 import { 
   ArrowRight, 
@@ -69,14 +70,14 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen pt-32 sm:pt-36 pb-24 overflow-hidden flex flex-col justify-center bg-[#fafafc] dark:bg-[#080b13] transition-colors duration-200">
       
-      {/* Precision Architectural Grid Background */}
+      {/* Interactive 3D Morphing Horizon Background */}
+      <HeroBackground3D />
+
+      {/* Precision Architectural Grid & Coordinates Overlay */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Subtle radial ambient spotlight centered on top */}
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-gradient-to-b from-[#fa6e69]/15 via-[#ffbc7d]/10 to-transparent rounded-full blur-[140px] opacity-70 dark:opacity-100" />
-        
         {/* Fine Architectural Hairline Grid */}
         <div 
-          className="absolute inset-0 opacity-[0.05] dark:opacity-[0.035]"
+          className="absolute inset-0 opacity-[0.035] dark:opacity-[0.025]"
           style={{
             backgroundImage: `
               linear-gradient(to right, currentColor 1px, transparent 1px),
