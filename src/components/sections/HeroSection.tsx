@@ -1,110 +1,317 @@
 "use client";
 
-import React from "react";
-import StripeMeshCanvas from "@/components/3d/StripeMeshCanvas";
+import React, { useState } from "react";
 import InventoryVault3D from "@/components/3d/InventoryVault3D";
 import { WAVO_CONTENT } from "@/lib/content";
-import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { 
+  ArrowRight, 
+  Sparkles, 
+  ShieldCheck, 
+  Check, 
+  TrendingUp, 
+  Sun, 
+  Bike, 
+  Laptop, 
+  ShoppingBag
+} from "lucide-react";
 
 export default function HeroSection() {
   const { hero } = WAVO_CONTENT;
 
+  // Interactive Live Facility Terminal Presets
+  const assetScenarios = [
+    {
+      id: "solar",
+      label: "Solaire & Énergie",
+      icon: Sun,
+      items: "280 panneaux bifaciaux + onduleurs",
+      stockValue: 120000,
+      tvaAdvance: 24000,
+      turnover: "3 mois",
+      repayment: "Au fil des raccordements clients",
+    },
+    {
+      id: "mobility",
+      label: "Mobilité Électrique",
+      icon: Bike,
+      items: "65 vélos cargos & batteries",
+      stockValue: 85000,
+      tvaAdvance: 17000,
+      turnover: "2.5 mois",
+      repayment: "À chaque sortie magasin / e-commerce",
+    },
+    {
+      id: "it",
+      label: "IT & Reconditionné",
+      icon: Laptop,
+      items: "420 PC portables & stations de travail",
+      stockValue: 210000,
+      tvaAdvance: 42000,
+      turnover: "4 mois",
+      repayment: "Dès facturation des flottes B2B",
+    },
+    {
+      id: "retail",
+      label: "Retail & B2B",
+      icon: ShoppingBag,
+      items: "6 000 références de saison",
+      stockValue: 160000,
+      tvaAdvance: 32000,
+      turnover: "3 mois",
+      repayment: "Au fil des encaissements caisse",
+    },
+  ];
+
+  const [activeScenario, setActiveScenario] = useState(assetScenarios[0]);
+
+  const totalCashReleased = activeScenario.stockValue + activeScenario.tvaAdvance;
+
   return (
-    <section className="relative min-h-screen pt-32 sm:pt-40 pb-20 overflow-hidden flex flex-col justify-center">
-      {/* 3D WebGL Fluid Canvas in background */}
-      <StripeMeshCanvas />
+    <section className="relative min-h-screen pt-32 sm:pt-36 pb-24 overflow-hidden flex flex-col justify-center bg-[#080b13]">
+      
+      {/* Precision Architectural Grid Background (NO STRIPE MESH) */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Subtle radial ambient spotlight centered on top */}
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-gradient-to-b from-[#fa6e69]/15 via-[#ffbc7d]/5 to-transparent rounded-full blur-[140px]" />
+        
+        {/* Fine Architectural Hairline Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #ffffff 1px, transparent 1px),
+              linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+            `,
+            backgroundSize: "64px 64px"
+          }}
+        />
 
-      {/* Subtle background grid pattern */}
-      <div className="absolute inset-0 wavo-grid opacity-30 pointer-events-none" />
+        {/* Decorative Coordinate Marks */}
+        <div className="hidden lg:block absolute top-36 left-10 font-mono text-[10px] text-slate-600 tracking-widest">
+          FACILITY//PARIS:48.8566°N
+        </div>
+        <div className="hidden lg:block absolute top-36 right-10 font-mono text-[10px] text-slate-600 tracking-widest">
+          STATUS:LIVE_MARKET
+        </div>
+      </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-12">
+        
+        {/* Top Masterhead Section */}
+        <div className="space-y-6 max-w-4xl">
           
-          {/* Left Column: Copy & CTAs (Pill/Badge removed per user request) */}
-          <div className="lg:col-span-6 space-y-8 text-left">
+          {/* Institutional Label */}
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-[#fa6e69] uppercase">
+            <span className="w-2 h-2 rounded-full bg-[#fa6e69] animate-pulse" />
+            <span>FACILITÉ DE CRÉDIT ADOSSÉE AUX STOCKS • TPE &amp; PME FRANÇAISES</span>
+          </div>
+
+          {/* Master Headline (Stark Editorial Authority) */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.04em] text-white leading-[1.05]">
+            Votre stock physique finance{" "}
+            <span className="wavo-gradient-text">votre hypercroissance.</span>
+          </h1>
+
+          {/* Sub-headline */}
+          <p className="text-base sm:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl">
+            {hero.subheadline}
+          </p>
+
+          {/* Action CTAs */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+            <a
+              href="#simulateur"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-[#fa6e69] via-[#e0534e] to-[#c43834] hover:from-[#ff8a85] hover:to-[#e0534e] shadow-xl shadow-[#fa6e69]/30 border border-white/[0.15] transition-all cursor-pointer group active:scale-[0.98]"
+            >
+              <Sparkles className="w-4 h-4 text-[#ffbc7d]" />
+              <span>Simuler ma trésorerie immédiate</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            <a
+              href="https://www.wavo.fr/rendez-vous/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl text-sm font-semibold text-slate-200 wavo-glass hover:border-[#fa6e69]/50 hover:text-white border border-white/[0.1] transition-all"
+            >
+              <span>Vérifier mon éligibilité</span>
+              <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-[#fa6e69]/20 text-[#fa6e69] border border-[#fa6e69]/30">
+                &lt; 2 min
+              </span>
+            </a>
+          </div>
+
+        </div>
+
+        {/* The Live Interactive Credit Terminal & Physical Vault Composition */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-4">
+          
+          {/* Left Column: Interactive Asset Collateral Terminal */}
+          <div className="lg:col-span-7 rounded-3xl bg-[#0f131e] border border-white/[0.1] p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-2xl relative overflow-hidden">
             
-            {/* Main Headline */}
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-[-0.035em] text-white leading-[1.05]">
-                Votre stock finance{" "}
-                <span className="wavo-gradient-text block">
-                  votre ambition.
+            {/* Terminal Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.08] pb-5">
+              <div>
+                <div className="text-[11px] font-mono uppercase tracking-widest text-[#fa6e69] font-bold flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#fa6e69]" />
+                  SIMULATEUR DE PORTAGE EN DIRECT
+                </div>
+                <div className="text-sm font-bold text-white mt-0.5">
+                  Sélectionnez un lot d&apos;actifs pour visualiser le déblocage
+                </div>
+              </div>
+              <div className="px-3 py-1 rounded-xl bg-white/[0.05] border border-white/[0.08] text-[11px] font-mono text-slate-400 self-start sm:self-auto">
+                0€ dette au bilan
+              </div>
+            </div>
+
+            {/* Asset Sector Selectors */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {assetScenarios.map((scenario) => {
+                const Icon = scenario.icon;
+                const isSelected = activeScenario.id === scenario.id;
+                return (
+                  <button
+                    key={scenario.id}
+                    type="button"
+                    onClick={() => setActiveScenario(scenario)}
+                    className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-3 ${
+                      isSelected
+                        ? "bg-[#fa6e69]/15 border-[#fa6e69] text-white shadow-lg shadow-[#fa6e69]/20"
+                        : "bg-white/[0.02] border-white/[0.06] text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <Icon className={`w-4 h-4 ${isSelected ? "text-[#fa6e69]" : "text-slate-500"}`} />
+                      <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? "bg-[#fa6e69]" : "bg-transparent"}`} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold leading-tight">{scenario.label}</div>
+                      <div className="text-[10px] font-mono text-slate-500 mt-0.5">
+                        {(scenario.stockValue / 1000).toFixed(0)} k€ stock
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Live Financial Breakdown Matrix */}
+            <div className="p-5 rounded-2xl bg-black/40 border border-white/[0.07] space-y-4">
+              
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-3">
+                <span className="text-xs text-slate-400">
+                  Actif engagé : <strong className="text-slate-200">{activeScenario.items}</strong>
                 </span>
-              </h1>
-            </div>
-
-            {/* Sub-headline */}
-            <p className="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-xl">
-              {hero.subheadline}
-            </p>
-
-            {/* Key Value Checks */}
-            <div className="flex flex-wrap gap-y-2 gap-x-5 text-xs text-slate-300 font-medium">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#fa6e69] flex-shrink-0" />
-                <span>100% de la valeur + TVA avancée</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#fa6e69] flex-shrink-0" />
-                <span>Rachat unitaire au fil de l&apos;eau</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#fa6e69] flex-shrink-0" />
-                <span>Capacité d&apos;emprunt 100% intacte</span>
-              </div>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <a
-                href="#simulateur"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-[#fa6e69] via-[#e0534e] to-[#c43834] hover:from-[#ff8a85] hover:to-[#e0534e] shadow-xl shadow-[#fa6e69]/35 border border-white/[0.15] transition-all cursor-pointer group active:scale-[0.98]"
-              >
-                <Sparkles className="w-4 h-4 text-[#ffbc7d] group-hover:rotate-12 transition-transform" />
-                <span>{hero.ctaPrimary}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-
-              <a
-                href="https://www.wavo.fr/rendez-vous/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl text-sm font-semibold text-slate-200 wavo-glass hover:border-[#fa6e69]/50 hover:text-white border border-white/[0.1] transition-all"
-              >
-                <span>{hero.ctaSecondary}</span>
-                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-[#fa6e69]/20 text-[#fa6e69] border border-[#fa6e69]/30">
-                  &lt; 2 min
+                <span className="text-[11px] font-mono text-[#ffbc7d]">
+                  Rotation estimée : {activeScenario.turnover}
                 </span>
-              </a>
+              </div>
+
+              {/* 3 Core Financial Columns */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                
+                <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.05] space-y-1">
+                  <span className="text-[11px] font-mono text-slate-400 block">Valeur Achat Stock</span>
+                  <span className="text-lg font-mono font-bold text-white">
+                    {activeScenario.stockValue.toLocaleString("fr-FR")} €
+                  </span>
+                  <span className="text-[10px] text-emerald-400 block flex items-center gap-1">
+                    <Check className="w-3 h-3" /> 100% financé
+                  </span>
+                </div>
+
+                <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.05] space-y-1">
+                  <span className="text-[11px] font-mono text-slate-400 block">Avance TVA (+20%)</span>
+                  <span className="text-lg font-mono font-bold text-[#ffbc7d]">
+                    +{activeScenario.tvaAdvance.toLocaleString("fr-FR")} €
+                  </span>
+                  <span className="text-[10px] text-slate-400 block">
+                    Avancé par Wavo
+                  </span>
+                </div>
+
+                <div className="p-3 rounded-xl bg-gradient-to-br from-[#fa6e69]/20 to-transparent border border-[#fa6e69]/40 space-y-1">
+                  <span className="text-[11px] font-mono text-[#fa6e69] block font-bold">Trésorerie Débloquée</span>
+                  <span className="text-xl font-mono font-black text-white">
+                    {totalCashReleased.toLocaleString("fr-FR")} €
+                  </span>
+                  <span className="text-[10px] text-[#fa6e69] font-mono block">
+                    Virement sous 24h
+                  </span>
+                </div>
+
+              </div>
+
+              {/* Legal & Regulatory Guarantees */}
+              <div className="pt-2 flex flex-wrap items-center justify-between gap-y-2 gap-x-4 text-xs font-mono text-slate-400 border-t border-white/[0.06]">
+                <span className="flex items-center gap-1.5 text-slate-300">
+                  <ShieldCheck className="w-4 h-4 text-[#fa6e69]" />
+                  Dette bancaire : <strong className="text-white">0,00 €</strong>
+                </span>
+                <span className="flex items-center gap-1.5 text-slate-300">
+                  <ShieldCheck className="w-4 h-4 text-[#fa6e69]" />
+                  Caution personnelle : <strong className="text-white">0,00 €</strong>
+                </span>
+                <span className="text-[11px] text-[#fa6e69]">
+                  Modalité : {activeScenario.repayment}
+                </span>
+              </div>
+
             </div>
 
-            {/* 4 Quantitative Metric Badges */}
-            <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/[0.08]">
-              {hero.stats.map((stat, idx) => (
-                <div key={idx} className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1">
-                  <div className="text-xl sm:text-2xl font-black tracking-tight text-white font-mono">
+          </div>
+
+          {/* Right Column: Physical Vault Hologram with Interactive Depth */}
+          <div className="lg:col-span-5 rounded-3xl bg-[#0b0e17] border border-white/[0.08] p-4 flex flex-col justify-between relative overflow-hidden shadow-2xl">
+            <div className="flex items-center justify-between px-3 pt-2 text-xs font-mono text-slate-400">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                VALORISATION D&apos;ACTIF EN TEMPS RÉEL
+              </span>
+              <span className="text-[#fa6e69] font-bold">100% SÉCURISÉ</span>
+            </div>
+            
+            <div className="h-[340px] sm:h-[380px] w-full relative">
+              <InventoryVault3D />
+            </div>
+
+            <div className="px-3 pb-2 text-[11px] font-mono text-slate-500 text-center">
+              Vos stocks restent physiquement dans vos entrepôts habituels. Aucun transfert logistique.
+            </div>
+          </div>
+
+        </div>
+
+        {/* Institutional Market Ticker Tape (Continuous Financial Metrics) */}
+        <div className="pt-4 border-t border-white/[0.08]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {hero.stats.map((stat, idx) => (
+              <div 
+                key={idx} 
+                className="p-4 rounded-2xl bg-[#0f131e]/80 border border-white/[0.06] flex items-center justify-between gap-3"
+              >
+                <div>
+                  <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+                    {stat.label}
+                  </div>
+                  <div className="text-2xl font-black text-white font-mono mt-0.5">
                     {stat.value}
                     {stat.suffix && (
-                      <span className="text-xs text-[#fa6e69] font-semibold ml-0.5">
+                      <span className="text-sm text-[#fa6e69] font-bold ml-0.5">
                         {stat.suffix}
                       </span>
                     )}
                   </div>
-                  <div className="text-[11px] text-slate-400 leading-tight">
-                    {stat.label}
-                  </div>
                 </div>
-              ))}
-            </div>
-
+                <div className="p-2.5 rounded-xl bg-white/[0.04] text-[#fa6e69] border border-white/[0.08]">
+                  <TrendingUp className="w-4 h-4" />
+                </div>
+              </div>
+            ))}
           </div>
-
-          {/* Right Column: Seamless 3D Holographic Vault in Wavo Coral */}
-          <div className="lg:col-span-6 relative">
-            <InventoryVault3D />
-          </div>
-
         </div>
+
       </div>
     </section>
   );

@@ -83,14 +83,14 @@ export default function Header() {
               href="#piliers"
               className="px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/[0.06] transition-colors"
             >
-              Les 4 Piliers
+              Modèle &amp; Comparatif
             </a>
 
             <a
               href="#etapes"
               className="px-3.5 py-2 rounded-xl hover:text-white hover:bg-white/[0.06] transition-colors"
             >
-              Fonctionnement
+              Cycle du Portage
             </a>
 
             <a

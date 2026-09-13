@@ -28,48 +28,77 @@ export default function ProcessPipeline() {
         <div className="max-w-3xl mx-auto text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full wavo-glass text-xs font-mono font-semibold text-[#fa6e69] border border-[#fa6e69]/30">
             <Layers className="w-3.5 h-3.5" />
-            <span>PROCESSUS AUTOMATISÉ &amp; SANS DETTE</span>
+            <span>LE CYCLE DU PORTAGE WAVO</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Une trésorerie optimisée en{" "}
-            <span className="wavo-gradient-text">4 étapes simples</span>
+            Un cycle de trésorerie fluide en{" "}
+            <span className="wavo-gradient-text">4 temps sans friction</span>
           </h2>
 
           <p className="text-base sm:text-lg text-slate-400">
-            De la qualification initiale jusqu&apos;à la récupération produit par produit : zéro lourdeur administrative, aucun passage devant le greffe.
+            De la valorisation initiale de votre bon de commande jusqu&apos;au rachat unitaire pièce par pièce : aucun passage devant notaire, aucun ralentissement opérationnel.
           </p>
         </div>
 
-        {/* Step Selector Horizontal Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-2 rounded-2xl wavo-glass border border-white/[0.08]">
-          {steps.map((step, idx) => {
-            const Icon = stepIcons[idx];
-            const active = selectedStep === idx;
-            return (
-              <button
-                key={idx}
-                onClick={() => setSelectedStep(idx)}
-                className={`flex items-center gap-3 p-3.5 sm:p-4 rounded-xl text-left transition-all duration-200 cursor-pointer ${
-                  active
-                    ? "bg-[#fa6e69]/25 border border-[#fa6e69]/50 text-white shadow-lg shadow-[#fa6e69]/20"
-                    : "text-slate-400 hover:text-white hover:bg-white/[0.04] border border-transparent"
-                }`}
-              >
-                <div className={`p-2.5 rounded-lg flex-shrink-0 ${active ? "bg-[#fa6e69] text-white" : "bg-white/[0.05] text-slate-400"}`}>
-                  <Icon className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                    Étape {step.stepNumber}
+        {/* Connected High-End Stepper Track */}
+        <div className="relative">
+          {/* Connecting Track Line */}
+          <div className="hidden md:block absolute top-1/2 left-8 right-8 h-0.5 bg-white/[0.08] -translate-y-1/2 z-0" />
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
+            {steps.map((step, idx) => {
+              const Icon = stepIcons[idx];
+              const active = selectedStep === idx;
+              const isPast = idx < selectedStep;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setSelectedStep(idx)}
+                  className={`p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 cursor-pointer flex flex-col justify-between gap-4 border select-none ${
+                    active
+                      ? "bg-[#0f131f] border-[#fa6e69] text-white shadow-xl shadow-[#fa6e69]/20"
+                      : isPast
+                      ? "bg-[#0a0d15] border-white/[0.1] text-slate-300 hover:border-white/[0.2]"
+                      : "bg-[#080a10] border-white/[0.05] text-slate-500 hover:border-white/[0.1] hover:text-slate-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
+                        active
+                          ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/40"
+                          : isPast
+                          ? "bg-white/[0.08] text-white"
+                          : "bg-white/[0.03] text-slate-500"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <span
+                      className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded ${
+                        active
+                          ? "bg-[#fa6e69]/20 text-[#fa6e69]"
+                          : "bg-white/[0.04] text-slate-500"
+                      }`}
+                    >
+                      0{step.stepNumber}
+                    </span>
                   </div>
-                  <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">
-                    {step.title.split("&")[0]}
+
+                  <div>
+                    <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                      {step.timeframe}
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-white mt-0.5 line-clamp-1">
+                      {step.title}
+                    </div>
                   </div>
-                </div>
-              </button>
-            );
-          })}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Dynamic Step Details & Interactive Simulation */}
