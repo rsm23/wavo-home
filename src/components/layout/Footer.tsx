@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { WAVO_CONTENT } from "@/lib/content";
-import { ArrowRight, MapPin, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { ArrowRight, MapPin, ShieldCheck, CheckCircle2, Mail } from "lucide-react";
 
 export default function Footer() {
   const { company } = WAVO_CONTENT;
@@ -188,26 +188,33 @@ export default function Footer() {
             </p>
 
             {subscribed ? (
-              <div className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-xs text-emerald-300 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Inscription confirmée !</span>
+              <div className="p-3.5 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 text-xs text-emerald-300 flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <span>Inscription confirmée ! Vous recevrez nos analyses trimestrielles.</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="space-y-2">
-                <input
-                  type="email"
-                  required
-                  placeholder="nom@entreprise.fr"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/[0.08] text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-[#fa6e69]"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-2.5 rounded-xl bg-[#fa6e69] hover:bg-[#e0534e] text-white font-bold text-xs transition-colors cursor-pointer"
-                >
-                  S&apos;inscrire
-                </button>
+                <div className="relative flex items-center bg-black/60 border border-white/[0.1] focus-within:border-[#fa6e69]/60 rounded-xl p-1 transition-all shadow-inner">
+                  <Mail className="w-4 h-4 text-slate-500 ml-2.5 flex-shrink-0" />
+                  <input
+                    type="email"
+                    required
+                    placeholder="directeur@pme.fr"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full bg-transparent px-2.5 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none font-sans"
+                  />
+                  <button
+                    type="submit"
+                    className="px-3 py-1.5 rounded-lg bg-[#fa6e69] hover:bg-[#e0534e] text-white font-bold text-xs transition-all shadow-md shadow-[#fa6e69]/30 flex items-center gap-1 cursor-pointer flex-shrink-0"
+                  >
+                    <span>OK</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </button>
+                </div>
+                <span className="text-[10px] text-slate-500 block">
+                  Sans spam • Désabonnement en 1 clic
+                </span>
               </form>
             )}
           </div>

@@ -7,7 +7,11 @@ import {
   Sparkles, 
   ArrowRight, 
   CheckCircle2, 
-  Activity
+  Activity,
+  Laptop,
+  Bike,
+  Sun,
+  ShoppingBag
 } from "lucide-react";
 
 export default function LiquiditySimulator() {
@@ -76,47 +80,98 @@ export default function LiquiditySimulator() {
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <label className="text-sm font-bold text-white tracking-wide">
-                    Valeur d&apos;achat du stock à financer
+                  <label className="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+                    <span>Valeur d&apos;achat du stock à financer</span>
+                    <span className="px-2 py-0.5 rounded-md bg-white/[0.06] text-slate-400 text-[10px] font-mono">
+                      Min 50k€ • Max 500k€
+                    </span>
                   </label>
                   <p className="text-xs text-slate-400">
                     Commande fournisseur ou inventaire déjà stocké
                   </p>
                 </div>
-                <div className="px-5 py-2.5 rounded-2xl bg-[#fa6e69]/15 border border-[#fa6e69]/30 text-[#fa6e69] font-mono font-black text-2xl tracking-tight self-start sm:self-auto">
+                <div className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#fa6e69]/20 to-[#ffbc7d]/10 border border-[#fa6e69]/40 text-[#fa6e69] font-mono font-black text-2xl tracking-tight self-start sm:self-auto shadow-lg shadow-[#fa6e69]/10">
                   {stockAmount.toLocaleString("fr-FR")} €
                 </div>
               </div>
 
-              <input
-                type="range"
-                min="50000"
-                max="500000"
-                step="10000"
-                value={stockAmount}
-                onChange={(e) => setStockAmount(Number(e.target.value))}
-                className="wavo-slider"
-              />
+              {/* Bespoke Tactile Controller */}
+              <div className="p-3.5 rounded-2xl bg-black/40 border border-white/[0.07] space-y-3">
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setStockAmount((prev) => Math.max(50000, prev - 10000))}
+                    disabled={stockAmount <= 50000}
+                    className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-slate-300 hover:text-white border border-white/[0.08] flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
+                    title="- 10 000 €"
+                  >
+                    <span className="text-base font-bold">−</span>
+                  </button>
 
-              <div className="flex justify-between items-center text-[11px] font-mono text-slate-500">
-                <span>50 000 €</span>
-                <span>250 000 € (Plafond standard)</span>
-                <span>500 000 €+</span>
+                  <div className="relative flex-1 flex items-center h-6">
+                    {/* Glowing Track Fill */}
+                    <div className="absolute inset-x-0 h-2 rounded-full bg-white/[0.08] overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-[#fa6e69] via-[#ff8a85] to-[#ffbc7d] rounded-full transition-all duration-75 shadow-[0_0_12px_rgba(250,110,105,0.6)]"
+                        style={{
+                          width: `${((stockAmount - 50000) / (500000 - 50000)) * 100}%`,
+                        }}
+                      />
+                    </div>
+                    {/* Range Input on Top */}
+                    <input
+                      type="range"
+                      min="50000"
+                      max="500000"
+                      step="10000"
+                      value={stockAmount}
+                      onChange={(e) => setStockAmount(Number(e.target.value))}
+                      className="wavo-slider relative z-10 opacity-90 cursor-pointer"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setStockAmount((prev) => Math.min(500000, prev + 10000))}
+                    disabled={stockAmount >= 500000}
+                    className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-slate-300 hover:text-white border border-white/[0.08] flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
+                    title="+ 10 000 €"
+                  >
+                    <span className="text-base font-bold">+</span>
+                  </button>
+                </div>
+
+                <div className="flex justify-between items-center text-[10px] font-mono text-slate-500 px-1">
+                  <span>50 000 €</span>
+                  <span className="text-slate-400">250 000 € (Plafond initial)</span>
+                  <span>500 000 €+</span>
+                </div>
               </div>
 
-              {/* Preset buttons */}
-              <div className="flex flex-wrap gap-2 pt-1">
-                {[80000, 150000, 250000, 400000].map((val) => (
+              {/* Bespoke Preset Chips */}
+              <div className="flex flex-wrap gap-2 pt-0.5">
+                {[
+                  { val: 80000, label: "80 k€" },
+                  { val: 150000, label: "150 k€ (Moyen)" },
+                  { val: 250000, label: "250 k€ (Standard)" },
+                  { val: 400000, label: "400 k€ (Scale-up)" },
+                ].map(({ val, label }) => (
                   <button
                     key={val}
+                    type="button"
                     onClick={() => setStockAmount(val)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                       stockAmount === val
                         ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/40 border border-[#fa6e69]"
                         : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08] border border-white/[0.06]"
                     }`}
                   >
-                    {val.toLocaleString("fr-FR")} €
+                    <span
+                      className={`w-1.5 h-1.5 rounded-full ${
+                        stockAmount === val ? "bg-white animate-pulse" : "bg-slate-600"
+                      }`}
+                    />
+                    <span>{label}</span>
                   </button>
                 ))}
               </div>
@@ -126,32 +181,90 @@ export default function LiquiditySimulator() {
             <div className="space-y-4 pt-6 border-t border-white/[0.08]">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <label className="text-sm font-bold text-white tracking-wide">
-                    Cycle moyen de revente de vos produits
+                  <label className="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+                    <span>Cycle moyen d&apos;écoulement</span>
+                    <span className="px-2 py-0.5 rounded-md bg-white/[0.06] text-slate-400 text-[10px] font-mono">
+                      Max 8 mois
+                    </span>
                   </label>
                   <p className="text-xs text-slate-400">
-                    Délai pour écouler 100% des unités concernées
+                    Délai estimé pour écouler 100% des unités financées
                   </p>
                 </div>
-                <div className="px-5 py-2.5 rounded-2xl bg-[#ffbc7d]/15 border border-[#ffbc7d]/30 text-[#ffbc7d] font-mono font-black text-2xl tracking-tight self-start sm:self-auto">
+                <div className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#ffbc7d]/20 to-[#fa6e69]/10 border border-[#ffbc7d]/40 text-[#ffbc7d] font-mono font-black text-2xl tracking-tight self-start sm:self-auto shadow-lg shadow-[#ffbc7d]/10">
                   {rotationMonths} {rotationMonths > 1 ? "mois" : "mois"}
                 </div>
               </div>
 
-              <input
-                type="range"
-                min="1"
-                max="8"
-                step="1"
-                value={rotationMonths}
-                onChange={(e) => setRotationMonths(Number(e.target.value))}
-                className="wavo-slider"
-              />
+              {/* Bespoke Tactile Controller for Months */}
+              <div className="p-3.5 rounded-2xl bg-black/40 border border-white/[0.07] space-y-3">
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setRotationMonths((prev) => Math.max(1, prev - 1))}
+                    disabled={rotationMonths <= 1}
+                    className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-slate-300 hover:text-white border border-white/[0.08] flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
+                    title="- 1 mois"
+                  >
+                    <span className="text-base font-bold">−</span>
+                  </button>
 
-              <div className="flex justify-between items-center text-[11px] font-mono text-slate-500">
-                <span>1 mois (Express)</span>
-                <span>4 mois (Standard PME)</span>
-                <span>8 mois (Plafond max Wavo)</span>
+                  <div className="relative flex-1 flex items-center h-6">
+                    {/* Glowing Track Fill */}
+                    <div className="absolute inset-x-0 h-2 rounded-full bg-white/[0.08] overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-[#ffbc7d] via-[#fa6e69] to-[#fa6e69] rounded-full transition-all duration-75 shadow-[0_0_12px_rgba(255,188,125,0.6)]"
+                        style={{
+                          width: `${((rotationMonths - 1) / (8 - 1)) * 100}%`,
+                        }}
+                      />
+                    </div>
+                    {/* Range Input on Top */}
+                    <input
+                      type="range"
+                      min="1"
+                      max="8"
+                      step="1"
+                      value={rotationMonths}
+                      onChange={(e) => setRotationMonths(Number(e.target.value))}
+                      className="wavo-slider relative z-10 opacity-90 cursor-pointer"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setRotationMonths((prev) => Math.min(8, prev + 1))}
+                    disabled={rotationMonths >= 8}
+                    className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-slate-300 hover:text-white border border-white/[0.08] flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
+                    title="+ 1 mois"
+                  >
+                    <span className="text-base font-bold">+</span>
+                  </button>
+                </div>
+
+                <div className="flex justify-between items-center text-[10px] font-mono text-slate-500 px-1">
+                  <span>1 mois (Express)</span>
+                  <span className="text-slate-400">4 mois (Moyenne PME)</span>
+                  <span>8 mois (Plafond max)</span>
+                </div>
+              </div>
+
+              {/* Segmented Duration Quick-Pills */}
+              <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 pt-0.5">
+                {[1, 2, 3, 4, 6, 8].map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    onClick={() => setRotationMonths(m)}
+                    className={`py-1.5 px-2 rounded-xl text-xs font-mono font-semibold text-center transition-all cursor-pointer ${
+                      rotationMonths === m
+                        ? "bg-[#ffbc7d] text-[#10101b] font-bold shadow-md shadow-[#ffbc7d]/30 border border-[#ffbc7d]"
+                        : "bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06]"
+                    }`}
+                  >
+                    {m}m
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -162,23 +275,32 @@ export default function LiquiditySimulator() {
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {[
-                  { id: "hightech", label: "High-Tech / IT" },
-                  { id: "mobility", label: "Mobilité / Vélos" },
-                  { id: "solar", label: "Solaire & Énergie" },
-                  { id: "retail", label: "Retail & B2B" },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setCategory(item.id)}
-                    className={`p-3 text-xs font-semibold rounded-xl border text-center transition-all cursor-pointer ${
-                      category === item.id
-                        ? "border-[#fa6e69] bg-[#fa6e69]/20 text-[#fa6e69] shadow-md shadow-[#fa6e69]/20 font-bold"
-                        : "border-white/[0.08] bg-white/[0.02] text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
+                  { id: "hightech", label: "High-Tech / IT", icon: Laptop },
+                  { id: "mobility", label: "Mobilité / Vélos", icon: Bike },
+                  { id: "solar", label: "Solaire & Énergie", icon: Sun },
+                  { id: "retail", label: "Retail & B2B", icon: ShoppingBag },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setCategory(item.id)}
+                      className={`p-3 text-xs font-semibold rounded-2xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-2 ${
+                        category === item.id
+                          ? "border-[#fa6e69] bg-[#fa6e69]/15 text-white shadow-lg shadow-[#fa6e69]/20 font-bold"
+                          : "border-white/[0.08] bg-white/[0.02] text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                      }`}
+                    >
+                      <Icon
+                        className={`w-4 h-4 transition-colors ${
+                          category === item.id ? "text-[#fa6e69]" : "text-slate-500"
+                        }`}
+                      />
+                      <span>{item.label}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
