@@ -55,19 +55,15 @@ export default function ProcessPipeline() {
                   onClick={() => setSelectedStep(idx)}
                   className={`relative z-10 p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 cursor-pointer flex flex-col justify-between gap-4 border select-none overflow-hidden ${
                     active
-                      ? "bg-white dark:bg-[#0f131f] border-2 border-[#fa6e69] text-slate-900 dark:text-white shadow-xl shadow-[#fa6e69]/20 ring-1 ring-[#fa6e69]"
+                      ? "bg-white dark:bg-[#0f131f] border-[#fa6e69] text-slate-900 dark:text-white shadow-lg shadow-[#fa6e69]/15"
                       : isPast
-                      ? "bg-white dark:bg-[#0d111c] border border-slate-200/90 dark:border-white/[0.08] text-slate-800 dark:text-slate-300 hover:border-slate-300 dark:hover:border-white/[0.2] shadow-sm dark:shadow-none"
-                      : "bg-white dark:bg-[#0a0d16] border border-slate-200/70 dark:border-white/[0.05] text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-white/[0.1] hover:text-slate-800 dark:hover:text-slate-200 shadow-xs dark:shadow-none"
+                      ? "bg-white dark:bg-[#0d111c] border-slate-200/90 dark:border-white/[0.08] text-slate-800 dark:text-slate-300 hover:border-slate-300 dark:hover:border-white/[0.2] shadow-xs dark:shadow-none"
+                      : "bg-white dark:bg-[#0a0d16] border-slate-200/70 dark:border-white/[0.05] text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-white/[0.1] hover:text-slate-800 dark:hover:text-slate-200 shadow-xs dark:shadow-none"
                   }`}
                 >
-                  {/* Active Top Accent Line */}
-                  {active && (
-                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#fa6e69] to-[#ffbc7d]" />
-                  )}
                   {/* Subtle inner ambient glow on active */}
                   {active && (
-                    <div className="absolute inset-0 bg-[#fa6e69]/[0.03] pointer-events-none" />
+                    <div className="absolute inset-0 bg-[#fa6e69]/[0.02] pointer-events-none" />
                   )}
 
                   <div className="flex items-center justify-between relative z-10">
