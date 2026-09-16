@@ -155,16 +155,16 @@ export default function ProcessPipeline() {
           {/* Right: Interactive Terminal Node Visual */}
           <div className="lg:col-span-6">
             <FloatingCard3D className="rounded-3xl">
-              <div className="p-8 rounded-3xl bg-[#10101b] text-white border border-white/[0.08] shadow-2xl relative overflow-hidden space-y-6">
+              <div className="p-8 rounded-3xl bg-white dark:bg-[#10101b] text-slate-900 dark:text-white border border-slate-200/90 dark:border-white/[0.08] shadow-xl dark:shadow-2xl relative overflow-hidden space-y-6 transition-colors">
                 
-                <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+                <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-white/[0.08] pb-4">
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded-full bg-rose-500/70" />
                     <span className="w-3 h-3 rounded-full bg-amber-500/70" />
                     <span className="w-3 h-3 rounded-full bg-emerald-500/70" />
-                    <span className="text-xs font-mono text-slate-400 ml-2">wavo-settlement-flow</span>
+                    <span className="text-xs font-mono text-slate-500 dark:text-slate-400 ml-2">wavo-settlement-flow</span>
                   </div>
-                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded bg-[#fa6e69]/15 text-[#fa6e69] border border-[#fa6e69]/30">
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded bg-[#fa6e69]/15 text-[#fa6e69] border border-[#fa6e69]/30 font-semibold">
                     STATUS: {steps[selectedStep].statusText}
                   </span>
                 </div>
@@ -176,10 +176,10 @@ export default function ProcessPipeline() {
                       key={idx}
                       className={`p-3.5 rounded-xl border transition-all duration-300 flex items-center justify-between ${
                         selectedStep === idx
-                          ? "bg-[#fa6e69]/20 border-[#fa6e69] text-white shadow-lg shadow-[#fa6e69]/20"
+                          ? "bg-[#fa6e69]/10 dark:bg-[#fa6e69]/20 border-[#fa6e69] text-slate-900 dark:text-white shadow-lg shadow-[#fa6e69]/15 font-semibold"
                           : idx < selectedStep
-                          ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300"
-                          : "bg-white/[0.02] border-white/[0.05] text-slate-500"
+                          ? "bg-emerald-50 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300"
+                          : "bg-slate-50 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/[0.05] text-slate-500 dark:text-slate-400"
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -193,9 +193,9 @@ export default function ProcessPipeline() {
                   ))}
                 </div>
 
-                <div className="pt-2 text-[11px] font-mono text-slate-400 border-t border-white/[0.08] flex items-center justify-between">
+                <div className="pt-2 text-[11px] font-mono text-slate-500 dark:text-slate-400 border-t border-slate-200/80 dark:border-white/[0.08] flex items-center justify-between">
                   <span>Protocole Wavo v2.6 • Déblocage SEPA</span>
-                  <span className="text-[#fa6e69] flex items-center gap-1">
+                  <span className="text-[#fa6e69] font-semibold flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#fa6e69] animate-ping" />
                     Temps réel
                   </span>

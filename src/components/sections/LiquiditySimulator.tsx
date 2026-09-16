@@ -4,7 +4,6 @@ import React, { useState, useMemo } from "react";
 import FloatingCard3D from "@/components/3d/FloatingCards3D";
 import { 
   Calculator, 
-  Sparkles, 
   ArrowRight, 
   CheckCircle2, 
   Activity,

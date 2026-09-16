@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { withBasePath } from "@/lib/paths";
 import { useTheme } from "@/components/theme/ThemeProvider";
 
 interface HeroBackground3DProps {
@@ -12,8 +13,6 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const themeRef = useRef(isDark);
-  themeRef.current = isDark;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -363,7 +362,7 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
 
       // Load official Wavo W logo symbol
       const wImg = new window.Image();
-      wImg.src = "/assets/wavo-w-symbol.png";
+      wImg.src = withBasePath("/assets/wavo-w-symbol.png");
       wImg.onload = () => {
         drawCoinFace(wImg);
       };
@@ -448,7 +447,8 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
     window.addEventListener("pointerleave", handlePointerLeave);
 
     // --- Animation & Dynamic Morphing Loop ---
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
     let animationFrameId: number;
     let isVisible = true;
 
@@ -464,7 +464,8 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
       animationFrameId = requestAnimationFrame(animate);
       if (!isVisible) return;
 
-      const elapsed = clock.getElapsedTime();
+      timer.update();
+      const elapsed = timer.getElapsed();
 
       // Smooth cursor interpolation
       mouse3D.lerp(targetMouse3D, 0.05);
@@ -554,22 +555,6 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
 
     animationFrameId = requestAnimationFrame(animate);
 
-    // --- Dynamic Theme Adaptations ---
-    const updateTheme = () => {
-      const dark = themeRef.current;
-      boxMat.color.setHex(dark ? 0x0d1222 : 0xffffff);
-      boxMat.roughness = dark ? 0.18 : 0.12;
-      boxMat.metalness = dark ? 0.45 : 0.08;
-      boxMat.transmission = dark ? 0.78 : 0.85;
-      boxMat.opacity = dark ? 0.9 : 0.8;
-
-      edgeCoralMat.opacity = dark ? 0.45 : 0.3;
-      edgePeachMat.opacity = dark ? 0.4 : 0.25;
-      ambientLight.color.setHex(dark ? 0x141828 : 0xffffff);
-      ambientLight.intensity = dark ? 1.4 : 2.6;
-      pulseMat.opacity = dark ? 0.85 : 0.65;
-    };
-
     // --- Resize Handling ---
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
@@ -602,13 +587,14 @@ export default function HeroBackground3D({ className = "" }: HeroBackground3DPro
       tokenGeo.dispose();
       pulseMat.dispose();
       pulseGeo.dispose();
+      timer.dispose();
       renderer.dispose();
 
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <div

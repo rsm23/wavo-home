@@ -12,8 +12,6 @@ import {
   ArrowRight,
   Sparkles,
   Scale,
-  TrendingUp,
-  Percent,
   Clock,
   AlertTriangle
 } from "lucide-react";
@@ -322,49 +320,49 @@ export default function CorePillarsBento() {
           </div>
 
           {/* Institutional Verdict & Benchmark Telemetry */}
-          <div className="p-6 rounded-2xl bg-slate-900 dark:bg-black/60 border border-slate-800 dark:border-white/[0.08] text-white space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.1] pb-4">
+          <div className="p-6 rounded-2xl bg-white dark:bg-black/60 border border-slate-200/90 dark:border-white/[0.08] text-slate-900 dark:text-white shadow-xl dark:shadow-none space-y-5 transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/80 dark:border-white/[0.1] pb-4">
               <div>
                 <div className="text-[10px] font-mono uppercase tracking-widest text-[#fa6e69] font-bold">
                   VERDICT D&apos;INGÉNIERIE FINANCIÈRE
                 </div>
-                <div className="text-base font-bold text-white mt-0.5">
+                <div className="text-base font-bold text-slate-900 dark:text-white mt-0.5">
                   Synthèse d&apos;impact pour le dirigeant et le directeur financier
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-xl bg-white/[0.06] border border-white/[0.1] text-xs font-mono text-emerald-400 font-semibold self-start sm:self-auto">
+              <span className="px-3 py-1 rounded-xl bg-emerald-50 dark:bg-white/[0.06] border border-emerald-200/80 dark:border-white/[0.1] text-xs font-mono text-emerald-700 dark:text-emerald-400 font-semibold self-start sm:self-auto">
                 Bilan 100% Hors Dette
               </span>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] space-y-1">
-                <span className="text-[10px] font-mono text-slate-400 block uppercase">Ratio Bilan D/E</span>
-                <div className="text-sm font-bold text-white">Neutre (0,00 €)</div>
-                <span className="text-[10px] text-emerald-400 block">Banque : +Dette Passif</span>
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.06] space-y-1">
+                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block uppercase">Ratio Bilan D/E</span>
+                <div className="text-sm font-bold text-slate-900 dark:text-white">Neutre (0,00 €)</div>
+                <span className="text-[10px] text-emerald-600 dark:text-emerald-400 block font-medium">Banque : +Dette Passif</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] space-y-1">
-                <span className="text-[10px] font-mono text-slate-400 block uppercase">Caution Dirigeant</span>
-                <div className="text-sm font-bold text-emerald-400">0 € Caution</div>
-                <span className="text-[10px] text-slate-400 block">Banque : Caution Privée</span>
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.06] space-y-1">
+                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block uppercase">Caution Dirigeant</span>
+                <div className="text-sm font-bold text-emerald-600 dark:text-emerald-400">0 € Caution</div>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Banque : Caution Privée</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] space-y-1">
-                <span className="text-[10px] font-mono text-slate-400 block uppercase">Financement TVA</span>
-                <div className="text-sm font-bold text-[#ffbc7d]">100% Avancé</div>
-                <span className="text-[10px] text-slate-400 block">Banque : 0% Financé</span>
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.06] space-y-1">
+                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block uppercase">Financement TVA</span>
+                <div className="text-sm font-bold text-amber-700 dark:text-[#ffbc7d]">100% Avancé</div>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Banque : 0% Financé</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] space-y-1">
-                <span className="text-[10px] font-mono text-slate-400 block uppercase">Délai SEPA</span>
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/[0.06] space-y-1">
+                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block uppercase">Délai SEPA</span>
                 <div className="text-sm font-bold text-[#fa6e69]">24h à 48h</div>
-                <span className="text-[10px] text-slate-400 block">Banque : 6 à 12 sem.</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Banque : 6 à 12 sem.</span>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-slate-500 dark:text-slate-400">
                 Protocole conforme aux articles L527-1 et suivants du Code de commerce (Gage des stocks sans dépossession).
               </span>
               <a

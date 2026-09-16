@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image from "@/components/ui/AppImage";
 import { WAVO_CONTENT } from "@/lib/content";
 import { ShieldCheck, Award } from "lucide-react";
 

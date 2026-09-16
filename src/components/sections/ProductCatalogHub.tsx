@@ -133,10 +133,10 @@ export default function ProductCatalogHub() {
         </div>
 
         {/* Custom Inventory Review Callout */}
-        <div className="p-8 rounded-3xl bg-slate-900 dark:bg-gradient-to-r dark:from-[#1c2639] dark:via-[#10101b] dark:to-[#080b13] border border-[#fa6e69]/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl dark:shadow-2xl">
+        <div className="p-8 rounded-3xl bg-white dark:bg-gradient-to-r dark:from-[#1c2639] dark:via-[#10101b] dark:to-[#080b13] border border-slate-200/90 dark:border-[#fa6e69]/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl dark:shadow-2xl transition-colors">
           <div className="space-y-1.5 text-center sm:text-left">
-            <h4 className="text-base font-bold text-white">Vous avez un stock physique spécifique ou atypique ?</h4>
-            <p className="text-xs text-slate-300 dark:text-slate-400">
+            <h4 className="text-base font-bold text-slate-900 dark:text-white">Vous avez un stock physique spécifique ou atypique ?</h4>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
               Nos analystes étudient la liquidité de vos références et vous répondent sous 2 heures ouvrées.
             </p>
           </div>

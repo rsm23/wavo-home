@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import Image from "@/components/ui/AppImage";
 import { WAVO_CONTENT } from "@/lib/content";
 import { ArrowRight, MapPin, ShieldCheck, CheckCircle2, Mail, Rocket } from "lucide-react";
 
@@ -28,16 +27,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 relative z-10">
         
         {/* High-Impact Closing Callout Banner */}
-        <div className="p-8 sm:p-14 rounded-3xl bg-slate-900 dark:bg-gradient-to-r dark:from-[#10101b] dark:via-[#1c2639] dark:to-[#080b13] border border-[#fa6e69]/30 shadow-xl dark:shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-gradient-to-r dark:from-[#10101b] dark:via-[#1c2639] dark:to-[#080b13] border border-slate-200/90 dark:border-[#fa6e69]/30 shadow-xl dark:shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 transition-colors">
           
           <div className="space-y-3.5 text-center md:text-left max-w-xl">
             <span className="px-3 py-1 rounded-full bg-[#fa6e69]/20 text-[#fa6e69] border border-[#fa6e69]/30 text-[11px] font-mono font-semibold uppercase tracking-wider inline-block">
               DÉBLOCAGE EXPRESS SOUS 24H
             </span>
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            <h3 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
               Prêt à transformer votre stock en moteur de croissance ?
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
               Débloquez de 50 000 € à 250 000 € dès maintenant. Sans endettement, sans caution personnelle, sans modification de vos flux logistiques.
             </p>
           </div>
@@ -54,7 +53,7 @@ export default function Footer() {
             </a>
             <a
               href="#simulateur"
-              className="w-full sm:w-auto px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm border border-white/20 flex items-center justify-center transition-all whitespace-nowrap cursor-pointer"
+              className="w-full sm:w-auto px-6 py-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-800 dark:text-white font-bold text-xs sm:text-sm border border-slate-200/90 dark:border-white/20 flex items-center justify-center transition-all whitespace-nowrap cursor-pointer"
             >
               Calculer ma trésorerie
             </a>

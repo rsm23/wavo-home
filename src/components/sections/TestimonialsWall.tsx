@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image from "@/components/ui/AppImage";
 import FloatingCard3D from "@/components/3d/FloatingCards3D";
 import { WAVO_CONTENT } from "@/lib/content";
 import { Quote, Sparkles, TrendingUp } from "lucide-react";

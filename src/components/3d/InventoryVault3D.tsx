@@ -11,7 +11,10 @@ export default function InventoryVault3D() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [activeMode, setActiveMode] = useState<"asset" | "liquidity" | "settlement">("liquidity");
   const modeRef = useRef(activeMode);
-  modeRef.current = activeMode;
+
+  useEffect(() => {
+    modeRef.current = activeMode;
+  }, [activeMode]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -209,11 +212,13 @@ export default function InventoryVault3D() {
 
     // Animation Loop
     let animId: number;
-    let clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
+      timer.update();
+      const time = timer.getElapsed();
       const currentMode = modeRef.current;
 
       assetGroup.rotation.y = time * 0.3;
@@ -256,6 +261,7 @@ export default function InventoryVault3D() {
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      timer.dispose();
       renderer.dispose();
     };
   }, [isDark]);

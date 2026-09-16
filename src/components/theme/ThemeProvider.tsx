@@ -14,18 +14,18 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("light");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("wavo-theme") as Theme | null;
     // Default to light theme per user request, but remember if user previously set dark
     const initialTheme = savedTheme === "dark" ? "dark" : "light";
-    setThemeState(initialTheme);
-    setMounted(true);
+    const frame = requestAnimationFrame(() => setThemeState(initialTheme));
 
     const root = document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(initialTheme);
+
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const setTheme = (newTheme: Theme) => {

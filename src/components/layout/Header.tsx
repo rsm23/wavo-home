@@ -1,16 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { WAVO_CONTENT } from "@/lib/content";
+import Image from "@/components/ui/AppImage";
 import ThemeToggle from "@/components/theme/ThemeToggle";
-import { 
-  ArrowRight, 
-  Menu, 
-  X, 
-  Calculator, 
-  ArrowUpRight
+import {
+  ArrowRight,
+  Menu,
+  X
 } from "lucide-react";
 
 export default function Header() {
@@ -71,138 +69,142 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+          <nav className="hidden lg:flex items-center gap-1 text-xs font-medium text-slate-700 dark:text-slate-300">
             <a
               href="#simulateur"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors"
+              className="h-9 px-3 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors flex items-center justify-center whitespace-nowrap"
             >
-              <Calculator className="w-3.5 h-3.5 text-[#fa6e69]" />
-              <span>Simulateur</span>
+              Simulateur
             </a>
 
             <a
               href="#piliers"
-              className="px-3 py-2 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors"
+              className="h-9 px-3 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors flex items-center justify-center whitespace-nowrap"
             >
               Modèle &amp; Comparatif
             </a>
 
             <a
               href="#etapes"
-              className="px-3 py-2 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors"
+              className="h-9 px-3 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors flex items-center justify-center whitespace-nowrap"
             >
               Cycle du Portage
             </a>
 
             <a
               href="#produits"
-              className="px-3 py-2 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors"
+              className="h-9 px-3 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors flex items-center justify-center whitespace-nowrap"
             >
               Actifs éligibles
             </a>
 
             <a
+              href="#eligibilite"
+              className="h-9 px-3 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors flex items-center justify-center whitespace-nowrap"
+            >
+              Critères
+            </a>
+
+            <a
               href="#temoignages"
-              className="px-3 py-2 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors"
+              className="h-9 px-3 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors flex items-center justify-center whitespace-nowrap"
             >
               Cas Clients
             </a>
 
             <a
               href="#faq"
-              className="px-3 py-2 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors"
+              className="h-9 px-3 rounded-xl hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors flex items-center justify-center whitespace-nowrap"
             >
               FAQ
             </a>
           </nav>
 
           {/* Right Action CTAs + Theme Toggle */}
-          <div className="hidden sm:flex items-center gap-2.5">
-            <ThemeToggle />
-
-            <a
-              href="#eligibilite"
-              className="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-2.5 py-2 transition-colors"
-            >
-              Critères
-            </a>
-
+          <div className="hidden lg:flex items-center gap-2">
             <a
               href="https://www.wavo.fr/rendez-vous/"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative group overflow-hidden px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#fa6e69] via-[#e0534e] to-[#c43834] hover:from-[#ff8a85] hover:to-[#e0534e] shadow-lg shadow-[#fa6e69]/30 transition-all duration-200 active:scale-95 flex items-center gap-2 border border-white/[0.15]"
+              className="h-9 px-4 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#fa6e69] via-[#e0534e] to-[#c43834] hover:from-[#ff8a85] hover:to-[#e0534e] shadow-md shadow-[#fa6e69]/25 transition-all duration-200 active:scale-95 flex items-center justify-center border border-white/[0.15] whitespace-nowrap"
             >
-              <span>Tester mon éligibilité</span>
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              Tester mon éligibilité
             </a>
+
+            <ThemeToggle />
           </div>
 
-          {/* Mobile menu hamburger */}
-          <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
+          {/* Mobile menu hamburger + Theme Toggle */}
+          <div className="lg:hidden flex items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08]"
+              className="w-9 h-9 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] flex items-center justify-center border border-slate-200/80 dark:border-white/[0.08]"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
+            <ThemeToggle />
           </div>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden max-w-7xl mx-auto px-4 mt-2">
-          <div className="p-5 rounded-2xl bg-[#10101b]/95 backdrop-blur-2xl border border-white/[0.1] shadow-2xl space-y-4">
+        <div className="lg:hidden max-w-7xl mx-auto px-4 mt-2">
+          <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#10101b]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/[0.1] shadow-2xl space-y-4 transition-colors">
             <div className="flex flex-col space-y-2 text-sm font-medium">
               <a
                 href="#simulateur"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/[0.05] text-slate-200"
+                className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.05] text-slate-800 dark:text-slate-200"
               >
-                <Calculator className="w-4 h-4 text-[#fa6e69]" />
                 Simulateur de trésorerie
               </a>
               <a
                 href="#piliers"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl hover:bg-white/[0.05] text-slate-200"
+                className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.05] text-slate-800 dark:text-slate-200"
               >
                 Les 4 Piliers Wavo
               </a>
               <a
                 href="#etapes"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl hover:bg-white/[0.05] text-slate-200"
+                className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.05] text-slate-800 dark:text-slate-200"
               >
                 Processus en 4 étapes
               </a>
               <a
                 href="#produits"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl hover:bg-white/[0.05] text-slate-200"
+                className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.05] text-slate-800 dark:text-slate-200"
               >
                 Produits finançables
               </a>
               <a
+                href="#eligibilite"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.05] text-slate-800 dark:text-slate-200"
+              >
+                Critères d&apos;éligibilité
+              </a>
+              <a
                 href="#temoignages"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl hover:bg-white/[0.05] text-slate-200"
+                className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.05] text-slate-800 dark:text-slate-200"
               >
                 Cas clients &amp; Avis
               </a>
               <a
                 href="#faq"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl hover:bg-white/[0.05] text-slate-200"
+                className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.05] text-slate-800 dark:text-slate-200"
               >
                 Questions fréquentes
               </a>
             </div>
 
-            <div className="pt-3 border-t border-white/[0.08] flex flex-col gap-2">
+            <div className="pt-3 border-t border-slate-200/80 dark:border-white/[0.08] flex flex-col gap-2">
               <a
                 href="https://www.wavo.fr/rendez-vous/"
                 target="_blank"

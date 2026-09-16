@@ -128,10 +128,10 @@ CONNECTED: DSP2 Open Banking (Lecture automatisée des encaissements)`,
           {/* Right: Institutional Systems Console */}
           <div className="lg:col-span-7">
             <FloatingCard3D className="rounded-3xl">
-              <div className="rounded-3xl bg-[#0f172a] dark:bg-[#0f131f] border border-slate-700/50 dark:border-white/[0.1] shadow-2xl overflow-hidden text-xs">
+              <div className="rounded-3xl bg-white dark:bg-[#0f131f] border border-slate-200/90 dark:border-white/[0.1] shadow-xl dark:shadow-2xl overflow-hidden text-xs transition-colors">
                 
                 {/* Institutional Console Header (No generic mac dots) */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 bg-slate-950/60 dark:bg-black/50 border-b border-white/[0.08]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 bg-slate-50 dark:bg-black/50 border-b border-slate-200/80 dark:border-white/[0.08]">
                   <div className="flex items-center gap-2.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#fa6e69] animate-pulse" />
                     <span className="font-mono text-[11px] uppercase tracking-widest text-[#fa6e69] font-bold">
@@ -147,7 +147,7 @@ CONNECTED: DSP2 Open Banking (Lecture automatisée des encaissements)`,
                       className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
                         activeTab === "webhook"
                           ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
-                          : "text-slate-400 hover:text-white bg-white/[0.03]"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-white/[0.03] hover:bg-slate-200/70 dark:hover:bg-white/[0.08]"
                       }`}
                     >
                       Événement Vente
@@ -158,7 +158,7 @@ CONNECTED: DSP2 Open Banking (Lecture automatisée des encaissements)`,
                       className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
                         activeTab === "payload"
                           ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
-                          : "text-slate-400 hover:text-white bg-white/[0.03]"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-white/[0.03] hover:bg-slate-200/70 dark:hover:bg-white/[0.08]"
                       }`}
                     >
                       Registre Collatéral
@@ -169,7 +169,7 @@ CONNECTED: DSP2 Open Banking (Lecture automatisée des encaissements)`,
                       className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
                         activeTab === "erp"
                           ? "bg-[#fa6e69] text-white shadow-md shadow-[#fa6e69]/30"
-                          : "text-slate-400 hover:text-white bg-white/[0.03]"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-white/[0.03] hover:bg-slate-200/70 dark:hover:bg-white/[0.08]"
                       }`}
                     >
                       Connecteurs Certifiés
@@ -178,19 +178,19 @@ CONNECTED: DSP2 Open Banking (Lecture automatisée des encaissements)`,
                     <button
                       type="button"
                       onClick={handleCopy}
-                      className="ml-1 p-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-400 hover:text-white transition-colors cursor-pointer"
+                      className="ml-1 p-1.5 rounded-xl bg-slate-100 dark:bg-white/[0.04] hover:bg-slate-200 dark:hover:bg-white/[0.08] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                       title="Copier"
                     >
-                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
                 </div>
 
                 {/* Console Content */}
-                <div className="p-6 text-slate-300 font-mono overflow-x-auto leading-relaxed max-h-[380px] bg-[#090b12]">
+                <div className="p-6 text-slate-800 dark:text-slate-300 font-mono overflow-x-auto leading-relaxed max-h-[380px] bg-slate-50/70 dark:bg-[#090b12]">
                   {activeTab === "erp" ? (
                     <div className="space-y-3">
-                      <div className="text-xs text-slate-400 mb-4 font-sans font-medium">
+                      <div className="text-xs text-slate-600 dark:text-slate-400 mb-4 font-sans font-medium">
                         Wavo s&apos;interconnecte nativement avec vos briques de gestion sans perturber votre production :
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -202,27 +202,27 @@ CONNECTED: DSP2 Open Banking (Lecture automatisée des encaissements)`,
                           { name: "DSP2 Open Banking", type: "Agrégation Flux", desc: "Réconciliation automatisée des encaissements" },
                           { name: "Exports Sécurisés CSV/SFTP", type: "Universel", desc: "Intégration manuelle hebdomadaire si besoin" },
                         ].map((c, i) => (
-                          <div key={i} className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] space-y-1 font-sans">
-                            <div className="flex items-center justify-between text-xs font-bold text-white">
+                          <div key={i} className="p-3.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/[0.06] shadow-xs dark:shadow-none space-y-1 font-sans">
+                            <div className="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white">
                               <span>{c.name}</span>
                               <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-[#fa6e69]/20 text-[#fa6e69]">
                                 ACTIF
                               </span>
                             </div>
-                            <div className="text-[11px] text-slate-400">{c.desc}</div>
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400">{c.desc}</div>
                           </div>
                         ))}
                       </div>
                     </div>
                   ) : (
-                    <pre className="text-xs leading-relaxed text-slate-300">{codeSnippets[activeTab]}</pre>
+                    <pre className="text-xs leading-relaxed text-slate-700 dark:text-slate-300">{codeSnippets[activeTab]}</pre>
                   )}
                 </div>
 
                 {/* Footer Telemetry Status */}
-                <div className="px-6 py-3.5 bg-black/40 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-slate-400">
+                <div className="px-6 py-3.5 bg-slate-50 dark:bg-black/40 border-t border-slate-200/80 dark:border-white/[0.08] flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-slate-600 dark:text-slate-400">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
                     <span>Synchronisation certifiée ISO-27001 &amp; DSP2</span>
                   </div>
                   <span className="text-[#fa6e69] font-bold">Chiffrement AES-256</span>

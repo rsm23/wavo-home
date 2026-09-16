@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image from "@/components/ui/AppImage";
 import { WAVO_CONTENT } from "@/lib/content";
 import { BookOpen, ArrowUpRight, Clock } from "lucide-react";
 import FloatingCard3D from "@/components/3d/FloatingCards3D";
