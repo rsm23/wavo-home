@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:pages": "PAGES_BASE_PATH=/wavo-home PAGES_BASE_URL=https://rsm23.github.io/wavo-home PAGES_OUTPUT_DIR=docs next build",
     "start": "next start",
     "lint": "eslint"
   },

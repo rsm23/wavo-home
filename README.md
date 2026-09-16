@@ -16,10 +16,13 @@ Open [http://localhost:3000](http://localhost:3000).
 ```bash
 npm run lint
 npm run build
+npm run build:pages
 ```
 
-The production build is a static export generated in `out/`.
+`npm run build` generates a local static export in `out/`. `npm run build:pages` generates the GitHub Pages artifact in `docs/` with the required `/wavo-home` base path.
 
 ## Deployment
 
-Pushes to `main` are built and deployed automatically with GitHub Actions. The published site is available at [https://rsm23.github.io/wavo-home/](https://rsm23.github.io/wavo-home/).
+GitHub Pages publishes the tracked `docs/` artifact from `main`. The published site is available at [https://rsm23.github.io/wavo-home/](https://rsm23.github.io/wavo-home/).
+
+A manual GitHub Actions deployment workflow is also included for use when Actions runners are available on the repository.
